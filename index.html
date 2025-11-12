@@ -5,231 +5,187 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Beautiful Economics</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 
 <style>
 
-/* ---------- ROOT STYLES ---------- */
+/* -------- ROOT COLORS -------- */
 :root {
-  --bg-dark: #0c0c0c;
-  --text: #f5f5f5;
-  --muted: #c4c4c4;
-  --gold: #cba55c;
-  --gold-dark: #a4833c;
-  --glass: rgba(255,255,255,0.08);
-  --card-bg: rgba(255,255,255,0.06);
+  --bg: linear-gradient(135deg, #0d1b2a, #1b263b, #415a77);
+  --card: rgba(255,255,255,0.06);
+  --glass: rgba(255,255,255,0.1);
+  --border: rgba(255,255,255,0.15);
+  --text: #e8e8e8;
+  --muted: #aab4c3;
+  --accent: #84a9ff; /* neon blue */
   --radius: 18px;
-  --transition: all 0.65s cubic-bezier(.2,.8,.3,1);
-  --shadow: 0 12px 40px rgba(0,0,0,0.55);
+  --transition: .65s cubic-bezier(.2,.8,.3,1);
+  --shadow: 0 12px 40px rgba(0,0,0,0.45);
 }
 
-/* ---------- BASE ---------- */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+/* -------- BASE -------- */
+*{margin:0;padding:0;box-sizing:border-box}
 
-body {
-  background: var(--bg-dark);
-  background-image: url('https://i.ibb.co/fnZ1d3L/gold-texture.jpg');
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-  font-family: "Inter", sans-serif;
-  color: var(--text);
-  padding: 40px 20px;
-  display: flex;
-  justify-content: center;
-  line-height: 1.6;
+body{
+  font-family:"Inter",sans-serif;
+  color:var(--text);
+  background:var(--bg);
+  background-attachment:fixed;
+  min-height:100vh;
+  padding:40px 20px;
+  display:flex;
+  justify-content:center;
+  line-height:1.6;
 }
 
-.overlay {
-  backdrop-filter: blur(8px);
-  background: rgba(0, 0, 0, 0.6);
-  min-height: 100vh;
-  width: 100%;
-  padding: 40px 20px;
+/* CONTAINER */
+.container{width:100%;max-width:1100px;}
+
+/* HEADER */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:60px;
 }
 
-.container {
-  max-width: 1100px;
-  margin: auto;
+.brand{
+  font-family:"Playfair Display",serif;
+  font-size:32px;
+  font-weight:600;
+  background:linear-gradient(90deg,#fff,#84a9ff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
 
-/* ---------- HEADER ---------- */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 60px;
+/* CARDS */
+.glass-card{
+  background:var(--card);
+  backdrop-filter:blur(12px);
+  border-radius:var(--radius);
+  padding:60px 40px;
+  box-shadow:var(--shadow);
+  border:1px solid var(--border);
+  margin-bottom:60px;
 }
 
-.brand {
-  font-family: "Playfair Display", serif;
-  font-size: 32px;
-  font-weight: 700;
-  background: linear-gradient(90deg, #f9e2a6, #cba55c, #c1923c);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* HERO */
+.hero{text-align:center;}
+
+.hero h1{
+  font-family:"Playfair Display",serif;
+  font-size:56px;
+  background:linear-gradient(90deg,#fff,#8db5ff,#b7d0ff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin-bottom:12px;
 }
 
-/* ---------- HERO SECTION ---------- */
-.hero {
-  text-align: center;
-  padding: 90px 40px;
-  background: var(--card-bg);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  border: 1px solid rgba(255,255,255,0.1);
-  margin-bottom: 60px;
-  animation: fadeIn 1.2s ease;
+.hero p{
+  max-width:700px;
+  margin:auto;
+  color:var(--muted);
+  font-size:19px;
+  margin-bottom:28px;
 }
 
-.hero h1 {
-  font-family: "Playfair Display", serif;
-  font-size: 58px;
-  margin-bottom: 12px;
-  background: linear-gradient(90deg, #f9e8c2, #d2b574, #cba55c, #b28b3a);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.btn{
+  display:inline-block;
+  padding:12px 28px;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:600;
+  transition:var(--transition);
+  margin:6px;
 }
 
-.hero p {
-  font-size: 18px;
-  color: var(--muted);
-  max-width: 680px;
-  margin: 0 auto 30px auto;
+.btn-primary{
+  background:var(--accent);
+  color:#000;
 }
 
-.btn {
-  display: inline-block;
-  padding: 12px 28px;
-  border-radius: 10px;
-  text-decoration: none;
-  font-weight: 600;
-  margin: 6px;
-  transition: var(--transition);
+.btn-primary:hover{transform:translateY(-6px);}
+
+.btn-outline{
+  border:1px solid var(--border);
+  color:var(--text);
 }
 
-.btn-gold {
-  background: var(--gold);
-  color: #000;
+.btn-outline:hover{transform:translateY(-6px);}
+
+/* SECTIONS */
+.section h2{
+  font-family:"Playfair Display",serif;
+  font-size:34px;
+  margin-bottom:14px;
+  color:#d7e3ff;
 }
 
-.btn-gold:hover {
-  transform: translateY(-6px);
-  background: var(--gold-dark);
+.section p{color:var(--muted);font-size:17px;}
+
+/* INSIGHTS GRID */
+.insights{
+  margin-top:20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:22px;
 }
 
-.btn-outline {
-  border: 1px solid rgba(255,255,255,0.3);
-  color: var(--text);
+.card{
+  padding:24px;
+  border-radius:var(--radius);
+  background:var(--glass);
+  border:1px solid rgba(255,255,255,0.12);
+  backdrop-filter:blur(10px);
+  transition:var(--transition);
 }
 
-.btn-outline:hover {
-  transform: translateY(-6px);
+.card:hover{
+  transform:translateY(-10px);
+  background:rgba(255,255,255,0.18);
 }
 
-/* ---------- SECTIONS ---------- */
-.section {
-  padding: 45px 40px;
-  background: var(--card-bg);
-  border-radius: var(--radius);
-  margin-bottom: 60px;
-  box-shadow: var(--shadow);
-  border: 1px solid rgba(255,255,255,0.08);
+.card h3{
+  font-family:"Playfair Display",serif;
+  margin-bottom:8px;
+  color:#cfe2ff;
 }
 
-.section h2 {
-  font-family: "Playfair Display", serif;
-  font-size: 34px;
-  margin-bottom: 14px;
-  color: var(--gold);
+/* CONNECT */
+.connect{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
-.section p {
-  color: var(--muted);
-  font-size: 17px;
+.socials{display:flex;gap:14px;}
+.socials a{
+  width:46px;height:46px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:#273649;
+  color:#8db5ff;
+  text-decoration:none;
+  font-size:20px;
+  transition:var(--transition);
 }
 
-/* ---------- INSIGHTS GRID ---------- */
-.insights {
-  margin-top: 25px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-  gap: 24px;
+.socials a:hover{transform:translateY(-6px);}
+
+/* FOOTER */
+footer{text-align:center;color:var(--muted);margin-top:40px;font-size:14px;}
+
+/* ANIMATION */
+.fade{
+  opacity:0;
+  transform:translateY(24px);
+  transition:var(--transition);
 }
 
-.card {
-  background: rgba(255,255,255,0.06);
-  backdrop-filter: blur(10px);
-  border-radius: var(--radius);
-  padding: 22px;
-  border: 1px solid rgba(255,255,255,0.08);
-  transition: var(--transition);
-}
-
-.card:hover {
-  transform: translateY(-10px);
-  background: rgba(255,255,255,0.1);
-}
-
-.card h3 {
-  font-family: "Playfair Display", serif;
-  color: var(--gold);
-  margin-bottom: 8px;
-}
-
-/* ---------- CONNECT SECTION ---------- */
-.connect {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.socials {
-  display: flex;
-  gap: 14px;
-}
-
-.socials a {
-  width: 46px;
-  height: 46px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.12);
-  color: var(--gold);
-  font-size: 20px;
-  text-decoration: none;
-  transition: var(--transition);
-}
-
-.socials a:hover {
-  transform: translateY(-6px);
-  background: rgba(255,255,255,0.22);
-}
-
-/* ---------- FOOTER ---------- */
-footer {
-  text-align: center;
-  color: var(--muted);
-  font-size: 14px;
-  margin-top: 40px;
-}
-
-/* ---------- ANIMATIONS ---------- */
-.fade {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: var(--transition);
-}
-
-.fade.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
+.fade.show{
+  opacity:1;
+  transform:translateY(0);
 }
 
 </style>
@@ -237,41 +193,42 @@ footer {
 
 <body>
 
-<div class="overlay">
 <div class="container">
 
 <header>
   <div class="brand">Beautiful Economics</div>
 </header>
 
-<section class="hero fade">
+<section class="glass-card hero fade">
   <h1>Beautiful Economics</h1>
-  <p>Where intelligence meets elegance.  
-  A premium economic experience designed for modern thinkers.</p>
+  <p>Modern clarity. Deep logic. A premium global space to understand economics with design and intelligence.</p>
 
-  <a href="#insights" class="btn btn-gold">Explore Insights</a>
-  <a href="https://www.facebook.com/beautifulecos/" target="_blank" class="btn btn-outline">Facebook</a>
+  <a href="#insights" class="btn btn-primary">Explore Insights</a>
+  <a href="https://www.facebook.com/beautifulecos/" class="btn btn-outline" target="_blank">Facebook</a>
 </section>
 
-<section class="section fade">
+<section class="glass-card section fade">
   <h2>About</h2>
-  <p>Beautiful Economics presents important economic ideas with depth, luxury, and clarity — designed for people who value premium content and elegant learning.</p>
+  <p>A modern digital experience where economics meets design.  
+  Beautiful Economics turns complex ideas into elegant, visual, global knowledge.</p>
 </section>
 
-<section id="insights" class="section fade">
+<section id="insights" class="glass-card section fade">
   <h2>Featured Insights</h2>
+
   <div class="insights">
-    <div class="card"><h3>Inflation</h3><p>A luxury explanation of a global economic force.</p></div>
-    <div class="card"><h3>Liquidity Trap</h3><p>Why low rates fail — simplified with depth.</p></div>
-    <div class="card"><h3>Growth Models</h3><p>The real engines of long-term prosperity.</p></div>
-    <div class="card"><h3>Exchange Rates</h3><p>A gold-level explanation of REER and currency power.</p></div>
+    <div class="card"><h3>Inflation</h3><p>A modern re-explanation of rising prices.</p></div>
+    <div class="card"><h3>Liquidity Trap</h3><p>When cutting interest rates stops working.</p></div>
+    <div class="card"><h3>Growth Models</h3><p>The engines that drive long-term development.</p></div>
+    <div class="card"><h3>Exchange Rates</h3><p>A clean look at REER and currency strength.</p></div>
   </div>
+
 </section>
 
-<section class="section connect fade">
+<section class="glass-card connect fade">
   <div>
-    <h3 style="font-family:'Playfair Display',serif;font-size:24px;color:var(--gold);margin:0;">Stay Connected</h3>
-    <p style="color:var(--muted);margin:2px 0;font-size:15px;">Join our premium content channels</p>
+    <h3 style="font-family:'Playfair Display',serif;font-size:24px;margin:0;">Stay Connected</h3>
+    <p style="color:var(--muted);font-size:15px;margin:2px 0;">More insights coming soon</p>
   </div>
 
   <div class="socials">
@@ -282,18 +239,17 @@ footer {
 </section>
 
 <footer>
-  © <span id="year"></span> Beautiful Economics · All Rights Reserved
+  © <span id="year"></span> Beautiful Economics · All rights reserved.
 </footer>
 
 </div>
-</div>
 
 <script>
-document.getElementById("year").innerText = new Date().getFullYear();
+document.getElementById("year").textContent = new Date().getFullYear();
 
 // scroll reveal
-const faders = document.querySelectorAll(".fade");
-const observer = new IntersectionObserver((entries)=>{
+const faders=document.querySelectorAll(".fade");
+const observer=new IntersectionObserver((entries)=>{
   entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("show"); });
 });
 faders.forEach(el=>observer.observe(el));
