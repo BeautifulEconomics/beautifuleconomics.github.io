@@ -1,232 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Beautiful Economics</title>
 
+<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
 <style>
 
-/* ROOT */
-:root{
-  --bg: #0f0f15;
-  --text: #e8e8e8;
-  --muted: #b9b9b9;
-
-  --accent1: #7b70ff;
-  --accent2: #a06bff;
-  --accent3: #6db5ff;
-
-  --card: rgba(255,255,255,0.08);
-  --glass: rgba(255,255,255,0.12);
-  --border: rgba(255,255,255,0.18);
+/* -------------------- ROOT COLORS -------------------- */
+:root {
+  --bg-light: #f9f9fb;
+  --bg-gradient: linear-gradient(135deg, #eef2ff, #faf6ff, #f1f9ff);
+  --text-dark: #1f1f1f;
+  --text-muted: #6f6f75;
+  --accent-blue: #6a8bff;
+  --accent-purple: #9a72ff;
+  --accent-glow: rgba(148, 106, 255, 0.35);
 
   --radius: 18px;
-  --transition: .6s cubic-bezier(.2,.8,.3,1);
-  --shadow: 0 15px 45px rgba(0,0,0,0.55);
+  --shadow-soft: 0 12px 30px rgba(0,0,0,0.08);
+  --shadow-card: 0 10px 26px rgba(0,0,0,0.06);
+
+  --transition: all .6s cubic-bezier(.2,.8,.3,1);
 }
 
-/* BASE */
-*{margin:0;padding:0;box-sizing:border-box}
+/* -------------------- BASE -------------------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-body{
-  font-family:"Inter",sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  overflow-x:hidden;
-  padding:40px 20px;
-  display:flex;
-  justify-content:center;
+body {
+  font-family: "Inter", sans-serif;
+  background: var(--bg-gradient);
+  color: var(--text-dark);
+  overflow-x: hidden;
+  padding: 0;
+  line-height: 1.6;
 }
 
-/* ABSTRACT BACKGROUND */
-.bg-art{
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(circle at 20% 30%, var(--accent1), transparent 70%),
-    radial-gradient(circle at 80% 20%, var(--accent2), transparent 75%),
-    radial-gradient(circle at 40% 85%, var(--accent3), transparent 75%);
-  filter:blur(140px);
-  opacity:0.55;
-  animation:floatAnim 14s infinite alternate ease-in-out;
-  z-index:-1;
+/* -------------------- NAVBAR -------------------- */
+nav {
+  width: 100%;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(12px);
+  z-index: 100;
 }
 
-@keyframes floatAnim{
-  0%{transform:translateY(0px);}
-  100%{transform:translateY(-60px);}
+.brand {
+  font-family: "Playfair Display", serif;
+  font-size: 28px;
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.container{
-  max-width:1100px;
-  width:100%;
+/* -------------------- HERO -------------------- */
+.hero {
+  padding: 180px 40px 120px;
+  text-align: center;
+  position: relative;
 }
 
-/* HEADER */
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:60px;
+.floating-title {
+  font-family: "Playfair Display", serif;
+  font-size: 64px;
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 22px var(--accent-glow);
+  animation: float 4s ease-in-out infinite;
 }
 
-.brand{
-  font-family:"Playfair Display",serif;
-  font-size:34px;
-  font-weight:700;
-  background:linear-gradient(90deg,var(--accent1),var(--accent3));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-14px); }
+  100% { transform: translateY(0px); }
 }
 
-/* CARD STYLE */
-.card-glass{
-  background:var(--card);
-  border:1px solid var(--border);
-  backdrop-filter:blur(14px);
-  border-radius:var(--radius);
-  padding:60px 40px;
-  box-shadow:var(--shadow);
-  margin-bottom:60px;
+.hero p {
+  max-width: 680px;
+  margin: 18px auto 30px;
+  font-size: 20px;
+  color: var(--text-muted);
 }
 
-/* HERO */
-.hero{text-align:center;}
-
-.hero h1{
-  font-family:"Playfair Display",serif;
-  font-size:60px;
-  margin-bottom:12px;
-  background:linear-gradient(90deg,var(--accent1),var(--accent2),var(--accent3));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  text-shadow:0 0 25px rgba(150,80,255,0.35);
+.btn-primary {
+  display: inline-block;
+  padding: 14px 32px;
+  border-radius: 12px;
+  background: var(--accent-blue);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.1);
 }
 
-.hero p{
-  max-width:650px;
-  margin:auto;
-  color:var(--muted);
-  font-size:19px;
-  margin-bottom:30px;
+.btn-primary:hover {
+  transform: translateY(-6px);
+  background: var(--accent-purple);
 }
 
-.btn{
-  padding:12px 28px;
-  border-radius:10px;
-  display:inline-block;
-  text-decoration:none;
-  font-weight:600;
-  margin:6px;
-  transition:var(--transition);
+/* -------------------- WAVE TRANSITION -------------------- */
+.wave {
+  margin-top: -40px;
+  width: 100%;
+  height: 120px;
+  background: url('https://i.imgur.com/2kXk0yC.png');
+  background-size: cover;
 }
 
-.btn-primary{
-  background:var(--accent1);
-  color:#fff;
+/* -------------------- ABOUT SECTION -------------------- */
+.about {
+  padding: 80px 60px;
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
-.btn-primary:hover{
-  transform:translateY(-6px);
-  background:var(--accent2);
+.about-text {
+  flex: 1;
+  min-width: 320px;
 }
 
-.btn-outline{
-  border:1px solid rgba(255,255,255,0.3);
-  color:#fff;
+.about-text h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 36px;
+  margin-bottom: 12px;
+  color: var(--accent-purple);
 }
 
-.btn-outline:hover{
-  transform:translateY(-6px);
+.about-text p {
+  font-size: 18px;
+  color: var(--text-muted);
 }
 
-/* SECTION TITLES */
-.section h2{
-  font-family:"Playfair Display",serif;
-  font-size:34px;
-  margin-bottom:14px;
-  background:linear-gradient(90deg,var(--accent1),var(--accent2));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+.about-img {
+  flex: 1;
+  min-width: 320px;
 }
 
-.section p{color:var(--muted);font-size:17px;}
-
-/* GRID */
-.insights{
-  margin-top:25px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:22px;
+.about-img img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: var(--shadow-soft);
 }
 
-.card{
-  padding:24px;
-  border-radius:var(--radius);
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.18);
-  backdrop-filter:blur(14px);
-  transition:var(--transition);
+/* -------------------- INSIGHTS -------------------- */
+.insights {
+  padding: 80px 40px;
+  background: var(--bg-light);
 }
 
-.card:hover{
-  transform:translateY(-10px);
-  background:rgba(255,255,255,0.16);
+.insights h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 36px;
+  margin-bottom: 30px;
+  text-align: center;
 }
 
-.card h3{
-  font-family:"Playfair Display",serif;
-  margin-bottom:8px;
-  color:#ffffff;
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+  gap: 26px;
 }
 
-/* CONNECT */
-.connect{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+.card {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+  transition: var(--transition);
 }
 
-.socials{display:flex;gap:14px;}
-.socials a{
-  width:48px;height:48px;
-  display:grid;
-  place-items:center;
-  border-radius:50%;
-  background:#1a1a1d;
-  color:var(--accent3);
-  font-size:20px;
-  text-decoration:none;
-  transition:var(--transition);
-  border:1px solid rgba(255,255,255,0.12);
+.card:hover {
+  transform: translateY(-10px);
 }
 
-socials a:hover{
-  transform:translateY(-6px);
-  background:#29292d;
+.card h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 22px;
+  margin-bottom: 8px;
 }
 
-/* FOOTER */
-footer{
-  text-align:center;
-  margin-top:40px;
-  color:var(--muted);
-  font-size:14px;
+.card p {
+  color: var(--text-muted);
 }
 
-/* ANIMATION */
-.fade{
-  opacity:0;
-  transform:translateY(24px);
-  transition:var(--transition);
+/* -------------------- FOOTER -------------------- */
+footer {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--text-muted);
 }
 
-.fade.show{
-  opacity:1;
-  transform:translateY(0);
+/* -------------------- ANIMATION ON SCROLL -------------------- */
+.fade {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: var(--transition);
+}
+
+.fade.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 </style>
@@ -234,49 +221,35 @@ footer{
 
 <body>
 
-<div class="bg-art"></div>
-
-<div class="container">
-
-<header>
+<nav>
   <div class="brand">Beautiful Economics</div>
-</header>
+</nav>
 
-<section class="card-glass hero fade">
-  <h1>Beautiful Economics</h1>
+<section class="hero fade">
+  <h1 class="floating-title">Beautiful Economics</h1>
   <p>Understanding the world through beauty and logic.</p>
-
-  <a href="#insights" class="btn btn-primary">Explore Insights</a>
-  <a href="https://www.facebook.com/beautifulecos/" class="btn btn-outline" target="_blank">Facebook</a>
+  <a href="#insights" class="btn-primary">Explore Insights</a>
 </section>
 
-<section class="card-glass section fade">
-  <h2>About</h2>
-  <p>Beautiful Economics blends modern design with deep economic insight.  
-  A premium space where ideas become clearer, learning becomes elegant, and economics becomes visually meaningful.</p>
+<div class="wave"></div>
+
+<section class="about fade">
+  <div class="about-text">
+    <h2>About Beautiful Economics</h2>
+    <p>Beautiful Economics transforms complex ideas into elegant and simple explanations, blending clarity with premium design to make learning enjoyable and meaningful.</p>
+  </div>
+  <div class="about-img">
+    <img src="https://i.imgur.com/fR3BzqV.png" alt="Economics Image">
+  </div>
 </section>
 
-<section id="insights" class="card-glass section fade">
+<section id="insights" class="insights fade">
   <h2>Featured Insights</h2>
-
-  <div class="insights">
-    <div class="card"><h3>Inflation</h3><p>Elegant explanation of rising prices.</p></div>
-    <div class="card"><h3>Liquidity Trap</h3><p>Why interest rates sometimes fail.</p></div>
-    <div class="card"><h3>Growth Models</h3><p>The engines behind long-term development.</p></div>
-    <div class="card"><h3>Exchange Rates</h3><p>A premium breakdown of REER & currency strength.</p></div>
-  </div>
-</section>
-
-<section class="card-glass connect fade">
-  <div>
-    <h3 style="font-family:'Playfair Display',serif;font-size:24px;margin:0;">Stay Connected</h3>
-    <p style="color:var(--muted);font-size:15px;margin:2px 0;">Premium insights delivered visually</p>
-  </div>
-
-  <div class="socials">
-    <a href="https://www.facebook.com/beautifulecos/" target="_blank">📘</a>
-    <a href="#">📸</a>
-    <a href="#">🔗</a>
+  <div class="card-grid">
+    <div class="card"><h3>Inflation</h3><p>Understand rising prices in a clear, beautiful way.</p></div>
+    <div class="card"><h3>Liquidity Trap</h3><p>Why interest rates sometimes fail to stimulate growth.</p></div>
+    <div class="card"><h3>Growth Models</h3><p>The true engines behind long-term economic expansion.</p></div>
+    <div class="card"><h3>Exchange Rates</h3><p>A modern, clean explanation of currency power.</p></div>
   </div>
 </section>
 
@@ -284,20 +257,16 @@ footer{
   © <span id="year"></span> Beautiful Economics · All rights reserved.
 </footer>
 
-</div>
-
 <script>
-// update year
-document.getElementById("year").textContent = new Date().getFullYear();
+// year
+document.getElementById("year").innerText = new Date().getFullYear();
 
-// fade animation on scroll
-const faders=document.querySelectorAll(".fade");
-const observer=new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting) e.target.classList.add("show");
-  });
+// fade animation
+const faders = document.querySelectorAll(".fade");
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add("show"); });
 });
-faders.forEach(el=>observer.observe(el));
+faders.forEach(el => observer.observe(el));
 </script>
 
 </body>
