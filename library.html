@@ -1,0 +1,35 @@
+---
+layout: default
+title: Library
+nav: library
+permalink: /library/
+description: Free PDFs — notes, summaries and reading guides you can download and keep.
+---
+<section class="band">
+  <div class="shell">
+    <div class="column" style="margin-bottom:2.4rem">
+      <h1 style="font-size:clamp(1.9rem,6vw,2.7rem);font-weight:600;letter-spacing:-0.019em;line-height:1.1;margin:0 0 .8rem">Library</h1>
+      <p style="color:var(--ink-soft);margin:0">Things worth keeping on your own device. Free, no account, no form in the way.</p>
+    </div>
+
+    {% if site.data.library and site.data.library.size > 0 %}
+    <ul class="shelf">
+      {% for item in site.data.library %}
+      <li>
+        <h2 class="shelf__title"><a href="{{ item.file | relative_url }}" download>{{ item.title }}</a></h2>
+        <span class="shelf__meta">PDF{% if item.pages %} — {{ item.pages }} pages{% endif %}{% if item.size %} — {{ item.size }}{% endif %}</span>
+        {% if item.note %}<p class="shelf__note">{{ item.note }}</p>{% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="empty">Nothing on the shelf yet. Put a PDF in <code>assets/library/</code> and list it in <code>_data/library.yml</code>.</p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="band band--sunk">
+  <div class="shell"><div class="column">
+    {% include subscribe.html id="subscribe-library" heading="New notes go out by email first." body="Subscribers get each PDF the day it is finished. Free, and your address is never passed on." %}
+  </div></div>
+</section>
