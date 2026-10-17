@@ -1,0 +1,35 @@
+---
+layout: default
+title: Writing
+nav: writing
+permalink: /writing/
+description: Essays and notes on economics, the evidence behind it, and the arguments it keeps having.
+---
+<section class="band">
+  <div class="shell">
+    <div class="column" style="margin-bottom:2.4rem">
+      <h1 style="font-size:clamp(1.9rem,6vw,2.7rem);font-weight:600;letter-spacing:-0.019em;line-height:1.1;margin:0 0 .8rem">Writing</h1>
+      <p style="color:var(--ink-soft);margin:0">Longer pieces. Everything stays at its own address, so you can link to it, send it, or come back in three years.</p>
+    </div>
+
+    {% if site.posts.size > 0 %}
+      {% assign byyear = site.posts | group_by_exp: "p", "p.date | date: '%Y'" %}
+      {% for year in byyear %}
+        <p class="year-heading">{{ year.name }}</p>
+        <ul class="entries">
+          {% for post in year.items %}
+          <li class="entry">
+            <span class="entry__date">{{ post.date | date: "%d.%m.%Y" }}</span>
+            <div>
+              <h2 class="entry__title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+              {% if post.standfirst %}<p class="entry__summary">{{ post.standfirst }}</p>{% endif %}
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      {% endfor %}
+    {% else %}
+      <p class="empty">Nothing published yet.</p>
+    {% endif %}
+  </div>
+</section>
