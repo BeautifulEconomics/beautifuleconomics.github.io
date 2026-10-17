@@ -1,0 +1,40 @@
+---
+layout: default
+---
+<article class="article">
+  <div class="shell">
+    <div class="column">
+      <p class="article__meta">{{ page.date | date: "%-d %B %Y" }}{% if page.reading %} — {{ page.reading }}{% endif %}</p>
+      <h1>{{ page.title }}</h1>
+      {% if page.standfirst %}<p class="article__standfirst">{{ page.standfirst }}</p>{% endif %}
+      <div class="prose">{{ content }}</div>
+    </div>
+  </div>
+</article>
+
+<section class="band band--sunk" style="margin-top:3.5rem">
+  <div class="shell">
+    <div class="column">
+      {% include subscribe.html id="subscribe-post" %}
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="shell">
+    <h2 class="band__heading">Read next</h2>
+    <ul class="entries">
+      {% for item in site.posts limit: 3 %}
+        {% unless item.url == page.url %}
+        <li class="entry">
+          <span class="entry__date">{{ item.date | date: "%d.%m.%Y" }}</span>
+          <div>
+            <h3 class="entry__title"><a href="{{ item.url | relative_url }}">{{ item.title }}</a></h3>
+            {% if item.standfirst %}<p class="entry__summary">{{ item.standfirst }}</p>{% endif %}
+          </div>
+        </li>
+        {% endunless %}
+      {% endfor %}
+    </ul>
+  </div>
+</section>
