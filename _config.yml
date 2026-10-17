@@ -1,0 +1,60 @@
+# ---------------------------------------------------------------
+# Beautiful Economics — site settings
+# Change the values here, commit, and the whole site updates.
+# After editing this file it can take ~1 minute for GitHub to rebuild.
+# ---------------------------------------------------------------
+
+title: Beautiful Economics
+tagline: Economics, explained plainly and kept where you can find it again.
+description: >-
+  Clear, careful writing about economics — the ideas, the evidence,
+  and the arguments — by Arjun Sharma.
+author: Arjun Sharma
+
+# Your live address. No trailing slash.
+url: "https://beautifuleconomics.in"
+baseurl: ""
+
+# Where people can find you. Leave a value empty to hide that link.
+facebook: "https://www.facebook.com/beautifuleconomics"
+email: "hello@beautifuleconomics.in"
+whatsapp_channel: ""   # paste your WhatsApp channel invite link here
+twitter: ""
+
+# Newsletter. Paste the form action URL from your email provider here.
+# Buttondown:  https://buttondown.email/api/emails/embed-subscribe/YOURNAME
+# MailerLite / Substack: see README.md
+newsletter_action: ""
+newsletter_field: "email"
+
+# --- Build settings. You will not normally need to touch these. ---
+markdown: kramdown
+permalink: /:title/
+timezone: Asia/Kolkata
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+
+collections:
+  concepts:
+    output: true
+    permalink: /concepts/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "concepts"
+    values:
+      layout: "concept"
