@@ -1,0 +1,34 @@
+---
+layout: default
+title: Concepts
+nav: concepts
+permalink: /concepts/
+description: A growing dictionary of economics — each idea explained in plain language, with the assumption it rests on made visible.
+---
+<section class="band">
+  <div class="shell">
+    <div class="column" style="margin-bottom:2.4rem">
+      <h1 style="font-size:clamp(1.9rem,6vw,2.7rem);font-weight:600;letter-spacing:-0.019em;line-height:1.1;margin:0 0 .8rem">Concepts</h1>
+      <p style="color:var(--ink-soft);margin:0">Economics, one idea at a time. Each entry says what the idea claims, what it assumes, and where it stops working. No prior course required.</p>
+    </div>
+    {% if site.concepts.size > 0 %}
+    <ul class="concept-grid">
+      {% assign sorted = site.concepts | sort: "title" %}
+      {% for c in sorted %}
+      <li><a href="{{ c.url | relative_url }}">
+        <span class="concept-grid__term">{{ c.title }}</span>
+        <span class="concept-grid__gloss">{{ c.gloss }}</span>
+      </a></li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="empty">No concepts yet. Add a file to <code>_concepts/</code>.</p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="band band--sunk">
+  <div class="shell"><div class="column">
+    {% include subscribe.html id="subscribe-concepts" heading="One concept a week, in your inbox." body="Same writing, delivered. Put your address in and it arrives on Sunday morning." %}
+  </div></div>
+</section>
