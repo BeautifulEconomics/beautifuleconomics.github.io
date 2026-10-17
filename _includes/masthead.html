@@ -1,0 +1,13 @@
+<header class="masthead">
+  <div class="shell masthead__inner">
+    <a class="wordmark" href="{{ '/' | relative_url }}">
+      <span class="wordmark__dot" aria-hidden="true"></span>Beautiful Economics
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="{{ '/concepts/' | relative_url }}"{% if page.nav == 'concepts' %} aria-current="page"{% endif %}>Concepts</a>
+      <a href="{{ '/writing/' | relative_url }}"{% if page.nav == 'writing' %} aria-current="page"{% endif %}>Writing</a>
+      <a href="{{ '/library/' | relative_url }}"{% if page.nav == 'library' %} aria-current="page"{% endif %}>Library</a>
+      <a href="{{ '/about/' | relative_url }}"{% if page.nav == 'about' %} aria-current="page"{% endif %}>About</a>
+    </nav>
+  </div>
+</header>
