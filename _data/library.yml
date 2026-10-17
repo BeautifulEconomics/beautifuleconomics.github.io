@@ -1,0 +1,8 @@
+# Each PDF you want on the Library page. Put the file in assets/library/
+# then add it here. Example:
+#
+# - title: "Game theory in one sitting"
+#   file: /assets/library/game-theory-in-one-sitting.pdf
+#   pages: 14
+#   size: "1.2 MB"
+#   note: "Dominant strategies, Nash equilibrium and why the prisoner's dilemma is not about prisoners."
