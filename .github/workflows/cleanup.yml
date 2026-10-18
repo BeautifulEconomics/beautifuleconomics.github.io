@@ -1,0 +1,36 @@
+name: Clean up one-off files
+
+# Removes the temporary files used to apply the redesign, including this
+# workflow itself, so the repository is left tidy. Run it once from the
+# Actions tab; after it succeeds nothing from this exercise remains.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Remove the one-off files
+        run: |
+          git rm -f --ignore-unmatch \
+            zz-t.md \
+            zz2.md \
+            scripts/_redesign_a.txt \
+            scripts/_redesign_b.txt \
+            scripts/apply_redesign.py \
+            .github/workflows/apply-redesign.yml \
+            .github/workflows/cleanup.yml
+          if git diff --cached --quiet; then
+            echo "Nothing to remove."
+            exit 0
+          fi
+          git config user.name  "beautiful-economics-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Remove the one-off files used to apply the redesign"
+          git push
