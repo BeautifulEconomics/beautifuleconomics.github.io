@@ -8,3 +8,20 @@
 <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | relative_url }}">
 {%- seo -%}
+<style>
+  /* Social links sit in their own row under the site links, set apart so
+     they read as "elsewhere" rather than as more pages on this site. */
+  .footer__social {
+    display: flex; flex-wrap: wrap; gap: .6rem 1.8rem;
+    margin: -0.6rem 0 1.8rem; padding: 0; list-style: none;
+    font-size: .95rem;
+  }
+  .footer__social a {
+    color: var(--ink-soft); text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    transition: color .18s ease, border-color .18s ease;
+  }
+  .footer__social a:hover, .footer__social a:focus-visible {
+    color: var(--ink); border-bottom-color: var(--mark);
+  }
+</style>
