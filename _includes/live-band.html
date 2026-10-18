@@ -1,0 +1,52 @@
+{% assign live = site.data.live %}
+{% if live and live.rates and live.rates.size > 0 %}
+<section class="band band--sunk live">
+  <div class="shell">
+    <div class="live__head">
+      <h2 class="band__heading">The rupee this morning</h2>
+      <p class="live__stamp">European Central Bank reference rates, {{ live.as_of }}</p>
+    </div>
+
+    <p class="live__headline">{{ live.headline }}</p>
+
+    <ul class="quotes">
+      {% for r in live.rates %}
+      <li class="quote">
+        <span class="quote__pair">{{ r.unit }} buys</span>
+        <span class="quote__value">&#8377;{{ r.value }}</span>
+        <svg class="quote__spark" viewBox="0 0 150 34" preserveAspectRatio="none" aria-hidden="true">
+          <path d="{{ r.path }}" />
+        </svg>
+        <span class="quote__meta">
+          {% if r.change > 0 %}
+            <span class="quote__dir quote__dir--up">&#9650; {{ r.change }}%</span> weaker over a month
+          {% elsif r.change < 0 %}
+            {% assign down = 0 | minus: r.change %}
+            <span class="quote__dir quote__dir--down">&#9660; {{ down }}%</span> stronger over a month
+          {% else %}
+            <span class="quote__dir">flat</span> over a month
+          {% endif %}
+        </span>
+        <span class="quote__range">90-day range &#8377;{{ r.low }} &ndash; &#8377;{{ r.high }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% if live.indicators and live.indicators.size > 0 %}
+    <div class="slow">
+      <p class="slow__intro">Slower numbers, for scale. These move once a year, not once a day.</p>
+      <ul class="slow__list">
+        {% for i in live.indicators %}
+        <li>
+          <span class="slow__value">{{ i.value }}{{ i.unit }}</span>
+          <span class="slow__label">{{ i.label }}</span>
+          <span class="slow__note">{{ i.note }} &middot; {{ i.year }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+      <p class="slow__source">Annual indicators from the World Bank. Updated automatically each weekday.</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endif %}
