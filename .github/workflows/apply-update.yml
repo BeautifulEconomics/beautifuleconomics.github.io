@@ -1,0 +1,46 @@
+name: Apply update
+
+# One-off: unpacks scripts/_r2*.txt over the site files, commits the
+# result, then removes itself and its bundle so the repository stays tidy.
+# Run by hand from the Actions tab.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Unpack the update
+        run: python scripts/apply_update.py
+
+      - name: Remove the one-off files
+        run: |
+          git rm -f --ignore-unmatch \
+            zz2.md \
+            zz3.md \
+            scripts/_r2a.txt \
+            scripts/_r2b.txt \
+            scripts/apply_update.py \
+            .github/workflows/apply-update.yml
+
+      - name: Commit the result
+        run: |
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Nothing changed."
+            exit 0
+          fi
+          git config user.name  "beautiful-economics-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Nav glyphs, time-aware greeting, simpler homepage and footer"
+          git push
