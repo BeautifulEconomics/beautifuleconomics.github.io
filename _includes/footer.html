@@ -1,16 +1,38 @@
 <footer class="footer">
   <div class="shell">
     <p class="footer__mark">Beautiful Economics</p>
+
     <ul class="footer__links">
       <li><a href="{{ '/concepts/' | relative_url }}">Concepts</a></li>
       <li><a href="{{ '/writing/' | relative_url }}">Writing</a></li>
       <li><a href="{{ '/library/' | relative_url }}">Library</a></li>
       <li><a href="{{ '/about/' | relative_url }}">About</a></li>
       <li><a href="{{ '/feed.xml' | relative_url }}">RSS</a></li>
-      {% if site.facebook != "" %}<li><a href="{{ site.facebook }}" rel="me noopener">Facebook</a></li>{% endif %}
-      {% if site.whatsapp_channel != "" %}<li><a href="{{ site.whatsapp_channel }}" rel="noopener">WhatsApp</a></li>{% endif %}
       {% if site.email != "" %}<li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>{% endif %}
     </ul>
+
+    {%- comment -%}
+      Social links only appear when you fill the matching value in
+      _config.yml. An empty value hides the link, so the footer never
+      shows a dead address.
+    {%- endcomment -%}
+    {% if site.facebook != "" or site.instagram != "" or site.whatsapp_channel != "" or site.twitter != "" %}
+    <ul class="footer__social">
+      {% if site.facebook != "" %}
+      <li><a href="{{ site.facebook }}" rel="me noopener" target="_blank">Facebook</a></li>
+      {% endif %}
+      {% if site.instagram != "" %}
+      <li><a href="{{ site.instagram }}" rel="me noopener" target="_blank">Instagram</a></li>
+      {% endif %}
+      {% if site.whatsapp_channel != "" %}
+      <li><a href="{{ site.whatsapp_channel }}" rel="noopener" target="_blank">WhatsApp</a></li>
+      {% endif %}
+      {% if site.twitter != "" %}
+      <li><a href="{{ site.twitter }}" rel="me noopener" target="_blank">X</a></li>
+      {% endif %}
+    </ul>
+    {% endif %}
+
     <p class="footer__fine">Written by {{ site.author }}. Everything here stays at this address and stays readable without an account.</p>
   </div>
 </footer>
