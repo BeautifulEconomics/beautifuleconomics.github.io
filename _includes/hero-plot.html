@@ -1,32 +1,32 @@
-<svg class="plot" viewBox="0 0 560 400" role="img" aria-labelledby="plot-title plot-desc">
+<svg class="plot" viewBox="0 0 640 316" role="img" aria-labelledby="plot-title plot-desc">
   <title id="plot-title">How long a piece of writing stays findable</title>
-  <desc id="plot-desc">A Facebook post reaches almost nobody after about forty-eight hours. A page on this site stays findable, and slowly gains readers through search, for years.</desc>
+  <desc id="plot-desc">A post in the feed reaches almost nobody after about forty-eight hours. A page on this site stays findable, and slowly gains readers through search, for years.</desc>
+
+  <!-- axis title, kept well inside the box so it is never clipped -->
+  <text class="axis-title" transform="rotate(-90 26 148)" x="26" y="148" text-anchor="middle">readers who can still find it</text>
 
   <!-- axes -->
-  <line class="plot__axis" x1="48" y1="30"  x2="48"  y2="340"/>
-  <line class="plot__axis" x1="48" y1="340" x2="540" y2="340"/>
+  <line class="plot__axis" x1="78" y1="20"  x2="78"  y2="258"/>
+  <line class="plot__axis" x1="78" y1="258" x2="622" y2="258"/>
 
-  <!-- area under the durable line -->
-  <path class="plot__under" d="M58,250 C 160,244 320,228 528,210 L528,340 L58,340 Z"/>
+  <!-- the area under the durable line -->
+  <path class="plot__under" d="M88,186 C 210,180 390,166 618,150 L618,258 L88,258 Z"/>
 
   <!-- the two series -->
-  <path class="plot__decay" d="M58,58 C 86,56 96,250 126,306 C 170,334 320,338 528,338"/>
-  <path class="plot__flat"  d="M58,250 C 160,244 320,228 528,210"/>
+  <path class="plot__decay" d="M88,36 C 112,34 122,170 146,226 C 186,252 340,256 618,257"/>
+  <path class="plot__flat"  d="M88,186 C 210,180 390,166 618,150"/>
 
-  <!-- the 48-hour marker -->
-  <line class="plot__guide" x1="134" y1="340" x2="134" y2="316"/>
-  <circle class="plot__dot" cx="134" cy="316" r="4"/>
-  <text class="plot__note" x="144" y="310">gone by hour 48</text>
+  <!-- the forty-eight hour marker -->
+  <line class="plot__guide" x1="150" y1="258" x2="150" y2="232"/>
+  <circle class="plot__dot" cx="150" cy="229" r="4"/>
+  <text class="plot__note" x="162" y="226">gone by hour 48</text>
 
   <!-- series labels -->
-  <text class="plot__series series-mark" x="104" y="64">A post in the feed</text>
-  <text class="plot__series series-plot" x="286" y="218">A page on this site</text>
+  <text class="plot__series series-mark" x="118" y="44">A post in the feed</text>
+  <text class="plot__series series-plot" x="372" y="160">A page on this site</text>
 
   <!-- ticks -->
-  <text x="50"  y="360">published</text>
-  <text x="134" y="360" text-anchor="middle">48h</text>
-  <text x="286" y="360" text-anchor="middle">1 month</text>
-  <text x="515" y="360" text-anchor="middle">3 years</text>
-
-  <text class="axis-title" transform="rotate(-90 16 200)" x="16" y="200" text-anchor="middle">readers who can still find it</text>
+  <text x="78"  y="280">published</text>
+  <text x="352" y="280" text-anchor="middle">1 month</text>
+  <text x="604" y="280" text-anchor="end">3 years</text>
 </svg>

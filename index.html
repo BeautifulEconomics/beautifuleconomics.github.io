@@ -4,17 +4,29 @@ title: Beautiful Economics
 nav: home
 ---
 
-<section class="hero gridpaper">
-  <div class="shell hero__inner">
-    <div>
-      <h1>Beautiful Economics</h1>
-      <p class="hero__lede">Economics explained carefully and kept where you can find it again — not buried in a feed two days after it was written.</p>
-      <div class="hero__actions">
-        <a class="button" href="{{ '/concepts/' | relative_url }}">Start with a concept</a>
-        <a class="textlink" href="{{ '/about/' | relative_url }}">Why this site exists</a>
-      </div>
+<section class="cover">
+  <div class="shell">
+    <hr class="cover__rule">
+    <h1 class="cover__title">Beautiful Economics</h1>
+    <hr class="cover__rule cover__rule--thin">
+
+    <p class="cover__lede">Economics explained carefully and kept where you can find it again — not buried in a feed two days after it was written.</p>
+
+    <div class="cover__actions">
+      <a class="button" href="{{ '/concepts/' | relative_url }}">Start with a concept</a>
+      <a class="textlink" href="{{ '/about/' | relative_url }}">Why this site exists</a>
     </div>
-    {% include hero-plot.html %}
+
+    <figure class="plate">
+      <p class="plate__label">PLATE I</p>
+      <div class="plate__frame">
+        {% include hero-plot.html %}
+      </div>
+      <figcaption class="plate__caption">
+        <b>How long a piece of writing stays findable.</b>
+        A post in the feed reaches almost nobody after about forty-eight hours. A page at its own address keeps being found, and slowly gains readers through search, for years.
+      </figcaption>
+    </figure>
   </div>
 </section>
 
@@ -25,8 +37,8 @@ nav: home
   <div class="shell">
     <h2 class="band__heading">Today's concept</h2>
     {% assign first = site.concepts | first %}
-    <div class="today" id="today" data-fallback="{{ first.url | relative_url }}">
-      <p class="today__kicker" id="today-date">A new one every day</p>
+    <div class="today" id="today">
+      <p class="today__kicker" id="today-date">A NEW ONE EVERY DAY</p>
       <h3 class="today__term"><a href="{{ first.url | relative_url }}" id="today-link">{{ first.title }}</a></h3>
       <p class="today__gloss" id="today-gloss">{{ first.gloss }}</p>
     </div>
@@ -47,7 +59,7 @@ nav: home
     document.getElementById('today-link').setAttribute('href', pick.u);
     document.getElementById('today-gloss').textContent = pick.g;
     document.getElementById('today-date').textContent =
-      now.toLocaleDateString(undefined, { day: 'numeric', month: 'long' });
+      now.toLocaleDateString(undefined, { day: 'numeric', month: 'long' }).toUpperCase();
   })();
 </script>
 {% endif %}
@@ -67,7 +79,7 @@ nav: home
       </li>
       {% endfor %}
     </ul>
-    <p style="margin-top:1.6rem"><a class="textlink" href="{{ '/writing/' | relative_url }}">All writing</a></p>
+    <p style="margin-top:2rem"><a class="textlink" href="{{ '/writing/' | relative_url }}">All writing</a></p>
     {% else %}
     <p class="empty">Nothing published yet. Add a file to <code>_posts/</code> and it appears here.</p>
     {% endif %}
