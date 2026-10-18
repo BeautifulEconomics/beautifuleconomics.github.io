@@ -136,15 +136,44 @@ body {
   border-bottom: 1px solid transparent;
   transition: color .18s ease, border-color .18s ease;
 }
+.nav a {
+  display: inline-flex; align-items: center; gap: .45rem;
+}
+.nav__icon {
+  width: 1em; height: 1em; flex: none;
+  fill: none; stroke: currentColor; stroke-width: 1.3;
+  stroke-linecap: round; stroke-linejoin: round;
+  opacity: .62;
+  transition: opacity .18s ease;
+}
+.nav a:hover .nav__icon,
+.nav a:focus-visible .nav__icon,
+.nav a[aria-current="page"] .nav__icon { opacity: 1; }
+
 .nav a:hover, .nav a:focus-visible { color: var(--ink); border-bottom-color: var(--mark); }
 .nav a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--plot); }
-@media (max-width: 30em) {
-  .nav { gap: 1rem; }
-  .nav a { font-size: .9rem; }
+/* On a narrow screen the mark takes its own row so the navigation has the
+   full width and can keep its glyphs without crowding. */
+@media (max-width: 34em) {
+  .masthead__inner { flex-direction: column; align-items: stretch; gap: .7rem; }
+  .masthead--home .masthead__inner { justify-content: flex-start; }
+  .nav { justify-content: space-between; gap: .5rem; width: 100%; }
+  .nav a { font-size: .9rem; gap: .35rem; }
+  .masthead--home .wordmark { margin-right: 0; }
 }
 
 /* ---------------------------- the cover ----------------------- */
 .cover { padding: clamp(3rem, 9vw, 6.5rem) 0 clamp(2.5rem, 6vw, 4rem); }
+
+.cover__greeting {
+  font-family: var(--text);
+  font-style: italic;
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  color: var(--ink-faint);
+  text-align: center;
+  margin: 0 0 1.8rem;
+  letter-spacing: .005em;
+}
 
 .cover__rule {
   border: 0; height: 1px; background: var(--ink);
@@ -471,9 +500,25 @@ body {
   letter-spacing: -0.02em; color: var(--ink); margin: 0 0 1.4rem;
   font-variation-settings: "SOFT" 0, "WONK" 1, "opsz" 24;
 }
+.footer__line { color: var(--ink-soft); margin: 0 0 1.6rem; max-width: 46ch; font-size: 1.02rem; text-wrap: pretty; }
 .footer__links { display: flex; flex-wrap: wrap; gap: .6rem 1.8rem; margin: 0 0 1.8rem; padding: 0; list-style: none; }
 .footer a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--rule); transition: color .18s ease, border-color .18s ease; }
 .footer a:hover, .footer a:focus-visible { color: var(--ink); border-bottom-color: var(--mark); }
+.footer__social {
+  display: flex; flex-wrap: wrap; gap: .6rem 1.8rem;
+  margin: 0 0 1.8rem; padding: 0; list-style: none; font-size: .98rem;
+}
+.footer__social a {
+  color: var(--ink-soft); text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  transition: color .18s ease, border-color .18s ease;
+}
+.footer__social a:hover, .footer__social a:focus-visible {
+  color: var(--ink); border-bottom-color: var(--mark);
+}
+.footer__fine a { color: var(--ink-soft); border-bottom: 1px solid var(--rule); text-decoration: none; }
+.footer__fine a:hover { color: var(--ink); border-bottom-color: var(--mark); }
+
 .footer__fine { color: var(--ink-faint); font-size: .88rem; margin: 0; max-width: 52ch; line-height: 1.6; }
 
 /* ---------------------------- utilities ----------------------- */

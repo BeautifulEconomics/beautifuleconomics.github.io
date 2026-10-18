@@ -6,31 +6,24 @@ nav: home
 
 <section class="cover">
   <div class="shell">
+    {%- comment -%}
+      The greeting reads the visitor's own device clock, so it is correct
+      wherever in the world they are. Without JavaScript it stays "Welcome".
+    {%- endcomment -%}
+    <p class="cover__greeting" id="greeting">Welcome</p>
+
     <hr class="cover__rule">
     <h1 class="cover__title">Beautiful Economics</h1>
     <hr class="cover__rule cover__rule--thin">
 
-    <p class="cover__lede">Economics explained carefully and kept where you can find it again — not buried in a feed two days after it was written.</p>
+    <p class="cover__lede">Economics explained carefully, in plain language, and kept at an address where you can find it again.</p>
 
     <div class="cover__actions">
       <a class="button" href="{{ '/concepts/' | relative_url }}">Start with a concept</a>
-      <a class="textlink" href="{{ '/about/' | relative_url }}">Why this site exists</a>
+      <a class="textlink" href="{{ '/about/' | relative_url }}">What this is</a>
     </div>
-
-    <figure class="plate">
-      <p class="plate__label">PLATE I</p>
-      <div class="plate__frame">
-        {% include hero-plot.html %}
-      </div>
-      <figcaption class="plate__caption">
-        <b>How long a piece of writing stays findable.</b>
-        A post in the feed reaches almost nobody after about forty-eight hours. A page at its own address keeps being found, and slowly gains readers through search, for years.
-      </figcaption>
-    </figure>
   </div>
 </section>
-
-{% include live-band.html %}
 
 {% if site.concepts.size > 0 %}
 <section class="band">
@@ -45,24 +38,26 @@ nav: home
   </div>
 </section>
 
-<script>
-  (function () {
-    var all = [
-      {% for c in site.concepts %}{ t: {{ c.title | jsonify }}, g: {{ c.gloss | jsonify }}, u: {{ c.url | relative_url | jsonify }} }{% unless forloop.last %},{% endunless %}
+<section class="band">
+  <div class="shell">
+    <h2 class="band__heading">Browse the concepts</h2>
+    <ul class="concept-grid">
+      {% assign sorted = site.concepts | sort: "title" %}
+      {% for c in sorted limit: 6 %}
+      <li><a href="{{ c.url | relative_url }}">
+        <span class="concept-grid__term">{{ c.title }}</span>
+        <span class="concept-grid__gloss">{{ c.gloss }}</span>
+      </a></li>
       {% endfor %}
-    ];
-    if (!all.length) return;
-    var now = new Date();
-    var day = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);
-    var pick = all[(day + now.getFullYear()) % all.length];
-    document.getElementById('today-link').textContent = pick.t;
-    document.getElementById('today-link').setAttribute('href', pick.u);
-    document.getElementById('today-gloss').textContent = pick.g;
-    document.getElementById('today-date').textContent =
-      now.toLocaleDateString(undefined, { day: 'numeric', month: 'long' }).toUpperCase();
-  })();
-</script>
+    </ul>
+    {% if site.concepts.size > 6 %}
+    <p style="margin-top:2rem"><a class="textlink" href="{{ '/concepts/' | relative_url }}">All {{ site.concepts.size }} concepts</a></p>
+    {% endif %}
+  </div>
+</section>
 {% endif %}
+
+{% include live-band.html %}
 
 <section class="band">
   <div class="shell">
@@ -93,3 +88,32 @@ nav: home
     </div>
   </div>
 </section>
+
+<script>
+  (function () {
+    // Greeting, from the reader's own clock.
+    var el = document.getElementById('greeting');
+    if (el) {
+      var h = new Date().getHours();
+      el.textContent =
+        (h >= 5 && h < 12)  ? 'Good morning'   :
+        (h >= 12 && h < 17) ? 'Good afternoon' :
+        (h >= 17 && h < 22) ? 'Good evening'   : 'Hello';
+    }
+
+    // One concept surfaced per day, chosen from the whole collection.
+    var all = [
+      {% for c in site.concepts %}{ t: {{ c.title | jsonify }}, g: {{ c.gloss | jsonify }}, u: {{ c.url | relative_url | jsonify }} }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ];
+    if (!all.length) return;
+    var now = new Date();
+    var day = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);
+    var pick = all[(day + now.getFullYear()) % all.length];
+    document.getElementById('today-link').textContent = pick.t;
+    document.getElementById('today-link').setAttribute('href', pick.u);
+    document.getElementById('today-gloss').textContent = pick.g;
+    document.getElementById('today-date').textContent =
+      now.toLocaleDateString(undefined, { day: 'numeric', month: 'long' }).toUpperCase();
+  })();
+</script>

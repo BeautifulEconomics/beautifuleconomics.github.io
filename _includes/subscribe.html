@@ -1,13 +1,12 @@
-<h2 class="subscribe__heading">{{ include.heading | default: "Facebook decides who sees this. Your inbox doesn't." }}</h2>
-<p class="subscribe__body">{{ include.body | default: "One email a week: a concept explained properly, and whatever I have been reading. No tracking pixels, no selling your address, unsubscribe in one click." }}</p>
+<h2 class="subscribe__heading">{{ include.heading | default: "Get each new piece by email." }}</h2>
+<p class="subscribe__body">{{ include.body | default: "An algorithm decides who sees a post in a feed. Nothing decides who sees an email. No tracking, no selling your address, unsubscribe in one click." }}</p>
 
 {% if site.newsletter_action != "" %}
 <form class="signup" action="{{ site.newsletter_action }}" method="post" target="_blank">
   <label class="visually-hidden" for="{{ include.id | default: 'subscribe-email' }}">Email address</label>
   <input id="{{ include.id | default: 'subscribe-email' }}" type="email" name="{{ site.newsletter_field }}" placeholder="you@example.com" required autocomplete="email">
-  <button class="button" type="submit">Send me the weekly email</button>
+  <button class="button" type="submit">Subscribe</button>
 </form>
-<p class="signup__note">Free. About 600 words. Sent on Sunday mornings.</p>
 {% else %}
 <p class="signup--pending">Set <code>newsletter_action</code> in <code>_config.yml</code> to switch this form on. Instructions are in README.md.</p>
 {% endif %}

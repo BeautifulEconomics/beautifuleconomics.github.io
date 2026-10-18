@@ -1,19 +1,18 @@
 <header class="masthead{% if page.nav == 'home' %} masthead--home{% endif %}">
   <div class="shell masthead__inner">
     {%- comment -%}
-      On the homepage the giant cover title is the masthead, so repeating the
-      wordmark here would say the same thing twice. The dot stays as the home
-      link; on every other page the full wordmark appears.
+      On the homepage the large cover title is the masthead, so the wordmark
+      text is hidden there and only the mark remains as a home link.
     {%- endcomment -%}
-    <a class="wordmark" href="{{ '/' | relative_url }}" {% if page.nav == 'home' %}aria-label="Beautiful Economics, home"{% endif %}>
+    <a class="wordmark" href="{{ '/' | relative_url }}" aria-label="Beautiful Economics, home">
       <span class="wordmark__dot" aria-hidden="true"></span>
       <span class="wordmark__text">Beautiful Economics</span>
     </a>
     <nav class="nav" aria-label="Main">
-      <a href="{{ '/concepts/' | relative_url }}"{% if page.nav == 'concepts' %} aria-current="page"{% endif %}>Concepts</a>
-      <a href="{{ '/writing/' | relative_url }}"{% if page.nav == 'writing' %} aria-current="page"{% endif %}>Writing</a>
-      <a href="{{ '/library/' | relative_url }}"{% if page.nav == 'library' %} aria-current="page"{% endif %}>Library</a>
-      <a href="{{ '/about/' | relative_url }}"{% if page.nav == 'about' %} aria-current="page"{% endif %}>About</a>
+      <a href="{{ '/concepts/' | relative_url }}"{% if page.nav == 'concepts' %} aria-current="page"{% endif %}>{% include icons.html name='concepts' %}<span>Concepts</span></a>
+      <a href="{{ '/writing/' | relative_url }}"{% if page.nav == 'writing' %} aria-current="page"{% endif %}>{% include icons.html name='writing' %}<span>Writing</span></a>
+      <a href="{{ '/library/' | relative_url }}"{% if page.nav == 'library' %} aria-current="page"{% endif %}>{% include icons.html name='library' %}<span>Library</span></a>
+      <a href="{{ '/about/' | relative_url }}"{% if page.nav == 'about' %} aria-current="page"{% endif %}>{% include icons.html name='about' %}<span>About</span></a>
     </nav>
   </div>
 </header>
