@@ -1,0 +1,16 @@
+name: deploy-r3
+on: { workflow_dispatch: }
+permissions: { contents: write }
+jobs:
+  go:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/_unpack.py
+      - run: git rm -q scripts/_unpack.py scripts/_r31.txt scripts/_sha.txt .github/workflows/deploy-r3.yml
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Scroll reveals, highlighter, how-it-works band, FAQ"
+          git push
