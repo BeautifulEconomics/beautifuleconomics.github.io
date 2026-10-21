@@ -16,21 +16,29 @@ nav: home
     <h1 class="cover__title">Beautiful Economics</h1>
     <hr class="cover__rule cover__rule--thin">
 
-    <p class="cover__lede">Economics explained carefully, in plain language, and kept at an address where you can find it again.</p>
+    <p class="cover__lede" data-reveal>Economics explained carefully, in plain language, and <span class="mark-up">kept where you can find it again</span>.</p>
 
-    <div class="cover__actions">
+    <div class="cover__actions" data-reveal data-delay="2">
       <a class="button" href="{{ '/concepts/' | relative_url }}">Start with a concept</a>
-      <a class="textlink" href="{{ '/about/' | relative_url }}">What this is</a>
+      <a class="textlink" href="#how">How this works</a>
     </div>
+  </div>
+</section>
+
+<section class="band band--dark" id="how">
+  <div class="shell">
+    <h2 class="band__heading" data-reveal>How to use this</h2>
+    <p class="band__intro" data-reveal data-delay="1">No account, no fee, no order to follow. Three steps and you are reading.</p>
+    {% include steps.html %}
   </div>
 </section>
 
 {% if site.concepts.size > 0 %}
 <section class="band">
   <div class="shell">
-    <h2 class="band__heading">Today's concept</h2>
+    <h2 class="band__heading" data-reveal>Today's concept</h2>
     {% assign first = site.concepts | first %}
-    <div class="today" id="today">
+    <div class="today" id="today" data-reveal data-delay="1">
       <p class="today__kicker" id="today-date">A NEW ONE EVERY DAY</p>
       <h3 class="today__term"><a href="{{ first.url | relative_url }}" id="today-link">{{ first.title }}</a></h3>
       <p class="today__gloss" id="today-gloss">{{ first.gloss }}</p>
@@ -40,18 +48,18 @@ nav: home
 
 <section class="band">
   <div class="shell">
-    <h2 class="band__heading">Browse the concepts</h2>
+    <h2 class="band__heading" data-reveal>Browse the concepts</h2>
     <ul class="concept-grid">
       {% assign sorted = site.concepts | sort: "title" %}
       {% for c in sorted limit: 6 %}
-      <li><a href="{{ c.url | relative_url }}">
+      <li data-reveal data-delay="{{ forloop.index | modulo: 4 | plus: 1 }}"><a href="{{ c.url | relative_url }}">
         <span class="concept-grid__term">{{ c.title }}</span>
         <span class="concept-grid__gloss">{{ c.gloss }}</span>
       </a></li>
       {% endfor %}
     </ul>
     {% if site.concepts.size > 6 %}
-    <p style="margin-top:2rem"><a class="textlink" href="{{ '/concepts/' | relative_url }}">All {{ site.concepts.size }} concepts</a></p>
+    <p style="margin-top:2rem" data-reveal><a class="textlink" href="{{ '/concepts/' | relative_url }}">All {{ site.concepts.size }} concepts</a></p>
     {% endif %}
   </div>
 </section>
@@ -61,11 +69,11 @@ nav: home
 
 <section class="band">
   <div class="shell">
-    <h2 class="band__heading">Latest writing</h2>
+    <h2 class="band__heading" data-reveal>Latest writing</h2>
     {% if site.posts.size > 0 %}
     <ul class="entries">
       {% for post in site.posts limit: 5 %}
-      <li class="entry">
+      <li class="entry" data-reveal data-delay="{{ forloop.index | modulo: 3 | plus: 1 }}">
         <span class="entry__date">{{ post.date | date: "%d.%m.%Y" }}</span>
         <div>
           <h3 class="entry__title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
@@ -74,16 +82,23 @@ nav: home
       </li>
       {% endfor %}
     </ul>
-    <p style="margin-top:2rem"><a class="textlink" href="{{ '/writing/' | relative_url }}">All writing</a></p>
+    <p style="margin-top:2rem" data-reveal><a class="textlink" href="{{ '/writing/' | relative_url }}">All writing</a></p>
     {% else %}
     <p class="empty">Nothing published yet. Add a file to <code>_posts/</code> and it appears here.</p>
     {% endif %}
   </div>
 </section>
 
+<section class="band">
+  <div class="shell">
+    <h2 class="band__heading" data-reveal>Questions people ask</h2>
+    <div data-reveal data-delay="1">{% include faq.html %}</div>
+  </div>
+</section>
+
 <section class="band band--sunk">
   <div class="shell">
-    <div class="column">
+    <div class="column" data-reveal>
       {% include subscribe.html id="subscribe-home" %}
     </div>
   </div>

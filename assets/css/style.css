@@ -22,6 +22,11 @@
   --plot:       #0E5B52;   /* deep teal: curves, links, focus */
   --mark:       #8C1A38;   /* deep crimson: annotation, only where it means something */
   --plot-wash:  #0E5B521f;
+  --high:       #FFD84D80;   /* highlighter: a translucent amber swash */
+  --high-solid: #FFD24A;     /* the same amber, solid, for small marks */
+  --deep:       #121A1D;     /* dark band background */
+  --deep-ink:   #F2EFE7;
+  --deep-soft:  #A9B4B6;
 
   /* ---- type ---- */
   --display: "Fraunces", Georgia, "Times New Roman", serif;
@@ -56,6 +61,11 @@
     --plot:       #58B9A9;
     --mark:       #E3879F;
     --plot-wash:  #58B9A922;
+    --high:       #FFD84D4d;
+    --high-solid: #FFD24A;
+    --deep:       #080C0E;
+    --deep-ink:   #F2EFE7;
+    --deep-soft:  #9BA7A9;
   }
 }
 :root[data-theme="dark"] {
@@ -70,6 +80,11 @@
   --plot:       #58B9A9;
   --mark:       #E3879F;
   --plot-wash:  #58B9A922;
+  --high:       #FFD84D4d;
+  --high-solid: #FFD24A;
+  --deep:       #080C0E;
+  --deep-ink:   #F2EFE7;
+  --deep-soft:  #9BA7A9;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -566,3 +581,117 @@ body {
     transition-duration: .001ms !important;
   }
 }
+
+/* ===============================================================
+   Movement, emphasis and rhythm
+   =============================================================== */
+
+/* --- scroll reveal ----------------------------------------------
+   Elements rise into place once, the first time they are seen.
+   The hiding rule is scoped to .js, which a script at the top of
+   the page sets, so with JavaScript off nothing is ever hidden.
+   ---------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity .65s cubic-bezier(.22,.61,.36,1),
+                transform .65s cubic-bezier(.22,.61,.36,1);
+    will-change: opacity, transform;
+  }
+  .js [data-reveal].is-in { opacity: 1; transform: none; }
+  .js [data-reveal][data-delay="1"] { transition-delay: .07s; }
+  .js [data-reveal][data-delay="2"] { transition-delay: .14s; }
+  .js [data-reveal][data-delay="3"] { transition-delay: .21s; }
+  .js [data-reveal][data-delay="4"] { transition-delay: .28s; }
+  .js [data-reveal][data-delay="5"] { transition-delay: .35s; }
+}
+
+/* --- highlighter -------------------------------------------------
+   A marked-up phrase, the way a reader marks a book. Drawn as a
+   gradient behind the text so it sits under the letters, not over.
+   ------------------------------------------------------------------ */
+.mark-up {
+  background-image: linear-gradient(transparent 58%, var(--high) 58%, var(--high) 94%, transparent 94%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: 0 .08em;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] .mark-up,
+  .js .mark-up[data-reveal] {
+    background-size: 0% 100%;
+    transition: background-size .8s cubic-bezier(.22,.61,.36,1) .35s;
+  }
+  .js [data-reveal].is-in .mark-up,
+  .js .mark-up[data-reveal].is-in { background-size: 100% 100%; }
+}
+
+/* --- sticky header ---------------------------------------------- */
+.masthead {
+  position: sticky; top: 0; z-index: 40;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: saturate(1.4) blur(10px);
+  -webkit-backdrop-filter: saturate(1.4) blur(10px);
+}
+@supports not (backdrop-filter: blur(4px)) { .masthead { background: var(--paper); } }
+
+/* --- a dark band, for contrast ----------------------------------- */
+.band--dark {
+  background: var(--deep);
+  color: var(--deep-ink);
+  border-top-color: var(--deep);
+}
+.band--dark .band__heading { color: var(--deep-ink); border-bottom-color: var(--deep-ink); }
+.band--dark .step__title { color: var(--deep-ink); }
+.band--dark .step__body,
+.band--dark .band__intro { color: var(--deep-soft); }
+.band--dark .step__num { color: var(--deep); background: var(--high-solid); font-weight: 500; }
+.band--dark a { color: var(--deep-ink); }
+
+.band__intro {
+  color: var(--ink-soft); margin: -1.2rem 0 2.6rem;
+  max-width: 48ch; font-size: 1.06rem; text-wrap: pretty;
+}
+
+/* --- numbered steps ---------------------------------------------- */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 2rem 2.5rem; }
+@media (min-width: 46em) { .steps { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+.step { display: grid; gap: .7rem; align-content: start; }
+.step__num {
+  font-family: var(--mono); font-size: .78rem; font-weight: 400;
+  width: 2.1rem; height: 2.1rem; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--ink); color: var(--paper);
+}
+.step__title {
+  font-family: var(--display); font-size: 1.22rem; font-weight: 600;
+  letter-spacing: -0.016em; margin: 0;
+  font-variation-settings: "SOFT" 0, "WONK" 0, "opsz" 24;
+}
+.step__body { margin: 0; color: var(--ink-soft); font-size: 1rem; line-height: 1.6; text-wrap: pretty; }
+
+/* --- frequently asked -------------------------------------------- */
+.faq { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); max-width: 52rem; }
+.faq details { border-bottom: 1px solid var(--rule); }
+.faq summary {
+  cursor: pointer; list-style: none;
+  padding: 1.3rem 2.5rem 1.3rem 0; position: relative;
+  font-family: var(--display); font-size: 1.1rem; font-weight: 600;
+  letter-spacing: -0.012em; color: var(--ink);
+  font-variation-settings: "SOFT" 0, "WONK" 0, "opsz" 22;
+  transition: color .18s ease;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary:hover { color: var(--plot); }
+.faq summary::after {
+  content: ""; position: absolute; right: .4rem; top: 50%;
+  width: .72rem; height: .72rem; margin-top: -.42rem;
+  border-right: 1.5px solid var(--ink-faint);
+  border-bottom: 1.5px solid var(--ink-faint);
+  transform: rotate(45deg); transform-origin: center;
+  transition: transform .22s ease, border-color .18s ease;
+}
+.faq details[open] summary::after { transform: rotate(-135deg); border-color: var(--plot); }
+.faq__answer { margin: 0; padding: 0 2.5rem 1.6rem 0; color: var(--ink-soft); line-height: 1.65; max-width: 62ch; }
+.faq__answer a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--mark); text-underline-offset: 3px; }

@@ -1,6 +1,13 @@
 <!doctype html>
 <html lang="en">
-<head>{% include head.html %}</head>
+<head>
+  {%- comment -%}
+    Mark the document as script-enabled before anything paints. The reveal
+    styles are scoped to .js, so if this never runs nothing is ever hidden.
+  {%- endcomment -%}
+  <script>document.documentElement.className += ' js';</script>
+  {% include head.html %}
+</head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
   {% include masthead.html %}
@@ -8,5 +15,39 @@
     {{ content }}
   </main>
   {% include footer.html %}
+
+  <script>
+    (function () {
+      var items = document.querySelectorAll('[data-reveal]');
+      if (!items.length) return;
+
+      var reduced = window.matchMedia &&
+                    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // No IntersectionObserver, or the reader prefers less motion:
+      // show everything at once and do nothing further.
+      if (reduced || !('IntersectionObserver' in window)) {
+        for (var i = 0; i < items.length; i++) items[i].classList.add('is-in');
+        return;
+      }
+
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-in');
+          io.unobserve(entry.target);        // reveal once, never again
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+      items.forEach(function (el) { io.observe(el); });
+
+      // Anything already on screen at load should not wait for a scroll.
+      requestAnimationFrame(function () {
+        items.forEach(function (el) {
+          if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('is-in');
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
