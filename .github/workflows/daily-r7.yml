@@ -1,0 +1,18 @@
+name: daily-r7
+on: { workflow_dispatch: }
+permissions: { contents: write }
+jobs:
+  go:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/_apply6.py
+      - name: remove scaffolding
+        run: git rm -q --ignore-unmatch scripts/_d6.txt scripts/_apply6.py .github/workflows/daily-r7.yml
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git status --short
+          git commit -m "Add word of the day and thought of the day, rotating daily"
+          git push
