@@ -28,8 +28,10 @@ description: Free PDFs — notes, summaries and reading guides you can download 
   </div>
 </section>
 
+{% if site.newsletter_action != "" %}
 <section class="band band--sunk">
   <div class="shell"><div class="column">
     {% include subscribe.html id="subscribe-library" heading="New notes go out by email first." body="Subscribers get each PDF the day it is finished. Free, and your address is never passed on." %}
   </div></div>
 </section>
+{% endif %}

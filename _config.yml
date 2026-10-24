@@ -19,9 +19,12 @@ baseurl: ""
 # Paste the full address from your browser's address bar, not just the name.
 facebook: ""
 instagram: ""
+youtube: ""
 whatsapp_channel: ""
 twitter: ""
-email: "hello@beautifuleconomics.in"
+# Leave empty until the address really receives mail. An address that
+# bounces silently is worse than none: corrections never reach you.
+email: ""
 
 # Newsletter. Paste the form action URL from your email provider here.
 # Buttondown:  https://buttondown.email/api/emails/embed-subscribe/YOURNAME
