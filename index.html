@@ -33,19 +33,9 @@ nav: home
   </div>
 </section>
 
-{% if site.concepts.size > 0 %}
-<section class="band">
-  <div class="shell">
-    <h2 class="band__heading" data-reveal>Today's concept</h2>
-    {% assign first = site.concepts | first %}
-    <div class="today" id="today" data-reveal data-delay="1">
-      <p class="today__kicker" id="today-date">A NEW ONE EVERY DAY</p>
-      <h3 class="today__term"><a href="{{ first.url | relative_url }}" id="today-link">{{ first.title }}</a></h3>
-      <p class="today__gloss" id="today-gloss">{{ first.gloss }}</p>
-    </div>
-  </div>
-</section>
+{% include today.html %}
 
+{% if site.concepts.size > 0 %}
 <section class="band">
   <div class="shell">
     <h2 class="band__heading" data-reveal>Browse the concepts</h2>
@@ -108,29 +98,15 @@ nav: home
 
 <script>
   (function () {
-    // Greeting, from the reader's own clock.
+    // Greeting, read from the visitor's own device clock, so it is correct
+    // wherever in the world they are. Everything that rotates daily lives in
+    // _includes/today.html.
     var el = document.getElementById('greeting');
-    if (el) {
-      var h = new Date().getHours();
-      el.textContent =
-        (h >= 5 && h < 12)  ? 'Good morning'   :
-        (h >= 12 && h < 17) ? 'Good afternoon' :
-        (h >= 17 && h < 22) ? 'Good evening'   : 'Hello';
-    }
-
-    // One concept surfaced per day, chosen from the whole collection.
-    var all = [
-      {% for c in site.concepts %}{ t: {{ c.title | jsonify }}, g: {{ c.gloss | jsonify }}, u: {{ c.url | relative_url | jsonify }} }{% unless forloop.last %},{% endunless %}
-      {% endfor %}
-    ];
-    if (!all.length) return;
-    var now = new Date();
-    var day = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);
-    var pick = all[(day + now.getFullYear()) % all.length];
-    document.getElementById('today-link').textContent = pick.t;
-    document.getElementById('today-link').setAttribute('href', pick.u);
-    document.getElementById('today-gloss').textContent = pick.g;
-    document.getElementById('today-date').textContent =
-      now.toLocaleDateString(undefined, { day: 'numeric', month: 'long' }).toUpperCase();
+    if (!el) return;
+    var h = new Date().getHours();
+    el.textContent =
+      (h >= 5 && h < 12)  ? 'Good morning'   :
+      (h >= 12 && h < 17) ? 'Good afternoon' :
+      (h >= 17 && h < 22) ? 'Good evening'   : 'Hello';
   })();
 </script>

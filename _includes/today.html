@@ -1,0 +1,108 @@
+{%- comment -%}
+  Today — concept, word and thought, all rotating on their own.
+
+  The pick is made from the reader's own device clock, so it turns over at
+  their local midnight wherever they are, with no rebuild and nothing to
+  write daily. Without JavaScript the first entry of each list is shown, so
+  the section is never empty and never broken.
+
+  Entries live in _data/words.yml and _data/thoughts.yml. A thought with no
+  source is dropped on purpose: see the note at the top of that file.
+{%- endcomment -%}
+
+{% assign thoughts = site.data.thoughts | where_exp: "t", "t.source != nil" %}
+{% assign words = site.data.words %}
+
+{% if words.size > 0 or thoughts.size > 0 or site.concepts.size > 0 %}
+<section class="band" id="today">
+  <div class="shell">
+    <p class="today__date" id="d-date">Today</p>
+    <h2 class="band__heading" data-reveal>Start here, today</h2>
+
+    <div class="daily">
+      {% if site.concepts.size > 0 %}
+      {% assign c0 = site.concepts | first %}
+      <div class="daily__card" data-reveal>
+        <p class="daily__label">Concept</p>
+        <h3 class="daily__term"><a id="d-concept-link" href="{{ c0.url | relative_url }}">{{ c0.title }}</a></h3>
+        <p class="daily__gloss" id="d-concept-gloss">{{ c0.gloss }}</p>
+      </div>
+      {% endif %}
+
+      {% if words.size > 0 %}
+      {% assign w0 = words | first %}
+      <div class="daily__card" data-reveal data-delay="1">
+        <p class="daily__label">Word of the day</p>
+        <h3 class="daily__term" id="d-word-term">{{ w0.term }}</h3>
+        <p class="daily__gloss" id="d-word-meaning">{{ w0.meaning }}</p>
+        <p class="daily__more"><a id="d-word-link" href="{{ '/concepts/' | relative_url }}" hidden>Read the full concept</a></p>
+      </div>
+      {% endif %}
+    </div>
+
+    {% if thoughts.size > 0 %}
+    {% assign t0 = thoughts | first %}
+    <figure class="thought" data-reveal data-delay="2">
+      <p class="daily__label">Thought of the day</p>
+      <blockquote class="thought__text" id="d-thought-text">{{ t0.text }}</blockquote>
+      <figcaption class="thought__by">
+        <span class="thought__who" id="d-thought-who">{{ t0.who }}</span><span class="thought__what" id="d-thought-what">{{ t0.what }}</span>
+        <cite class="thought__source" id="d-thought-source">{{ t0.source }}</cite>
+      </figcaption>
+    </figure>
+    {% endif %}
+  </div>
+</section>
+
+<script>
+(function () {
+  var words = {{ words | jsonify }};
+  var thoughts = {{ thoughts | jsonify }};
+  var concepts = [
+    {% for c in site.concepts %}{ t: {{ c.title | jsonify }}, g: {{ c.gloss | jsonify }}, u: {{ c.url | relative_url | jsonify }} }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ];
+  var base = {{ '/concepts/' | relative_url | jsonify }};
+
+  var now = new Date();
+  // A continuous count of days, taken from the reader's own calendar date, so
+  // the pick turns over at their local midnight and every list cycles evenly
+  // across a year boundary instead of jumping.
+  var seed = Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86400000);
+
+  function set(id, text) { var el = document.getElementById(id); if (el) el.textContent = text; }
+
+  var d = document.getElementById('d-date');
+  if (d) {
+    d.textContent = now.toLocaleDateString(undefined, { weekday: 'long', day: 'numeric', month: 'long' });
+  }
+
+  if (concepts.length) {
+    var c = concepts[seed % concepts.length];
+    var cl = document.getElementById('d-concept-link');
+    if (cl) { cl.textContent = c.t; cl.setAttribute('href', c.u); }
+    set('d-concept-gloss', c.g);
+  }
+
+  if (words.length) {
+    // Offset so the word and the concept do not march in step.
+    var w = words[(seed + 11) % words.length];
+    set('d-word-term', w.term);
+    set('d-word-meaning', w.meaning);
+    var wl = document.getElementById('d-word-link');
+    if (wl) {
+      if (w.link) { wl.setAttribute('href', base + w.link + '/'); wl.hidden = false; }
+      else { wl.hidden = true; }
+    }
+  }
+
+  if (thoughts.length) {
+    var t = thoughts[(seed + 3) % thoughts.length];
+    set('d-thought-text', t.text);
+    set('d-thought-who', t.who);
+    set('d-thought-what', t.what || '');
+    set('d-thought-source', t.source);
+  }
+})();
+</script>
+{% endif %}

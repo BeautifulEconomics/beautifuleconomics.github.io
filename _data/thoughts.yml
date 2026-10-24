@@ -1,0 +1,110 @@
+# Thought of the day.
+# One idea per entry, in plain language. Rotates on its own, every day.
+#
+# To add one, copy the shape below and append it. No other file changes.
+#   - text:   the idea, two or three sentences, simple words
+#     who:    whose idea it is
+#     what:   what they were — "economist", "novelist", "not an economist"
+#     source: where it comes from. REQUIRED. An entry without a source is
+#             skipped and never shown. This is deliberate: a site that is
+#             casual about sources is not trusted by the people you want.
+
+- text: "We get our dinner not because the butcher and the baker are kind, but because selling it serves them too. Smith's point was not that kindness is useless — it is that a system working only on kindness would feed almost nobody."
+  who: "Adam Smith"
+  what: "economist"
+  source: "The Wealth of Nations, Book I, Chapter 2, 1776"
+
+- text: "Famines, Sen found, are rarely caused by there being no food. Food is usually still in the market. What collapses is people's ability to buy any of it."
+  who: "Amartya Sen"
+  what: "economist"
+  source: "Poverty and Famines, 1981"
+
+- text: "Everyone was taught that shared land gets destroyed by overuse. Ostrom went and looked. Communities from Swiss alps to Japanese forests had governed shared resources for centuries, with their own rules and their own enforcement."
+  who: "Elinor Ostrom"
+  what: "political scientist"
+  source: "Governing the Commons, 1990"
+
+- text: "Why do firms exist at all? If markets are so good at organising work, why does anyone employ anyone? Coase's answer: because using a market costs something — finding people, haggling, writing contracts. A firm is what you build when that cost gets too high."
+  who: "Ronald Coase"
+  what: "economist"
+  source: "The Nature of the Firm, 1937"
+
+- text: "Two psychologists, not economists, showed that people are not the calm calculating machines the textbooks assumed. We fear a loss more than we enjoy the same size of gain. One of them later won the Nobel prize in economics."
+  who: "Daniel Kahneman and Amos Tversky"
+  what: "psychologists"
+  source: "Prospect Theory, 1979"
+
+- text: "A used car market can collapse not from greed but from ignorance. Buyers cannot tell good cars from bad ones, so they offer an average price, so good cars leave the market, so the average falls again."
+  who: "George Akerlof"
+  what: "economist"
+  source: "The Market for Lemons, 1970"
+
+- text: "New ways of doing things do not simply add to the old. They destroy them, along with the firms and the jobs attached. Schumpeter thought this destruction was not a flaw in capitalism but the engine of it."
+  who: "Joseph Schumpeter"
+  what: "economist"
+  source: "Capitalism, Socialism and Democracy, 1942"
+
+- text: "An art critic attacked the economics of his day for measuring wealth in money while ignoring whether people lived well. His argument lost at the time and has been quietly rediscovered ever since."
+  who: "John Ruskin"
+  what: "art critic, not an economist"
+  source: "Unto This Last, 1860"
+
+- text: "Cities are not failed machines to be tidied up by planners. Jacobs argued that the messy mixed street — shops, homes and strangers all together — is what makes a neighbourhood safe and alive."
+  who: "Jane Jacobs"
+  what: "writer, not an economist"
+  source: "The Death and Life of Great American Cities, 1961"
+
+- text: "Why do people buy things precisely because they are expensive? Veblen saw that some goods are bought to be seen owning them. The price is not a cost to be minimised. The price is the point."
+  who: "Thorstein Veblen"
+  what: "economist"
+  source: "The Theory of the Leisure Class, 1899"
+
+- text: "Factory smoke harms people who never bought anything from the factory. Pigou's suggestion was simple and still argued about a century later: make the factory pay for the harm, and it will make less of it."
+  who: "Arthur Cecil Pigou"
+  what: "economist"
+  source: "The Economics of Welfare, 1920"
+
+- text: "Long stretches of calm do not make a financial system safer. Minsky argued they make it more dangerous, because calm teaches everyone that borrowing more is safe."
+  who: "Hyman Minsky"
+  what: "economist"
+  source: "Stabilizing an Unstable Economy, 1986"
+
+- text: "Markets for land, labour and money did not grow naturally out of village trade. Polanyi's claim was that they had to be built, often by force of law, and that societies then pushed back against living inside them."
+  who: "Karl Polanyi"
+  what: "economic historian"
+  source: "The Great Transformation, 1944"
+
+- text: "Nobody knows enough to run an economy from one desk. Hayek's argument was about knowledge, not ideology: the information needed is scattered across millions of people and most of it never gets written down."
+  who: "Friedrich Hayek"
+  what: "economist"
+  source: "The Use of Knowledge in Society, 1945"
+
+- text: "Instead of arguing about what helps poor people, Banerjee and Duflo ran trials. Sometimes the cheap deworming tablet beat the expensive scheme. Sometimes the obvious answer simply did not work."
+  who: "Abhijit Banerjee and Esther Duflo"
+  what: "economists"
+  source: "Poor Economics, 2011"
+
+- text: "People do not maximise. They satisfice — they search until something is good enough, then stop. Simon thought real decisions were made by creatures with limited time and attention, and the theory should say so."
+  who: "Herbert Simon"
+  what: "economist and cognitive scientist"
+  source: "A Behavioral Model of Rational Choice, 1955"
+
+- text: "If everyone votes honestly between more than two options, Arrow proved there is no voting method that always behaves sensibly. Not a flaw in one system. A limit on all of them."
+  who: "Kenneth Arrow"
+  what: "economist"
+  source: "Social Choice and Individual Values, 1951"
+
+- text: "Growth, Solow showed, does not come mainly from piling up more machines. Most of it comes from learning to use them better — and economics still has no complete account of where that learning comes from."
+  who: "Robert Solow"
+  what: "economist"
+  source: "A Contribution to the Theory of Economic Growth, 1956"
+
+- text: "Malthus predicted that population would outrun food and that hunger would follow. He was wrong about the next two centuries, because he did not foresee how fast farming would improve. He is worth reading anyway, for how carefully he was wrong."
+  who: "Thomas Malthus"
+  what: "economist"
+  source: "An Essay on the Principle of Population, 1798"
+
+- text: "A country with no advantage at anything can still gain from trade. Ricardo's proof is two hundred years old, still counter-intuitive, and still the most misunderstood result in the subject."
+  who: "David Ricardo"
+  what: "economist"
+  source: "On the Principles of Political Economy and Taxation, 1817"
