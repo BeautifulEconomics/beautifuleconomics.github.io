@@ -1,0 +1,21 @@
+name: headlines
+on:
+  schedule:
+    - cron: "20 4 * * 1-5"   # 09:50 India time, weekdays
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/fetch_news.py
+      - name: commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add _data/news.yml
+          if git diff --cached --quiet -- _data/news.yml; then echo "unchanged"; exit 0; fi
+          git commit -m "Refresh headlines"
+          git push
