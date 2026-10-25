@@ -26,6 +26,13 @@ twitter: ""
 # bounces silently is worse than none: corrections never reach you.
 email: ""
 
+# Selling, for when you are ready. Leave empty and nothing appears.
+# A static site cannot take payments itself, so these point at a shop that
+# can. Gumroad, Payhip or Lemon Squeezy all sell a PDF from a plain link;
+# a paid newsletter (Substack, Ghost, Buttondown) handles subscriptions.
+shop: ""            # link to your shop or book page
+shop_label: "Books" # the words shown on the link
+
 # Newsletter. Paste the form action URL from your email provider here.
 # Buttondown:  https://buttondown.email/api/emails/embed-subscribe/YOURNAME
 # MailerLite / Substack: see README.md

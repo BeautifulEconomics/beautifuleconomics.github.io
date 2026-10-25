@@ -519,48 +519,110 @@ body {
 .footer__links { display: flex; flex-wrap: wrap; gap: .6rem 1.8rem; margin: 0 0 1.8rem; padding: 0; list-style: none; }
 .footer a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--rule); transition: color .18s ease, border-color .18s ease; }
 .footer a:hover, .footer a:focus-visible { color: var(--ink); border-bottom-color: var(--mark); }
-/* --- Today: concept, word and thought, all rotating daily --- */
-.today__date {
-  font-family: var(--mono); font-size: .74rem; letter-spacing: .14em;
-  text-transform: uppercase; color: var(--ink-faint); margin: 0 0 .6rem;
+/* --- Today: the daily word, thought and concept. This band is the first
+       thing under the title, and the word of the day is the largest piece of
+       type on the page after the masthead, because it is the reason a
+       returning reader opens the site at all. --- */
+.band--daily {
+  background: var(--deep); color: var(--deep-ink);
+  border-top: 0; padding-block: calc(var(--step) * 0.9);
 }
-.daily { display: grid; gap: 1.5rem; grid-template-columns: 1fr; margin-top: .4rem; }
-@media (min-width: 46em) { .daily { grid-template-columns: 1fr 1fr; gap: 2.2rem; } }
-.daily__card {
-  background: var(--paper-lift); border: 1px solid var(--rule-soft);
-  border-radius: 2px; padding: 1.6rem 1.5rem 1.4rem;
+.band--daily .today__date {
+  font-family: var(--mono); font-size: .74rem; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--deep-soft); margin: 0 0 2.2rem;
 }
+
+.wordday { max-width: 40rem; }
+.wordday__label {
+  font-family: var(--mono); font-size: .7rem; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--high-solid); margin: 0 0 1rem;
+}
+.wordday__term {
+  font-family: var(--display);
+  font-size: clamp(2.6rem, 9vw, 5rem);
+  font-weight: 600; letter-spacing: -0.035em; line-height: 1.02;
+  margin: 0 0 1.1rem; color: var(--deep-ink);
+  font-variation-settings: "SOFT" 0, "WONK" 1, "opsz" 96;
+  text-wrap: balance;
+}
+.wordday__meaning {
+  font-family: var(--text); font-size: clamp(1.18rem, 2.8vw, 1.5rem);
+  line-height: 1.5; color: var(--deep-ink); margin: 0;
+  max-width: 34ch; text-wrap: pretty;
+}
+.wordday__more { margin: 1.3rem 0 0; font-size: .95rem; }
+.wordday__more a {
+  color: var(--high-solid); text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--high-solid) 40%, transparent);
+  transition: border-color .18s ease;
+}
+.wordday__more a:hover, .wordday__more a:focus-visible { border-bottom-color: var(--high-solid); }
+.wordday__more a[hidden] { display: none; }
+
+.daily {
+  display: grid; gap: 2.4rem; grid-template-columns: 1fr;
+  margin-top: calc(var(--step) * 0.62);
+  padding-top: calc(var(--step) * 0.52);
+  border-top: 1px solid color-mix(in srgb, var(--deep-ink) 16%, transparent);
+}
+@media (min-width: 52em) { .daily { grid-template-columns: 1.35fr 1fr; gap: 3rem; } }
 .daily__label {
   font-family: var(--mono); font-size: .68rem; letter-spacing: .16em;
-  text-transform: uppercase; color: var(--plot); margin: 0 0 .8rem;
+  text-transform: uppercase; color: var(--deep-soft); margin: 0 0 .9rem;
 }
 .daily__term {
-  font-family: var(--display); font-size: clamp(1.45rem, 3.4vw, 1.85rem);
+  font-family: var(--display); font-size: clamp(1.4rem, 3.2vw, 1.72rem);
   font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; margin: 0 0 .6rem;
   font-variation-settings: "SOFT" 0, "WONK" 1, "opsz" 24; text-wrap: balance;
 }
-.daily__term a { color: inherit; text-decoration: none; border-bottom: 2px solid var(--rule); }
-.daily__term a:hover, .daily__term a:focus-visible { border-bottom-color: var(--mark); }
-.daily__gloss { color: var(--ink-soft); margin: 0; font-size: 1.04rem; line-height: 1.55; text-wrap: pretty; }
-.daily__more { margin: 1rem 0 0; font-size: .92rem; }
-.daily__more a { color: var(--plot); text-decoration: none; border-bottom: 1px solid var(--rule); }
-.daily__more a:hover { border-bottom-color: var(--mark); }
-.daily__more a[hidden] { display: none; }
+.daily__term a {
+  color: var(--deep-ink); text-decoration: none;
+  border-bottom: 2px solid color-mix(in srgb, var(--deep-ink) 22%, transparent);
+}
+.daily__term a:hover, .daily__term a:focus-visible { border-bottom-color: var(--high-solid); }
+.daily__gloss {
+  color: var(--deep-soft); margin: 0; font-size: 1.04rem;
+  line-height: 1.55; text-wrap: pretty;
+}
 
-.thought { margin: 2.2rem 0 0; padding: 0; }
+.thought { margin: 0; padding: 0; }
 .thought__text {
-  font-family: var(--text); font-size: clamp(1.12rem, 2.4vw, 1.3rem);
-  line-height: 1.6; color: var(--ink); margin: 0 0 1rem;
-  max-width: 54ch; text-wrap: pretty;
+  font-family: var(--text); font-size: clamp(1.1rem, 2.3vw, 1.26rem);
+  line-height: 1.6; color: var(--deep-ink); margin: 0 0 1rem;
+  max-width: 50ch; text-wrap: pretty;
   border-left: 2px solid var(--high-solid); padding-left: 1.2rem;
 }
 .thought__by { display: flex; flex-wrap: wrap; align-items: baseline; gap: .1rem .6rem; padding-left: 1.2rem; }
-.thought__who { font-weight: 600; color: var(--ink); font-size: .98rem; }
-.thought__what { color: var(--ink-faint); font-size: .9rem; }
-.thought__what:not(:empty)::before { content: "— "; }
+.thought__who { font-weight: 600; color: var(--deep-ink); font-size: .98rem; }
+.thought__what { color: var(--deep-soft); font-size: .9rem; }
+.thought__what:not(:empty)::before { content: "\2014 "; }
 .thought__source {
   flex-basis: 100%; font-style: normal; font-family: var(--mono);
-  font-size: .76rem; color: var(--ink-faint); letter-spacing: .01em; margin-top: .35rem;
+  font-size: .76rem; color: var(--deep-soft); letter-spacing: .01em; margin-top: .35rem;
+}
+
+/* --- Headlines from the institutions --- */
+.newsroom { list-style: none; margin: .4rem 0 0; padding: 0; }
+.newsroom__item {
+  padding: 1.15rem 0; border-bottom: 1px solid var(--rule-soft);
+}
+.newsroom__item:first-child { border-top: 1px solid var(--rule-soft); }
+.newsroom__link {
+  font-family: var(--text); font-size: clamp(1.06rem, 2.2vw, 1.18rem);
+  line-height: 1.45; color: var(--ink); text-decoration: none;
+  border-bottom: 1px solid transparent; text-wrap: pretty;
+  transition: border-color .18s ease, color .18s ease;
+}
+.newsroom__link:hover, .newsroom__link:focus-visible { border-bottom-color: var(--mark); }
+.newsroom__meta {
+  margin: .45rem 0 0; display: flex; flex-wrap: wrap; gap: .3rem .9rem;
+  font-family: var(--mono); font-size: .72rem; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--ink-faint);
+}
+.newsroom__source { color: var(--plot); }
+.newsroom__note {
+  margin: 1.8rem 0 0; font-size: .88rem; color: var(--ink-faint);
+  max-width: 54ch; line-height: 1.6; text-wrap: pretty;
 }
 
 .footer__follow {

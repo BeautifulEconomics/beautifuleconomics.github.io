@@ -9,7 +9,7 @@
       Each one renders only when its value is set in _config.yml.
     {%- endcomment -%}
     {% assign has_social = false %}
-    {% if site.facebook != "" or site.instagram != "" or site.youtube != "" or site.whatsapp_channel != "" or site.twitter != "" or site.email != "" %}{% assign has_social = true %}{% endif %}
+    {% if site.facebook != "" or site.instagram != "" or site.youtube != "" or site.whatsapp_channel != "" or site.twitter != "" or site.email != "" or site.shop != "" %}{% assign has_social = true %}{% endif %}
 
     {% if has_social %}
     <p class="footer__follow">Follow</p>
@@ -20,6 +20,7 @@
       {% if site.whatsapp_channel != "" %}<li><a href="{{ site.whatsapp_channel }}" rel="noopener" target="_blank">WhatsApp</a></li>{% endif %}
       {% if site.twitter != "" %}<li><a href="{{ site.twitter }}" rel="me noopener" target="_blank">X</a></li>{% endif %}
       {% if site.email != "" %}<li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>{% endif %}
+      {% if site.shop != "" %}<li><a href="{{ site.shop }}" rel="noopener" target="_blank">{{ site.shop_label | default: "Books" }}</a></li>{% endif %}
     </ul>
     {% endif %}
 

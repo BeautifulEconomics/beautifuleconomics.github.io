@@ -14,43 +14,42 @@
 {% assign words = site.data.words %}
 
 {% if words.size > 0 or thoughts.size > 0 or site.concepts.size > 0 %}
-<section class="band" id="today">
+<section class="band band--daily" id="today">
   <div class="shell">
     <p class="today__date" id="d-date">Today</p>
-    <h2 class="band__heading" data-reveal>Start here, today</h2>
+
+    {% if words.size > 0 %}
+    {% assign w0 = words | first %}
+    <div class="wordday" data-reveal>
+      <p class="wordday__label">Word of the day</p>
+      <h2 class="wordday__term" id="d-word-term">{{ w0.term }}</h2>
+      <p class="wordday__meaning" id="d-word-meaning">{{ w0.meaning }}</p>
+      <p class="wordday__more"><a id="d-word-link" href="{{ '/concepts/' | relative_url }}" hidden>Read the full concept &rarr;</a></p>
+    </div>
+    {% endif %}
 
     <div class="daily">
+      {% if thoughts.size > 0 %}
+      {% assign t0 = thoughts | first %}
+      <figure class="thought" data-reveal data-delay="1">
+        <p class="daily__label">Thought of the day</p>
+        <blockquote class="thought__text" id="d-thought-text">{{ t0.text }}</blockquote>
+        <figcaption class="thought__by">
+          <span class="thought__who" id="d-thought-who">{{ t0.who }}</span><span class="thought__what" id="d-thought-what">{{ t0.what }}</span>
+          <cite class="thought__source" id="d-thought-source">{{ t0.source }}</cite>
+        </figcaption>
+      </figure>
+      {% endif %}
+
       {% if site.concepts.size > 0 %}
       {% assign c0 = site.concepts | first %}
-      <div class="daily__card" data-reveal>
-        <p class="daily__label">Concept</p>
+      <div class="daily__card" data-reveal data-delay="2">
+        <p class="daily__label">Concept of the day</p>
         <h3 class="daily__term"><a id="d-concept-link" href="{{ c0.url | relative_url }}">{{ c0.title }}</a></h3>
         <p class="daily__gloss" id="d-concept-gloss">{{ c0.gloss }}</p>
       </div>
       {% endif %}
-
-      {% if words.size > 0 %}
-      {% assign w0 = words | first %}
-      <div class="daily__card" data-reveal data-delay="1">
-        <p class="daily__label">Word of the day</p>
-        <h3 class="daily__term" id="d-word-term">{{ w0.term }}</h3>
-        <p class="daily__gloss" id="d-word-meaning">{{ w0.meaning }}</p>
-        <p class="daily__more"><a id="d-word-link" href="{{ '/concepts/' | relative_url }}" hidden>Read the full concept</a></p>
-      </div>
-      {% endif %}
     </div>
-
-    {% if thoughts.size > 0 %}
-    {% assign t0 = thoughts | first %}
-    <figure class="thought" data-reveal data-delay="2">
-      <p class="daily__label">Thought of the day</p>
-      <blockquote class="thought__text" id="d-thought-text">{{ t0.text }}</blockquote>
-      <figcaption class="thought__by">
-        <span class="thought__who" id="d-thought-who">{{ t0.who }}</span><span class="thought__what" id="d-thought-what">{{ t0.what }}</span>
-        <cite class="thought__source" id="d-thought-source">{{ t0.source }}</cite>
-      </figcaption>
-    </figure>
-    {% endif %}
   </div>
 </section>
 

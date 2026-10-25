@@ -25,15 +25,15 @@ nav: home
   </div>
 </section>
 
-<section class="band band--dark" id="how">
+{% include today.html %}
+
+<section class="band" id="how">
   <div class="shell">
     <h2 class="band__heading" data-reveal>How to use this</h2>
     <p class="band__intro" data-reveal data-delay="1">No account, no fee, no order to follow. Three steps and you are reading.</p>
     {% include steps.html %}
   </div>
 </section>
-
-{% include today.html %}
 
 {% if site.concepts.size > 0 %}
 <section class="band">
@@ -55,7 +55,7 @@ nav: home
 </section>
 {% endif %}
 
-{% include live-band.html %}
+{% include news-band.html %}
 
 <section class="band">
   <div class="shell">
@@ -81,7 +81,7 @@ nav: home
 
 <section class="band">
   <div class="shell">
-    <h2 class="band__heading" data-reveal>Questions people ask</h2>
+    <h2 class="band__heading" data-reveal>About this site</h2>
     <div data-reveal data-delay="1">{% include faq.html %}</div>
   </div>
 </section>

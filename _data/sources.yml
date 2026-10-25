@@ -1,0 +1,21 @@
+# Where the "New in economics" band gets its headlines.
+#
+# Only the headline and the link are ever shown, and the link always goes
+# to the publisher. Nothing is copied from the article itself.
+#
+# To add a source: give it a name and the address of its RSS feed. If a feed
+# ever stops working it is skipped quietly and the others still appear, so a
+# bad entry here can never break the site.
+
+- name: "European Central Bank"
+  feed: "https://www.ecb.europa.eu/rss/press.html"
+- name: "US Federal Reserve"
+  feed: "https://www.federalreserve.gov/feeds/press_all.xml"
+- name: "IMF Blog"
+  feed: "https://www.imf.org/en/Blogs/rss"
+- name: "World Bank Blogs"
+  feed: "https://blogs.worldbank.org/en/rss.xml"
+- name: "Bank for International Settlements"
+  feed: "https://www.bis.org/list/press_releases/rss.xml"
+- name: "OECD"
+  feed: "https://www.oecd.org/newsroom/rss.xml"
