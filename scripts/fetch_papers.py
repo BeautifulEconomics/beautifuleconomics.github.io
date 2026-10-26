@@ -157,14 +157,28 @@ def main():
 
     collected.sort(key=lambda p: p["when"], reverse=True)
 
-    seen, items = set(), []
+    # Give every journal a share rather than letting the one that publishes
+    # most often fill the list. The AER appears monthly and Econometrica
+    # every other month, so a plain date sort would hide Econometrica for
+    # weeks at a time.
+    share = max(1, MAX_ITEMS // max(1, len(journals)))
+    seen, per, items = set(), {}, []
     for p in collected:
+        if p["doi"] in seen or per.get(p["journal"], 0) >= share:
+            continue
+        seen.add(p["doi"])
+        per[p["journal"]] = per.get(p["journal"], 0) + 1
+        items.append(p)
+    # If a journal had nothing to offer, fill the gap with the next newest.
+    for p in collected:
+        if len(items) >= MAX_ITEMS:
+            break
         if p["doi"] in seen:
             continue
         seen.add(p["doi"])
         items.append(p)
-        if len(items) >= MAX_ITEMS:
-            break
+    items.sort(key=lambda p: p["when"], reverse=True)
+    items = items[:MAX_ITEMS]
 
     def q(v):
         return '"%s"' % str(v).replace("\\", "").replace('"', "'")
