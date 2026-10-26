@@ -18,6 +18,8 @@ Everything here has its own address. You can find it on Google in 2031, send the
 
 *Concepts* — a growing dictionary. Each entry explains what an idea claims, what it quietly assumes, and where it stops working. Most explanations skip that last part.
 
+*Advanced* — the machinery underneath: models, proofs and methods, for readers who already have the basics.
+
 *Writing* — longer pieces, where an argument needs room.
 
 *Library* — PDFs you can download and keep, free, without handing over an email address first.
@@ -28,4 +30,6 @@ It is not a course, it is not exam coaching, and it will not tell you what the m
 
 **Reach me**
 
-Corrections are welcome and I would rather be told than left wrong. Write to [{{ site.email }}](mailto:{{ site.email }}).
+{% if site.email != "" %}Corrections are welcome and I would rather be told than left wrong. Write to [{{ site.email }}](mailto:{{ site.email }}).
+{% elsif site.facebook != "" %}Corrections are welcome and I would rather be told than left wrong. Send a message on [Facebook]({{ site.facebook }}){% if site.instagram != "" %} or [Instagram]({{ site.instagram }}){% endif %}, and it gets fixed with the correction noted.
+{% else %}Corrections are welcome and I would rather be told than left wrong.{% endif %}
