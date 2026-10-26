@@ -1,0 +1,18 @@
+name: advanced-r16
+on: { workflow_dispatch: }
+permissions: { contents: write }
+jobs:
+  go:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/_applyE.py
+      - name: remove scaffolding
+        run: git rm -q --ignore-unmatch scripts/_dE.txt scripts/_applyE.py .github/workflows/advanced-r16.yml
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git status --short
+          git commit -m "Advanced Economics section, ruled margins, colour accents, single social list"
+          git push
