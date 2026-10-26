@@ -23,6 +23,7 @@
   --mark:       #8C1A38;   /* deep crimson: annotation, only where it means something */
   --plot-wash:  #0E5B521f;
   --high:       #FFD84D80;   /* highlighter: a translucent amber swash */
+  --grid:       rgba(124, 135, 138, .26);   /* graph-paper ruling in the margins */
   --high-solid: #FFD24A;     /* the same amber, solid, for small marks */
   --deep:       #121A1D;     /* dark band background */
   --deep-ink:   #F2EFE7;
@@ -62,6 +63,7 @@
     --mark:       #E3879F;
     --plot-wash:  #58B9A922;
     --high:       #FFD84D4d;
+    --grid:       rgba(169, 180, 182, .13);   /* graph-paper ruling in the margins */
     --high-solid: #FFD24A;
     --deep:       #080C0E;
     --deep-ink:   #F2EFE7;
@@ -81,6 +83,7 @@
   --mark:       #E3879F;
   --plot-wash:  #58B9A922;
   --high:       #FFD84D4d;
+  --grid:       rgba(169, 180, 182, .13);   /* graph-paper ruling in the margins */
   --high-solid: #FFD24A;
   --deep:       #080C0E;
   --deep-ink:   #F2EFE7;
@@ -176,7 +179,10 @@ body {
   .masthead__inner { flex-direction: column; align-items: stretch; gap: .7rem; }
   .masthead--home .masthead__inner { justify-content: flex-start; }
   .nav { justify-content: space-between; gap: .5rem; width: 100%; }
-  .nav a { font-size: .98rem; gap: .35rem; }
+  /* Five labels fit one tidy row once the glyphs step aside. */
+  .nav a { font-size: .95rem; gap: 0; }
+  .nav { gap: .55rem; }
+  .nav__icon { display: none; }
   .masthead--home .wordmark { margin-right: 0; }
 }
 
@@ -342,8 +348,15 @@ body {
   font-variation-settings: "SOFT" 0, "WONK" 0, "opsz" 24;
   margin: 0 0 2.2rem;
   padding-bottom: .7rem;
-  border-bottom: 1px solid var(--ink);
+  border-bottom: 0;
   display: inline-block;
+  position: relative;
+}
+.band__heading::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+  background: linear-gradient(to right,
+    var(--high-solid) 0, var(--high-solid) 2.2rem,
+    var(--rule) 2.2rem, var(--rule) 100%);
 }
 
 /* ---------------------------- entries ------------------------- */
@@ -624,6 +637,30 @@ body {
 }
 @media (prefers-reduced-transparency: reduce) { .page-rules { display: none; } }
 
+/* --- The margins. Beyond the text column the page is ruled like graph
+       paper, at the faintest weight that still registers, fading out toward
+       the edge of the screen. It is decoration with a reason: the subject is
+       drawn on gridded paper more than any other. Off below 88em, where
+       there is no margin to spare, and off for anyone who has asked for
+       reduced motion or transparency. --- */
+.page-rules::before,
+.page-rules::after {
+  content: ""; position: absolute; top: 0; bottom: 0;
+  background-image:
+    repeating-linear-gradient(to right, var(--grid) 0 1px, transparent 1px 2.5rem),
+    repeating-linear-gradient(to bottom, var(--grid) 0 1px, transparent 1px 2.5rem);
+}
+.page-rules::before {
+  left: 0; right: calc(50% + 37rem);
+  -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0) 86%);
+  mask-image: linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0) 86%);
+}
+.page-rules::after {
+  left: calc(50% + 37rem); right: 0;
+  -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0) 86%);
+  mask-image: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0) 86%);
+}
+
 /* --- Newly published research. Laid out as a journal's own index: the
        title and authors on the left, the journal and date aligned right, so
        the full width of the page is used and the eye can scan either column. --- */
@@ -697,6 +734,19 @@ body {
   border-bottom: 1px solid var(--rule);
 }
 .subscribe__links a:hover { border-bottom-color: var(--mark); }
+.subscribe__kicker {
+  font-family: var(--mono); font-size: .7rem; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--mark); margin: 0 0 .9rem;
+}
+.subscribe__pending {
+  margin: 1.2rem 0 0; font-size: .98rem; color: var(--ink-soft);
+  max-width: 50ch; line-height: 1.6;
+  border-left: 2px solid var(--high-solid); padding-left: 1rem;
+}
+.faq summary::marker { content: ""; }
+.nav a[aria-current="page"] { border-bottom-color: var(--high-solid); border-bottom-width: 2px; }
+.page-title { position: relative; }
+
 .subscribe__fine {
   margin: 1rem 0 0; font-size: .84rem; color: var(--ink-faint);
   max-width: 52ch; line-height: 1.55;

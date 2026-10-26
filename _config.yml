@@ -58,6 +58,9 @@ collections:
   concepts:
     output: true
     permalink: /concepts/:name/
+  advanced:
+    output: true
+    permalink: /advanced/:name/
 
 defaults:
   - scope:
@@ -70,3 +73,9 @@ defaults:
       type: "concepts"
     values:
       layout: "concept"
+  - scope:
+      path: ""
+      type: "advanced"
+    values:
+      layout: "concept"
+      math: true

@@ -1,8 +1,10 @@
 {%- comment -%}
-  Keeping up. The email form appears the moment site.newsletter_action is set
-  in _config.yml. Until then the section still shows, offering the places that
-  do work, so a reader always has a way to follow rather than a dead form.
+  The email form appears as soon as site.newsletter_action is set in
+  _config.yml. Until then this says so plainly rather than showing a box that
+  would silently swallow addresses. The places to follow live in the footer
+  only, so they are not repeated here.
 {%- endcomment -%}
+<p class="subscribe__kicker">By email</p>
 <h2 class="subscribe__heading">{{ include.heading | default: "Get each new piece by email." }}</h2>
 <p class="subscribe__body">{{ include.body | default: "An algorithm decides who sees a post in a feed. Nothing decides who sees an email. No tracking, no selling your address, unsubscribe in one click." }}</p>
 
@@ -12,16 +14,7 @@
   <input id="{{ include.id | default: 'subscribe-email' }}" type="email" name="{{ site.newsletter_field }}" placeholder="you@example.com" required autocomplete="email">
   <button class="button" type="submit">Subscribe</button>
 </form>
-<p class="subscribe__fine">Your address is used for this one list and nothing else. One click unsubscribes, and it is never passed on or sold.</p>
+<p class="subscribe__fine">Used for this one list and nothing else. One click unsubscribes, and your address is never passed on or sold.</p>
 {% else %}
-{%- comment -%}
-  No provider configured yet. Rather than show a form that would silently
-  swallow addresses, point at the places that genuinely do reach people.
-{%- endcomment -%}
-<p class="subscribe__body">The email list is being set up. In the meantime, new writing is announced here:</p>
-<ul class="subscribe__links">
-  {% if site.facebook != "" %}<li><a href="{{ site.facebook }}" rel="me noopener" target="_blank">Facebook</a></li>{% endif %}
-  {% if site.instagram != "" %}<li><a href="{{ site.instagram }}" rel="me noopener" target="_blank">Instagram</a></li>{% endif %}
-  {% if site.youtube != "" %}<li><a href="{{ site.youtube }}" rel="me noopener" target="_blank">YouTube</a></li>{% endif %}
-</ul>
+<p class="subscribe__pending">The email list opens shortly. Until then, the places to follow are at the foot of this page.</p>
 {% endif %}

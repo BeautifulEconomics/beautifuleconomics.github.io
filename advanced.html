@@ -1,0 +1,36 @@
+---
+layout: default
+title: Advanced Economics
+nav: advanced
+permalink: /advanced/
+description: The harder material — models, proofs and methods, for readers who already have the basics and want the machinery underneath.
+---
+<section class="band band--first">
+  <div class="shell">
+    <div class="page-head">
+      <h1 class="page-title">Advanced Economics</h1>
+      <p class="page-intro">Where <a href="{{ '/concepts/' | relative_url }}">Concepts</a> gives you the idea, this gives you the machinery: the models, the proofs and the methods behind them. It assumes you have met calculus and some probability. Nothing here is harder than it needs to be, but it is not made easier than it is either.</p>
+    </div>
+    {% if site.advanced.size > 0 %}
+    <ul class="concept-grid">
+      {% assign sorted = site.advanced | sort: "title" %}
+      {% for c in sorted %}
+      <li data-reveal data-delay="{{ forloop.index | modulo: 4 | plus: 1 }}"><a href="{{ c.url | relative_url }}">
+        <span class="concept-grid__term">{{ c.title }}</span>
+        <span class="concept-grid__gloss">{{ c.gloss }}</span>
+      </a></li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="empty">Nothing here yet. Add a file to <code>_advanced/</code> and it appears on this page.</p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="band band--sunk">
+  <div class="shell">
+    <div class="column" data-reveal>
+      {% include subscribe.html id="subscribe-advanced" heading="New material, by email." body="Each new piece goes out once it is written. Nothing else is sent to your address." %}
+    </div>
+  </div>
+</section>
