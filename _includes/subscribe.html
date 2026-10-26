@@ -1,15 +1,27 @@
 {%- comment -%}
-  Renders only when site.newsletter_action is set. Call sites are already
-  guarded, so an unconfigured newsletter leaves no empty band behind and
-  never shows setup instructions to a reader.
+  Keeping up. The email form appears the moment site.newsletter_action is set
+  in _config.yml. Until then the section still shows, offering the places that
+  do work, so a reader always has a way to follow rather than a dead form.
 {%- endcomment -%}
-{% if site.newsletter_action != "" %}
 <h2 class="subscribe__heading">{{ include.heading | default: "Get each new piece by email." }}</h2>
 <p class="subscribe__body">{{ include.body | default: "An algorithm decides who sees a post in a feed. Nothing decides who sees an email. No tracking, no selling your address, unsubscribe in one click." }}</p>
 
+{% if site.newsletter_action != "" %}
 <form class="signup" action="{{ site.newsletter_action }}" method="post" target="_blank">
   <label class="visually-hidden" for="{{ include.id | default: 'subscribe-email' }}">Email address</label>
   <input id="{{ include.id | default: 'subscribe-email' }}" type="email" name="{{ site.newsletter_field }}" placeholder="you@example.com" required autocomplete="email">
   <button class="button" type="submit">Subscribe</button>
 </form>
+<p class="subscribe__fine">Your address is used for this one list and nothing else. One click unsubscribes, and it is never passed on or sold.</p>
+{% else %}
+{%- comment -%}
+  No provider configured yet. Rather than show a form that would silently
+  swallow addresses, point at the places that genuinely do reach people.
+{%- endcomment -%}
+<p class="subscribe__body">The email list is being set up. In the meantime, new writing is announced here:</p>
+<ul class="subscribe__links">
+  {% if site.facebook != "" %}<li><a href="{{ site.facebook }}" rel="me noopener" target="_blank">Facebook</a></li>{% endif %}
+  {% if site.instagram != "" %}<li><a href="{{ site.instagram }}" rel="me noopener" target="_blank">Instagram</a></li>{% endif %}
+  {% if site.youtube != "" %}<li><a href="{{ site.youtube }}" rel="me noopener" target="_blank">YouTube</a></li>{% endif %}
+</ul>
 {% endif %}

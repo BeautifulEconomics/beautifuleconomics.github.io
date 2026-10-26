@@ -17,9 +17,9 @@ baseurl: ""
 
 # Where people can find you. Leave a value empty ("") to hide that link.
 # Paste the full address from your browser's address bar, not just the name.
-facebook: ""
-instagram: ""
-youtube: ""
+facebook: "https://www.facebook.com/beautifulecos/"
+instagram: "https://www.instagram.com/beautiful.economics/"
+youtube: "https://www.youtube.com/@Beautifuleconomics"
 whatsapp_channel: ""
 twitter: ""
 # Leave empty until the address really receives mail. An address that

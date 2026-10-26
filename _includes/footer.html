@@ -1,38 +1,57 @@
 <footer class="footer">
-  <div class="shell">
-    <p class="footer__mark">Beautiful Economics</p>
-    <p class="footer__line">Economics explained carefully, in plain language, and kept at an address where you can find it again.</p>
+  <div class="shell footer__grid">
+
+    <div class="footer__about">
+      <p class="footer__mark">Beautiful Economics</p>
+      <p class="footer__line">Economics explained carefully, in plain language, and kept at an address where you can find it again.</p>
+      <p class="footer__fine">
+        Written and published by Beautiful Economics.
+        {%- if site.facebook != "" or site.instagram != "" or site.email != "" %}
+        Found a mistake?
+        {%- if site.email != "" %} <a href="mailto:{{ site.email }}">Tell me</a>
+        {%- elsif site.facebook != "" %} <a href="{{ site.facebook }}" rel="noopener" target="_blank">Tell me</a>
+        {%- elsif site.instagram != "" %} <a href="{{ site.instagram }}" rel="noopener" target="_blank">Tell me</a>
+        {%- endif %} and it gets corrected, with the correction noted.
+        {%- endif %}
+      </p>
+    </div>
 
     {%- comment -%}
-      No site navigation here: it is already at the top of every page, and
-      repeating it only adds noise. These links go somewhere else instead.
-      Each one renders only when its value is set in _config.yml.
+      What the site does not do. These are the plain facts a careful reader
+      wants before trusting a page, so they are stated rather than implied.
     {%- endcomment -%}
+    <div class="footer__trust">
+      <p class="footer__label">How this site works</p>
+      <ul class="footer__promises">
+        <li>No advertising, anywhere</li>
+        <li>No tracking and no analytics</li>
+        <li>No account needed to read anything</li>
+        <li>Your details are never sold or passed on</li>
+        <li>Every page keeps its own permanent address</li>
+      </ul>
+    </div>
+
     {% assign has_social = false %}
     {% if site.facebook != "" or site.instagram != "" or site.youtube != "" or site.whatsapp_channel != "" or site.twitter != "" or site.email != "" or site.shop != "" %}{% assign has_social = true %}{% endif %}
-
     {% if has_social %}
-    <p class="footer__follow">Follow</p>
-    <ul class="footer__social">
-      {% if site.facebook != "" %}<li><a href="{{ site.facebook }}" rel="me noopener" target="_blank">Facebook</a></li>{% endif %}
-      {% if site.instagram != "" %}<li><a href="{{ site.instagram }}" rel="me noopener" target="_blank">Instagram</a></li>{% endif %}
-      {% if site.youtube != "" %}<li><a href="{{ site.youtube }}" rel="me noopener" target="_blank">YouTube</a></li>{% endif %}
-      {% if site.whatsapp_channel != "" %}<li><a href="{{ site.whatsapp_channel }}" rel="noopener" target="_blank">WhatsApp</a></li>{% endif %}
-      {% if site.twitter != "" %}<li><a href="{{ site.twitter }}" rel="me noopener" target="_blank">X</a></li>{% endif %}
-      {% if site.email != "" %}<li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>{% endif %}
-      {% if site.shop != "" %}<li><a href="{{ site.shop }}" rel="noopener" target="_blank">{{ site.shop_label | default: "Books" }}</a></li>{% endif %}
-    </ul>
+    <div class="footer__follow-col">
+      <p class="footer__label">Follow</p>
+      <ul class="footer__social">
+        {% if site.facebook != "" %}<li><a href="{{ site.facebook }}" rel="me noopener" target="_blank">Facebook</a></li>{% endif %}
+        {% if site.instagram != "" %}<li><a href="{{ site.instagram }}" rel="me noopener" target="_blank">Instagram</a></li>{% endif %}
+        {% if site.youtube != "" %}<li><a href="{{ site.youtube }}" rel="me noopener" target="_blank">YouTube</a></li>{% endif %}
+        {% if site.whatsapp_channel != "" %}<li><a href="{{ site.whatsapp_channel }}" rel="noopener" target="_blank">WhatsApp</a></li>{% endif %}
+        {% if site.twitter != "" %}<li><a href="{{ site.twitter }}" rel="me noopener" target="_blank">X</a></li>{% endif %}
+        {% if site.email != "" %}<li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>{% endif %}
+        {% if site.shop != "" %}<li><a href="{{ site.shop }}" rel="noopener" target="_blank">{{ site.shop_label | default: "Books" }}</a></li>{% endif %}
+      </ul>
+    </div>
     {% endif %}
 
-    <p class="footer__fine">
-      Written and published by Beautiful Economics. Every page stays at its own address and stays readable without an account.
-      {%- comment -%}
-        The corrections promise only appears when there is a real route for a
-        correction to arrive by. It is never left pointing at a dead address.
-      {%- endcomment -%}
-      {% if site.email != "" %}Found a mistake? <a href="mailto:{{ site.email }}">Tell me</a> and it gets corrected.
-      {% elsif site.facebook != "" %}Found a mistake? <a href="{{ site.facebook }}" rel="noopener" target="_blank">Tell me</a> and it gets corrected.
-      {% elsif site.instagram != "" %}Found a mistake? <a href="{{ site.instagram }}" rel="noopener" target="_blank">Tell me</a> and it gets corrected.{% endif %}
+    <p class="footer__legal">
+      &copy; {{ site.time | date: "%Y" }} Beautiful Economics. Words and diagrams are the author's own.
+      Research listings link to their publishers and remain theirs.
+      <span class="footer__updated">Last updated {{ site.time | date: "%-d %B %Y" }}.</span>
     </p>
   </div>
 </footer>

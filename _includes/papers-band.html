@@ -1,0 +1,38 @@
+{%- comment -%}
+  Newly published research from the journals in _data/journals.yml, refreshed
+  by scripts/fetch_papers.py on a schedule. Title, authors and link only; every
+  link is a DOI, so it opens at the publisher's own page.
+
+  Renders nothing until the first run has written _data/papers.yml, so an empty
+  file never leaves a hole in the page.
+{%- endcomment -%}
+{% if site.data.papers.items and site.data.papers.items.size > 0 %}
+<section class="band band--sunk" id="research">
+  <div class="shell">
+    <h2 class="band__heading" data-reveal>Newly published research</h2>
+    <p class="band__intro" data-reveal data-delay="1">The latest papers in the <em>American Economic Review</em> and <em>Econometrica</em>. Each title opens at the journal.</p>
+
+    <ol class="papers">
+      {% for p in site.data.papers.items %}
+      <li class="papers__item" data-reveal data-delay="{{ forloop.index | modulo: 3 | plus: 1 }}">
+        <div class="papers__main">
+          <a class="papers__title" href="{{ p.url }}" rel="noopener" target="_blank">{{ p.title }}</a>
+          <p class="papers__authors">{{ p.authors }}</p>
+        </div>
+        <p class="papers__meta">
+          <span class="papers__journal">{{ p.journal }}</span>
+          {% if p.date != "" %}<span class="papers__date">{{ p.date | date: "%b %Y" }}</span>{% endif %}
+        </p>
+      </li>
+      {% endfor %}
+    </ol>
+
+    <p class="papers__note" data-reveal>
+      Collected automatically from Crossref, the public record publishers deposit
+      to. Beautiful Economics is not affiliated with these journals and does not
+      host their work — each link goes to the publisher, where access terms are
+      theirs.
+    </p>
+  </div>
+</section>
+{% endif %}

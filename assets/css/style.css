@@ -141,11 +141,13 @@ body {
 .masthead--home .masthead__inner { justify-content: flex-end; }
 .masthead--home .wordmark { margin-right: auto; }
 
-.nav { display: flex; gap: 1.5rem; align-items: baseline; flex-wrap: wrap; }
+.nav { display: flex; gap: 1.75rem; align-items: baseline; flex-wrap: wrap; }
 .nav a {
   font-family: var(--text);
-  font-size: 1rem;
-  color: var(--ink-soft);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  color: var(--ink);
   text-decoration: none;
   padding-bottom: 3px;
   border-bottom: 1px solid transparent;
@@ -158,7 +160,8 @@ body {
   width: 1em; height: 1em; flex: none;
   fill: none; stroke: currentColor; stroke-width: 1.3;
   stroke-linecap: round; stroke-linejoin: round;
-  opacity: .62;
+  opacity: .78;
+  stroke-width: 1.5;
   transition: opacity .18s ease;
 }
 .nav a:hover .nav__icon,
@@ -173,7 +176,7 @@ body {
   .masthead__inner { flex-direction: column; align-items: stretch; gap: .7rem; }
   .masthead--home .masthead__inner { justify-content: flex-start; }
   .nav { justify-content: space-between; gap: .5rem; width: 100%; }
-  .nav a { font-size: .9rem; gap: .35rem; }
+  .nav a { font-size: .98rem; gap: .35rem; }
   .masthead--home .wordmark { margin-right: 0; }
 }
 
@@ -601,28 +604,102 @@ body {
   font-size: .76rem; color: var(--deep-soft); letter-spacing: .01em; margin-top: .35rem;
 }
 
-/* --- Headlines from the institutions --- */
-.newsroom { list-style: none; margin: .4rem 0 0; padding: 0; }
-.newsroom__item {
-  padding: 1.15rem 0; border-bottom: 1px solid var(--rule-soft);
+/* --- The margin rules. On a wide screen two hairlines mark where the text
+       column begins and ends, the way a printed page is ruled. They sit above
+       the bands so they stay continuous across the dark one, are drawn in a
+       neutral grey that reads correctly on both light and dark, and never
+       catch a click. Below 88em there is no spare margin, so they are off. --- */
+.page-rules { display: none; }
+@media (min-width: 88em) {
+  .page-rules {
+    display: block; position: fixed; inset: 0; z-index: 1;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(124, 135, 138, .22), rgba(124, 135, 138, .22)),
+      linear-gradient(rgba(124, 135, 138, .22), rgba(124, 135, 138, .22));
+    background-size: 1px 100%, 1px 100%;
+    background-position: calc(50% - 37rem) 0, calc(50% + 37rem) 0;
+    background-repeat: no-repeat;
+  }
 }
-.newsroom__item:first-child { border-top: 1px solid var(--rule-soft); }
-.newsroom__link {
-  font-family: var(--text); font-size: clamp(1.06rem, 2.2vw, 1.18rem);
-  line-height: 1.45; color: var(--ink); text-decoration: none;
+@media (prefers-reduced-transparency: reduce) { .page-rules { display: none; } }
+
+/* --- Newly published research. Laid out as a journal's own index: the
+       title and authors on the left, the journal and date aligned right, so
+       the full width of the page is used and the eye can scan either column. --- */
+.papers { list-style: none; margin: .6rem 0 0; padding: 0; counter-reset: paper; }
+.papers__item {
+  display: grid; grid-template-columns: 1fr; gap: .4rem;
+  padding: 1.3rem 0; border-bottom: 1px solid var(--rule-soft);
+}
+.papers__item:first-child { border-top: 1px solid var(--rule-soft); }
+@media (min-width: 46em) {
+  .papers__item { grid-template-columns: 1fr auto; gap: 1rem 2.5rem; align-items: baseline; }
+}
+.papers__title {
+  font-family: var(--text); font-size: clamp(1.08rem, 2.2vw, 1.24rem);
+  font-weight: 500; line-height: 1.4; color: var(--ink); text-decoration: none;
   border-bottom: 1px solid transparent; text-wrap: pretty;
-  transition: border-color .18s ease, color .18s ease;
+  transition: border-color .18s ease;
 }
-.newsroom__link:hover, .newsroom__link:focus-visible { border-bottom-color: var(--mark); }
-.newsroom__meta {
-  margin: .45rem 0 0; display: flex; flex-wrap: wrap; gap: .3rem .9rem;
-  font-family: var(--mono); font-size: .72rem; letter-spacing: .06em;
+.papers__title:hover, .papers__title:focus-visible { border-bottom-color: var(--mark); }
+.papers__authors {
+  margin: .35rem 0 0; color: var(--ink-soft);
+  font-size: .96rem; font-style: italic;
+}
+.papers__meta {
+  margin: 0; display: flex; flex-wrap: wrap; gap: .25rem .8rem;
+  font-family: var(--mono); font-size: .72rem; letter-spacing: .08em;
   text-transform: uppercase; color: var(--ink-faint);
 }
-.newsroom__source { color: var(--plot); }
-.newsroom__note {
-  margin: 1.8rem 0 0; font-size: .88rem; color: var(--ink-faint);
-  max-width: 54ch; line-height: 1.6; text-wrap: pretty;
+@media (min-width: 46em) {
+  .papers__meta { flex-direction: column; align-items: flex-end; text-align: right; gap: .3rem; }
+}
+.papers__journal { color: var(--plot); font-weight: 500; }
+.papers__note {
+  margin: 1.9rem 0 0; font-size: .86rem; color: var(--ink-faint);
+  max-width: 58ch; line-height: 1.6; text-wrap: pretty;
+}
+
+/* --- Footer: a plain statement of who publishes this and how it behaves.
+       Three columns on a wide screen, so the width is used rather than left
+       as a long empty margin. --- */
+.footer__grid { display: grid; grid-template-columns: 1fr; gap: 2.6rem; }
+@media (min-width: 56em) {
+  .footer__grid { grid-template-columns: 1.6fr 1fr 1fr; gap: 3rem; }
+  .footer__legal { grid-column: 1 / -1; }
+}
+.footer__label {
+  font-family: var(--mono); font-size: .7rem; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--ink-faint); margin: 0 0 1rem;
+}
+.footer__promises { list-style: none; margin: 0; padding: 0; }
+.footer__promises li {
+  position: relative; padding-left: 1.1rem; margin-bottom: .55rem;
+  font-size: .94rem; color: var(--ink-soft); line-height: 1.45;
+}
+.footer__promises li::before {
+  content: ""; position: absolute; left: 0; top: .52em;
+  width: .34rem; height: .34rem; border-radius: 50%;
+  background: var(--plot); opacity: .55;
+}
+.footer__legal {
+  margin: 0; padding-top: 1.8rem; border-top: 1px solid var(--rule-soft);
+  font-size: .8rem; color: var(--ink-faint); line-height: 1.6; text-wrap: pretty;
+}
+.footer__updated { display: block; margin-top: .3rem; }
+.subscribe__links {
+  list-style: none; margin: 1.1rem 0 0; padding: 0;
+  display: flex; flex-wrap: wrap; gap: .6rem 1.6rem; font-size: 1rem;
+}
+.subscribe__links a {
+  color: var(--plot); text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+}
+.subscribe__links a:hover { border-bottom-color: var(--mark); }
+.subscribe__fine {
+  margin: 1rem 0 0; font-size: .84rem; color: var(--ink-faint);
+  max-width: 52ch; line-height: 1.55;
 }
 
 .footer__follow {

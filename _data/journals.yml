@@ -1,0 +1,21 @@
+# Journals watched for newly published research.
+#
+# Looked up through Crossref, which every major publisher deposits to, so one
+# method works for all of them. The link on each paper is its DOI, which always
+# opens at the publisher's own page - aeaweb.org for the AER, Wiley for
+# Econometrica. Nothing but title, authors and link is stored.
+#
+# To watch another journal, add its name and print ISSN below. A journal whose
+# ISSN is wrong is skipped quietly and the others still appear.
+#
+#   Quarterly Journal of Economics   0033-5533
+#   Journal of Political Economy     0022-3808
+#   Review of Economic Studies       0034-6527
+#   Econometrica (online issn)       1468-0262
+
+- name: "American Economic Review"
+  short: "AER"
+  issn: "0002-8282"
+- name: "Econometrica"
+  short: "Econometrica"
+  issn: "0012-9682"
