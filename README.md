@@ -1,171 +1,324 @@
-# Beautiful Economics
+# Running Beautiful Economics
 
-The website behind beautifuleconomics.in. Static site, built by GitHub Pages
-from the files in this repository. No server, no database, no monthly bill.
+This page is your manual. It is not part of the website — only you see it,
+and it is here every time you open this repository.
 
-Everything you write lives as a plain text file. If you ever leave GitHub,
-you take these files with you and nothing is lost.
+**The one address to remember:**
 
----
-
-## 1. Point beautifuleconomics.in at it
-
-The site is already live at https://beautifuleconomics.github.io
-
-Your domain currently forwards to Facebook. You will replace that forwarding
-with real DNS records, at whoever you bought the domain from (BigRock,
-GoDaddy, Namecheap, Hostinger — look for "DNS", "Manage DNS" or "Name Server
-settings").
-
-**First remove** any existing forwarding/redirect rule, and any A or CNAME
-record on `@` and `www`. They will conflict.
-
-**Then add these.** Source: GitHub's own documentation, linked at the bottom.
-
-| Type  | Name / Host | Value                          |
-|-------|-------------|--------------------------------|
-| A     | `@`         | `185.199.108.153`              |
-| A     | `@`         | `185.199.109.153`              |
-| A     | `@`         | `185.199.110.153`              |
-| A     | `@`         | `185.199.111.153`              |
-| AAAA  | `@`         | `2606:50c0:8000::153`          |
-| AAAA  | `@`         | `2606:50c0:8001::153`          |
-| AAAA  | `@`         | `2606:50c0:8002::153`          |
-| AAAA  | `@`         | `2606:50c0:8003::153`          |
-| CNAME | `www`       | `beautifuleconomics.github.io` |
-
-The CNAME value has no `https://` and no repository name.
-
-DNS takes anywhere from ten minutes to a few hours. Once GitHub shows a green
-tick under Settings to Pages, tick **Enforce HTTPS**. Do not skip that —
-without it the padlock is missing and browsers will warn people.
-
-## 2. Write an article
-
-Make a new file in `_posts/`. The filename must be
-`YYYY-MM-DD-some-words.md` — Jekyll reads the date from the name, so a wrong
-filename means the post silently does not appear.
-
-```markdown
----
-title: "What inflation actually is"
-standfirst: "One sentence under the headline. Shown on the homepage too."
-date: 2026-11-02 09:00:00 +0530
-reading: "5 min"
----
-
-Write normally. Blank line between paragraphs.
-
-## A heading looks like this
-
-**Bold**, *italic*, and [a link](https://example.com).
+```
+github.com/BeautifulEconomics/beautifuleconomics.github.io
 ```
 
-Commit it. The homepage, the Writing page, the RSS feed and the sitemap all
-update themselves.
+Bookmark it. Everything below starts from there.
 
-## 3. Add a concept
+---
 
-Same idea, in `_concepts/`. No date in the filename — the filename becomes the
-web address, so `price-elasticity.md` lives at `/concepts/price-elasticity/`.
+## The rule that never changes
 
-```markdown
+Whatever you are doing — adding, editing, deleting — it is always the same
+three steps:
+
+1. **Open the file** (or start a new one).
+2. **Type.**
+3. **Scroll down and press the green `Commit changes` button**, then confirm.
+
+Wait about a minute and the change is live on beautifuleconomics.in.
+
+That is it. There is nothing else to learn. The rest of this page is just
+*which* file, for *which* job.
+
+---
+
+## Where everything lives
+
+When you open the repository you see a list of folders. This is what they are:
+
+| Folder | What is inside |
+| --- | --- |
+| `_concepts` | One file per concept. The Concepts page builds itself from these. |
+| `_advanced` | One file per Advanced Economics entry. |
+| `_posts` | One file per piece of writing. |
+| `_data` | The word list, the thought list, the Library listing. |
+| `assets/library` | The actual PDF files. |
+| `_config.yml` | Site settings: your links, the newsletter, the shop. |
+| `about.md` | The About page. |
+
+Ignore every other folder. You will never need to touch them.
+
+---
+
+## Add a new concept
+
+1. Open the repository.
+2. Click the **`_concepts`** folder.
+3. Click **`Add file`** (top right) → **`Create new file`**.
+4. In the filename box type the name, lower case, hyphens instead of spaces,
+   ending in `.md` — for example `price-elasticity.md`.
+5. Paste this in and write over it:
+
+```
 ---
 title: Price elasticity
-gloss: How much the quantity people buy responds when the price moves.
+gloss: How much people change what they buy when the price moves.
 field: Microeconomics
 ---
 
 ## The claim
-...
-## The assumption underneath
-...
-## Where it stops working
-...
+
+What the idea says, in plain language.
+
+## What it assumes
+
+The thing the idea quietly takes for granted.
+
+## Where it breaks
+
+The case where it stops working.
 ```
 
-Keep those three headings. They are what makes this different from every other
-economics glossary on the internet — most tell you what an idea says, almost
-none tell you where it fails.
+6. Press **`Commit changes`**.
 
-The homepage picks one concept per day automatically. Add more and the rotation
-gets longer on its own.
+The three lines between the `---` marks are settings, not writing:
 
-## 4. Add a PDF
+- **title** — shown everywhere on the site.
+- **gloss** — the one-line summary. Keep it to one sentence.
+- **field** — the topic. Type anything; it creates that topic. Keep the
+  spelling consistent, because `Macroeconomics` and `macroeconomics` would
+  count as two different topics.
 
-1. Put the file in `assets/library/`.
-2. Add an entry to `_data/library.yml`:
+**The filename becomes the web address.** `price-elasticity.md` becomes
+`beautifuleconomics.in/concepts/price-elasticity/`. Choose it carefully —
+changing it later breaks every link anyone has shared.
 
-```yaml
+---
+
+## Add an Advanced Economics entry
+
+Exactly the same, but click the **`_advanced`** folder instead of `_concepts`.
+
+Advanced entries can contain mathematics. Write it between dollar signs:
+
+- Inside a sentence: `$x^2 + y^2 = z^2$`
+- On its own line: `$$V(s) = \max_a \{ u(s,a) + \beta V(s') \}$$`
+
+It is turned into proper typeset mathematics automatically. This only works
+in `_advanced`, which is why it exists as its own section.
+
+---
+
+## Write a new piece
+
+1. Click the **`_posts`** folder.
+2. **`Add file`** → **`Create new file`**.
+3. **The filename must start with the date**: `YYYY-MM-DD-some-title.md`,
+   for example `2026-11-03-why-prices-are-information.md`.
+4. Paste this in:
+
+```
+---
+title: "Why prices are information"
+standfirst: "One sentence that makes someone want to read on."
+date: 2026-11-03 09:00:00 +0530
+reading: "6 min"
+---
+
+Your first paragraph.
+
+Your second paragraph.
+
+## A heading partway through
+
+More writing.
+```
+
+5. **`Commit changes`**.
+
+Notes:
+
+- The date in the filename and the date inside must match. Leave `+0530` alone.
+- Writing below the second `---` is ordinary text. Blank line between
+  paragraphs. `## ` starts a heading. `**bold**`, `*italic*`,
+  `[the words](https://the-address.com)` for a link.
+- **A piece dated in the future stays hidden until that date arrives.** Use
+  this on purpose: write three on Sunday, date them across the week, and they
+  publish themselves.
+
+---
+
+## Put a PDF in the Library
+
+This is the only job that takes **two** steps.
+
+**Step one — upload the file.**
+
+1. Click **`assets`**, then **`library`**.
+2. **`Add file`** → **`Upload files`**.
+3. Drag the PDF in. Give it a simple lower-case name with hyphens, like
+   `game-theory-in-one-sitting.pdf`.
+4. **`Commit changes`**.
+
+**Step two — tell the site about it.**
+
+1. Go back to the top, click **`_data`**, then **`library.yml`**.
+2. Click the **pencil icon** (top right) to edit.
+3. Add this at the bottom, keeping the two-space indents exactly:
+
+```
 - title: "Game theory in one sitting"
   file: /assets/library/game-theory-in-one-sitting.pdf
   pages: 14
   size: "1.2 MB"
-  note: "One or two sentences on what is inside."
+  note: "What a dominant strategy is, and why the prisoner's dilemma is not about prisoners."
 ```
 
-Keep files under about 25 MB.
+4. **`Commit changes`**.
 
-## 5. Switch on the newsletter
-
-The signup form is already built and currently shows a reminder instead. To
-make it live, pick a provider and paste its form address into
-`newsletter_action` in `_config.yml`.
-
-**Buttondown** — simplest, free to 100 subscribers. Sign up, then
-Settings to Embedding. Use:
-
-```yaml
-newsletter_action: "https://buttondown.email/api/emails/embed-subscribe/YOURNAME"
-newsletter_field: "email"
-```
-
-**MailerLite** — free to 1,000 subscribers, better for a larger list. Create an
-embedded form, copy the `action="..."` URL out of the code it gives you, and
-set `newsletter_field` to the matching field name (usually `fields[email]`).
-
-Whichever you pick, **export your subscriber list every few months** and keep
-the file. That list is the only asset here that cannot be rebuilt.
+The `file:` line must match the uploaded filename exactly. A file uploaded but
+not listed will not appear. A listing with no file gives a broken download.
 
 ---
 
-## What this cannot do
+## Edit something that already exists
 
-No accounts, no login, no paid membership, no private area. GitHub Pages serves
-files; it does not run code and has no database. There is no plugin or trick
-that changes this.
+1. Click the folder, then click the file.
+2. Click the **pencil icon** at the top right.
+3. Change what you want.
+4. **`Commit changes`**.
 
-When you genuinely need those — meaning people are asking for them, not before
-— the move is **Ghost**. It does blogging, memberships, login and email
-newsletters in one piece of software, imports Markdown files and subscriber
-lists directly, and costs roughly 400 to 900 rupees a month self-hosted. Your
-domain and all of this writing carry over untouched.
+That works for every file on this page — a concept, a piece, the About page,
+the word list, the settings.
 
-## Things that will break, and why
+---
 
-- **A post does not appear.** The filename is wrong. It must be
-  `YYYY-MM-DD-title.md`, with real hyphens.
-- **The whole site goes blank after an edit.** You broke the block between the
-  two `---` lines at the top of a file. Colons and apostrophes inside a title
-  need the title wrapped in "double quotes".
-- **The custom domain stops working.** Check the `CNAME` file still exists in
-  the repository. Some editors delete it.
-- **A plugin does not work.** GitHub Pages only runs a fixed list of plugins.
-  This site uses three that are on it: jekyll-feed, jekyll-sitemap,
-  jekyll-seo-tag. Adding others will fail the build.
+## Delete something
 
-## Where things are
+1. Click the folder, then the file.
+2. Click the **`...`** button at the top right.
+3. Choose **`Delete file`**.
+4. **`Commit changes`**.
+
+It disappears from the site in about a minute. Anyone who had the link will
+get a "page not found", so think before deleting something you have shared.
+
+---
+
+## Add more words and thoughts
+
+These are the two pools the site draws from each day. Adding to them means you
+never have to write anything *on* the day.
+
+**Word of the day** — `_data` → `words.yml`, pencil icon, add at the bottom:
 
 ```
-_config.yml        site-wide settings — title, links, newsletter
-_posts/            articles
-_concepts/         the concepts dictionary
-_data/library.yml  the list of downloadable PDFs
-_layouts/          page skeletons
-_includes/         reused fragments, including the hero plot
-assets/css/        the single stylesheet
-assets/library/    PDF files
-CNAME              your domain. Do not delete.
+- term: "Seigniorage"
+  meaning: "The profit a government makes simply by creating money."
 ```
 
-Sources: [Managing a custom domain for your GitHub Pages site](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site) and [Securing your GitHub Pages site with HTTPS](https://docs.github.com/en/pages/getting-started-with-github-pages/securing-your-github-pages-site-with-https)
+If the word already has a concept page, add a third line and a link to it
+appears automatically:
+
+```
+  link: "opportunity-cost"
+```
+
+**Thought of the day** — `_data` → `thoughts.yml`:
+
+```
+- text: "Two or three sentences. Plain words. One idea."
+  who: "Whose idea it is"
+  what: "economist"
+  source: "The book or essay, and the year"
+```
+
+**The `source` line is not optional.** An entry without one is silently
+skipped and never shown. That is deliberate: it means you cannot accidentally
+publish a claim you cannot back up.
+
+---
+
+## Change the settings
+
+`_config.yml`, pencil icon. The things you are likely to want:
+
+| Line | What it does |
+| --- | --- |
+| `facebook:` `instagram:` `youtube:` | The links in the footer. Empty hides that one. |
+| `email:` | Your contact address. Leave empty until it actually receives mail. |
+| `newsletter_action:` | Paste your email provider's form address here and the subscribe box appears everywhere. |
+| `shop:` and `shop_label:` | A link to a shop, for when you sell something. |
+
+---
+
+## What you never have to touch
+
+These change on their own, for ever:
+
+- **Word of the day**, **Thought of the day**, **Concept of the day** — daily,
+  at each reader's own midnight, wherever they are in the world.
+- **Newly published research** — every Monday, from the American Economic
+  Review and Econometrica.
+- The greeting, dark mode, the date in the footer, the sitemap.
+
+You never edit these. You only add to the pools they draw from.
+
+---
+
+## The four things that break it
+
+Almost every problem is one of these.
+
+**1. A colon in an unquoted line.** The most common by far.
+`title: Inflation: a short history` breaks the build. Wrap it in quotes:
+`title: "Inflation: a short history"`.
+
+**2. Wrong indentation in `_data` files.** The first line of an entry starts
+with `- ` and every line under it starts with exactly **two spaces**. Tabs are
+not spaces.
+
+**3. A missing `---` line.** Every concept, Advanced entry and piece needs
+`---` above and below its settings. Three hyphens, nothing else on the line.
+
+**4. A piece whose filename has no date.** It silently never appears.
+
+### How you will know
+
+If your change does not show up, click the **`Actions`** tab at the top of the
+repository.
+
+- **Green tick** — it published.
+- **Red cross** — the build failed. Click it, and the error names the file and
+  the line number.
+
+**A failed build never takes the site down.** The last good version stays live.
+A mistake means "my change did not appear", never "my site is gone".
+
+---
+
+## Checking it worked
+
+Wait a minute, then open the site with a number on the end so your browser
+does not show you an old copy:
+
+```
+beautifuleconomics.in/?x=1
+```
+
+Change the number each time you check.
+
+---
+
+## Undoing anything
+
+Every change you have ever made is saved with its date, and any of it can be
+reversed.
+
+1. Click **`Commits`** (or the clock icon) on the repository home page.
+2. Click the change you want to undo.
+3. Press the **`...`** button at the top right and choose **`Revert`**.
+
+That creates a new change putting things back. Nothing is lost, and you can
+undo the undo.
+
+**There is nothing you can type into these files that cannot be reversed in
+under a minute.** Edit freely. The worst case is that a change does not appear
+and the previous version stays up.
