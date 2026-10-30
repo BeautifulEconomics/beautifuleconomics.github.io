@@ -515,6 +515,42 @@ body {
 }
 
 /* ---------------------------- library ------------------------- */
+/* --- Library categories. The page groups itself from the "category" line
+       on each entry, so adding a new one needs no code change. --- */
+.shelf-jump {
+  display: flex; flex-wrap: wrap; gap: .5rem 1.4rem;
+  margin: 0 0 3rem; padding-bottom: 1.4rem;
+  border-bottom: 1px solid var(--rule-soft);
+  font-family: var(--mono); font-size: .76rem;
+  letter-spacing: .08em; text-transform: uppercase;
+}
+.shelf-jump a {
+  color: var(--plot); text-decoration: none;
+  border-bottom: 1px solid transparent; padding-bottom: 2px;
+  transition: border-color .18s ease;
+}
+.shelf-jump a:hover, .shelf-jump a:focus-visible { border-bottom-color: var(--mark); }
+.shelf-group { margin: 0 0 3.4rem; scroll-margin-top: 6rem; }
+.shelf-group__name {
+  font-family: var(--display); font-size: clamp(1.25rem, 2.6vw, 1.5rem);
+  font-weight: 600; letter-spacing: -0.016em; margin: 0 0 1.2rem;
+  padding-bottom: .55rem; position: relative; display: flex;
+  align-items: baseline; gap: .7rem;
+}
+.shelf-group__name::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+  background: linear-gradient(to right,
+    var(--high-solid) 0, var(--high-solid) 1.8rem,
+    var(--rule-soft) 1.8rem, var(--rule-soft) 100%);
+}
+.shelf-group__count {
+  font-family: var(--mono); font-size: .72rem; font-weight: 400;
+  color: var(--ink-faint); letter-spacing: .06em;
+}
+.shelf__credit {
+  margin: .2rem 0 0; font-family: var(--mono); font-size: .72rem;
+  color: var(--ink-faint); letter-spacing: .02em;
+}
 .shelf { list-style: none; margin: 0; padding: 0; }
 .shelf li { padding: 1.6rem 0; border-bottom: 1px solid var(--rule-soft); display: grid; gap: .4rem; }
 .shelf li:first-child { padding-top: 0; }
@@ -933,3 +969,92 @@ body {
 .faq details[open] summary::after { transform: rotate(-135deg); border-color: var(--plot); }
 .faq__answer { margin: 0; padding: 0 2.5rem 1.6rem 0; color: var(--ink-soft); line-height: 1.65; max-width: 62ch; }
 .faq__answer a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--mark); text-underline-offset: 3px; }
+
+/* ============================================================
+   The opening curtain — homepage, once a day.
+   Built and removed by _includes/intro.html. If that script
+   never runs, none of this applies to anything.
+   ============================================================ */
+.intro-on, .intro-on body { overflow: hidden; }
+
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: grid;
+  place-items: center;
+  background: var(--paper);
+  transition: opacity .4s ease, transform .4s ease;
+}
+.intro.is-out { opacity: 0; transform: scale(1.015); }
+
+.intro__stage { text-align: center; padding: var(--gutter); }
+
+.intro__plot {
+  display: block;
+  width: clamp(8rem, 26vw, 11.5rem);
+  height: auto;
+  margin: 0 auto .9rem;
+  overflow: visible;
+}
+.intro__curve {
+  stroke: var(--plot);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-dasharray: 190;
+  stroke-dashoffset: 190;
+  animation: intro-draw .72s cubic-bezier(.33,.9,.35,1) .1s forwards;
+}
+.intro__curve--s { animation-delay: .22s; }
+
+.intro__dot {
+  fill: var(--high-solid);
+  transform-origin: 80px 60px;
+  transform: scale(0);
+  animation: intro-pop .46s cubic-bezier(.2,1.5,.4,1) .72s forwards;
+}
+.intro__ring {
+  fill: none;
+  stroke: var(--high-solid);
+  stroke-width: 1.6;
+  transform-origin: 80px 60px;
+  transform: scale(.4);
+  opacity: 0;
+  animation: intro-ring .9s ease-out .86s forwards;
+}
+
+.intro__word {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(1.45rem, 5.2vw, 2.5rem);
+  line-height: 1.1;
+  letter-spacing: -.012em;
+  color: var(--ink);
+  opacity: 0;
+  transform: translateY(.5rem);
+  animation: intro-rise .66s cubic-bezier(.2,.8,.3,1) .86s forwards;
+}
+
+.intro__rule {
+  display: block;
+  width: 0;
+  height: 2px;
+  margin: .85rem auto 0;
+  border-radius: 2px;
+  background: var(--high-solid);
+  animation: intro-wipe .5s cubic-bezier(.3,.8,.3,1) 1.16s forwards;
+}
+
+@keyframes intro-draw { to { stroke-dashoffset: 0; } }
+@keyframes intro-pop  { to { transform: scale(1); } }
+@keyframes intro-ring {
+  0%   { opacity: .85; transform: scale(.4); }
+  100% { opacity: 0;   transform: scale(1.9); }
+}
+@keyframes intro-rise { to { opacity: 1; transform: none; } }
+@keyframes intro-wipe { to { width: clamp(3rem, 12vw, 5.5rem); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .intro { display: none; }
+}

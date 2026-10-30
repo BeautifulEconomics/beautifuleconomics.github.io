@@ -9,6 +9,7 @@
   {% include head.html %}
 </head>
 <body>
+  {% if page.nav == 'home' %}{% include intro.html %}{% endif %}
   <div class="page-rules" aria-hidden="true"></div>
   <a class="skip" href="#main">Skip to content</a>
   {% include masthead.html %}

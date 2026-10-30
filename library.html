@@ -12,16 +12,36 @@ description: Free PDFs — notes, summaries and reading guides you can download 
       <p class="page-intro">Things worth keeping on your own device. Free, no account, no form in the way.</p>
     </div>
 
+    {%- comment -%}
+      Grouped by the "category" line on each entry in _data/library.yml.
+      Anything without one falls into "Other", so a forgotten category can
+      never make a file disappear from the page.
+    {%- endcomment -%}
     {% if site.data.library and site.data.library.size > 0 %}
-    <ul class="shelf">
-      {% for item in site.data.library %}
-      <li>
-        <h2 class="shelf__title"><a href="{{ item.file | relative_url }}" download>{{ item.title }}</a></h2>
-        <span class="shelf__meta">PDF{% if item.pages %} — {{ item.pages }} pages{% endif %}{% if item.size %} — {{ item.size }}{% endif %}</span>
-        {% if item.note %}<p class="shelf__note">{{ item.note }}</p>{% endif %}
-      </li>
+      {% assign groups = site.data.library | group_by_exp: "item", "item.category | default: 'Other'" | sort: "name" %}
+
+      {% if groups.size > 1 %}
+      <nav class="shelf-jump" aria-label="Categories">
+        {% for g in groups %}<a href="#{{ g.name | slugify }}">{{ g.name }}</a>{% endfor %}
+      </nav>
+      {% endif %}
+
+      {% for g in groups %}
+      <section class="shelf-group" id="{{ g.name | slugify }}">
+        <h2 class="shelf-group__name" data-reveal>{{ g.name }}<span class="shelf-group__count">{{ g.items.size }}</span></h2>
+        <ul class="shelf">
+          {% assign sorted = g.items | sort: "title" %}
+          {% for item in sorted %}
+          <li data-reveal data-delay="{{ forloop.index | modulo: 3 | plus: 1 }}">
+            <h3 class="shelf__title"><a href="{{ item.file | relative_url }}" download>{{ item.title }}</a></h3>
+            <span class="shelf__meta">PDF{% if item.pages %} &mdash; {{ item.pages }} pages{% endif %}{% if item.size %} &mdash; {{ item.size }}{% endif %}</span>
+            {% if item.note %}<p class="shelf__note">{{ item.note }}</p>{% endif %}
+            {% if item.credit %}<p class="shelf__credit">{{ item.credit }}</p>{% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      </section>
       {% endfor %}
-    </ul>
     {% else %}
     <p class="empty">Nothing on the shelf yet. Put a PDF in <code>assets/library/</code> and list it in <code>_data/library.yml</code>.</p>
     {% endif %}

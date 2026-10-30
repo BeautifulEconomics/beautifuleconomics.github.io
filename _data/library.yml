@@ -1,8 +1,33 @@
-# Each PDF you want on the Library page. Put the file in assets/library/
-# then add it here. Example:
+# ---------------------------------------------------------------
+# The Library page.
 #
-# - title: "Game theory in one sitting"
-#   file: /assets/library/game-theory-in-one-sitting.pdf
-#   pages: 14
-#   size: "1.2 MB"
-#   note: "Dominant strategies, Nash equilibrium and why the prisoner's dilemma is not about prisoners."
+# TWO STEPS for every PDF:
+#   1. Upload the file itself into  assets/library/
+#   2. Describe it here.
+# A file uploaded but not listed here will not appear on the page.
+#
+# COPY THIS SHAPE. Two spaces before every line after the first.
+#
+#   - title: "Game theory in one sitting"
+#     category: "Game theory"
+#     file: /assets/library/game-theory-in-one-sitting.pdf
+#     pages: 14
+#     size: "1.2 MB"
+#     note: "Dominant strategies, Nash equilibrium, and why the prisoner's dilemma is not about prisoners."
+#     credit: "Written by Beautiful Economics"
+#
+# category  groups the file on the page. Type anything; the heading and the
+#           jump links build themselves. Keep the spelling consistent, because
+#           "Game theory" and "Game Theory" would become two categories.
+#           Leave it out and the file lands under "Other".
+# file      must match the uploaded filename exactly, including capitals.
+# credit    optional, but say where it came from. For your own work write
+#           "Written by Beautiful Economics". For anything else, name the
+#           author and the licence that allows you to share it.
+#
+# ONLY PUT A FILE HERE IF YOU HAVE THE RIGHT TO SHARE IT:
+#   - your own notes and explanations          -> yes
+#   - openly licensed books (CC, OpenStax)     -> yes, with the credit line
+#   - out-of-copyright works (Smith, Ricardo)  -> yes
+#   - a scanned or downloaded textbook         -> NO
+# ---------------------------------------------------------------

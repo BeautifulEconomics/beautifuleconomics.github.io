@@ -1,0 +1,60 @@
+{%- comment -%}
+  The opening curtain. Homepage only, once a day per visitor.
+
+  Everything is built by this script, so if JavaScript is off, slow or
+  broken, no curtain is ever created and the homepage shows immediately.
+  A timer removes it after 2.6s no matter what else happens, so the site
+  can never be left behind a blank screen.
+{%- endcomment -%}
+<script>
+(function () {
+  var D = document;
+
+  // Readers who asked for less motion never see this.
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  // Once a day. If storage is blocked (private window), just show it.
+  try {
+    var last = window.localStorage.getItem('be-intro');
+    if (last && (Date.now() - Number(last)) < 864e5) return;
+    window.localStorage.setItem('be-intro', String(Date.now()));
+  } catch (e) {}
+
+  var el = D.createElement('div');
+  el.className = 'intro';
+  el.setAttribute('aria-hidden', 'true');
+  el.innerHTML =
+    '<div class="intro__stage">' +
+      '<svg class="intro__plot" viewBox="0 0 160 120" fill="none" aria-hidden="true">' +
+        '<path class="intro__curve intro__curve--d" d="M14 16 C 54 34, 86 70, 146 104" />' +
+        '<path class="intro__curve intro__curve--s" d="M14 104 C 54 86, 86 50, 146 16" />' +
+        '<circle class="intro__ring" cx="80" cy="60" r="9" />' +
+        '<circle class="intro__dot"  cx="80" cy="60" r="4.5" />' +
+      '</svg>' +
+      '<p class="intro__word">Beautiful Economics</p>' +
+      '<span class="intro__rule"></span>' +
+    '</div>';
+
+  D.body.insertBefore(el, D.body.firstChild);
+  D.documentElement.classList.add('intro-on');
+
+  var done = false;
+  function close() {
+    if (done) return;
+    done = true;
+    el.classList.add('is-out');
+    D.documentElement.classList.remove('intro-on');
+    window.setTimeout(function () {
+      if (el.parentNode) el.parentNode.removeChild(el);
+    }, 420);
+  }
+
+  // The failsafe comes first, so nothing below can prevent it.
+  window.setTimeout(close, 1950);
+
+  // Any sign of impatience ends it early.
+  ['click', 'keydown', 'wheel', 'touchstart'].forEach(function (ev) {
+    window.addEventListener(ev, close, { once: true, passive: true });
+  });
+})();
+</script>
