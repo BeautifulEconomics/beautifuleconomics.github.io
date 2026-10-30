@@ -620,7 +620,7 @@ body {
 @media (min-width: 52em) { .daily { grid-template-columns: 1.35fr 1fr; gap: 3rem; } }
 .daily__label {
   font-family: var(--mono); font-size: .68rem; letter-spacing: .16em;
-  text-transform: uppercase; color: var(--deep-soft); margin: 0 0 .9rem;
+  text-transform: uppercase; color: var(--high-solid); margin: 0 0 .9rem;
 }
 .daily__term {
   font-family: var(--display); font-size: clamp(1.4rem, 3.2vw, 1.72rem);
@@ -990,120 +990,52 @@ body {
 
 .intro__stage { text-align: center; padding: var(--gutter); }
 
-.intro__plot {
-  display: block;
-  width: clamp(8rem, 26vw, 11.5rem);
-  height: auto;
-  margin: 0 auto 1.1rem;
-  overflow: visible;
-  stroke: var(--plot);
-  stroke-width: 2.4;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+/* Each word sits in a slot that hides it, then climbs into view. */
+.intro__mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding: 0 .06em;
+  margin: 0 -.06em;
 }
-
-/* ---- the drawing primitives the six vignettes are built from ---- */
-.intro__plot .v-draw {
-  stroke-dasharray: 230;
-  stroke-dashoffset: 230;
-  animation: intro-draw .74s cubic-bezier(.33,.9,.35,1) .1s forwards;
+.intro__rise {
+  display: inline-block;
+  transform: translateY(105%);
+  animation: intro-rise .72s cubic-bezier(.22,.9,.26,1) forwards;
 }
-.intro__plot .v-grow {
-  fill: var(--plot);
-  stroke: none;
-  transform-box: fill-box;
-  transform-origin: 50% 100%;
-  transform: scaleY(0);
-  animation: intro-grow .5s cubic-bezier(.2,.9,.3,1) .22s forwards;
-}
-.intro__plot .v-pop {
-  fill: var(--plot);
-  stroke: none;
-  transform-box: fill-box;
-  transform-origin: 50% 50%;
-  transform: scale(0);
-  animation: intro-pop .46s cubic-bezier(.2,1.5,.4,1) .6s forwards;
-}
-.intro__plot .v-ring {
-  stroke: var(--high-solid);
-  stroke-width: 1.6;
-  transform-box: fill-box;
-  transform-origin: 50% 50%;
-  transform: scale(.4);
-  opacity: 0;
-  animation: intro-ring .9s ease-out .8s forwards;
-}
-.intro__plot .v-net {
-  stroke-dasharray: 130;
-  stroke-dashoffset: 130;
-  opacity: .55;
-  animation: intro-net .8s cubic-bezier(.33,.9,.35,1) .12s forwards;
-}
-.intro__plot .v-tip {
-  transform-box: fill-box;
-  transform-origin: 50% 50%;
-  transform: rotate(-13deg);
-  animation: intro-tip .9s cubic-bezier(.3,1.1,.35,1) .3s forwards;
-}
-.intro__plot .v-coin {
-  fill: none;
-  stroke: var(--plot);
-  transform-box: fill-box;
-  transform-origin: 50% 50%;
-  transform: scaleX(.04);
-  animation: intro-flip .7s cubic-bezier(.25,1.25,.4,1) .12s forwards;
-}
-.intro__plot .v-coin.v-amber { fill: var(--high-solid); stroke: none; }
-.intro__plot .v-amber       { fill: var(--high-solid); }
-.intro__plot .v-amber-fill  { fill: var(--high-solid); }
 
 .intro__kicker {
-  margin: 0 0 .3rem;
+  margin: 0 0 .35rem;
   font-family: var(--mono);
   font-size: .68rem;
   font-weight: 500;
   letter-spacing: .22em;
   text-transform: uppercase;
   color: var(--ink-faint);
-  opacity: 0;
-  animation: intro-rise .6s ease .76s forwards;
 }
 
 .intro__word {
   margin: 0;
   font-family: var(--display);
   font-weight: 600;
-  font-size: clamp(1.45rem, 5.2vw, 2.5rem);
-  line-height: 1.1;
-  letter-spacing: -.012em;
+  font-size: clamp(1.6rem, 6.4vw, 3.1rem);
+  line-height: 1.12;
+  letter-spacing: -.014em;
   color: var(--ink);
-  opacity: 0;
-  transform: translateY(.5rem);
-  animation: intro-rise .66s cubic-bezier(.2,.8,.3,1) .9s forwards;
 }
 
 .intro__rule {
   display: block;
   width: 0;
   height: 2px;
-  margin: .85rem auto 0;
+  margin: 1rem auto 0;
   border-radius: 2px;
   background: var(--high-solid);
-  animation: intro-wipe .5s cubic-bezier(.3,.8,.3,1) 1.2s forwards;
+  animation: intro-wipe .55s cubic-bezier(.3,.8,.3,1) .86s forwards;
 }
 
-@keyframes intro-draw { to { stroke-dashoffset: 0; } }
-@keyframes intro-net  { to { stroke-dashoffset: 0; } }
-@keyframes intro-grow { to { transform: scaleY(1); } }
-@keyframes intro-pop  { to { transform: scale(1); } }
-@keyframes intro-flip { to { transform: scaleX(1); } }
-@keyframes intro-tip  { to { transform: rotate(0deg); } }
-@keyframes intro-ring {
-  0%   { opacity: .85; transform: scale(.4); }
-  100% { opacity: 0;   transform: scale(1.9); }
-}
-@keyframes intro-rise { to { opacity: 1; transform: none; } }
-@keyframes intro-wipe { to { width: clamp(3rem, 12vw, 5.5rem); } }
+@keyframes intro-rise { to { transform: none; } }
+@keyframes intro-wipe { to { width: clamp(3.5rem, 14vw, 6.5rem); } }
 
 @media (prefers-reduced-motion: reduce) {
   .intro { display: none; }

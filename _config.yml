@@ -24,7 +24,7 @@ whatsapp_channel: ""
 twitter: ""
 # Leave empty until the address really receives mail. An address that
 # bounces silently is worse than none: corrections never reach you.
-email: ""
+email: "beautifuleconomic@gmail.com"
 
 # Selling, for when you are ready. Leave empty and nothing appears.
 # A static site cannot take payments itself, so these point at a shop that
