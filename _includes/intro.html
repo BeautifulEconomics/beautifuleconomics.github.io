@@ -1,36 +1,82 @@
 {%- comment -%}
-  The opening curtain. Homepage only, once a day per visitor.
+  The opening curtain. Homepage only, at most once every four hours.
 
   Everything is built by this script, so if JavaScript is off, slow or
   broken, no curtain is ever created and the homepage shows immediately.
-  A timer removes it after 2.6s no matter what else happens, so the site
-  can never be left behind a blank screen.
+  A timer removes it after 2.3s no matter what else happens, so the site
+  can never be left sitting behind a blank screen.
+
+  The drawing is one of six, picked at random each visit. They are drawn
+  here as SVG rather than loaded as images, so nothing is fetched from
+  anyone else's server and nothing can arrive late or not at all.
 {%- endcomment -%}
 <script>
 (function () {
   var D = document;
 
-  // Readers who asked for less motion never see this.
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  // Once a day. If storage is blocked (private window), just show it.
   try {
     var last = window.localStorage.getItem('be-intro');
-    if (last && (Date.now() - Number(last)) < 864e5) return;
+    if (last && (Date.now() - Number(last)) < 144e5) return;   /* four hours */
     window.localStorage.setItem('be-intro', String(Date.now()));
   } catch (e) {}
+
+  /* --- the six drawings. Each is a small story about economics. --- */
+  var art = [
+
+    /* equilibrium: supply and demand find their price */
+    '<path class="v-draw" d="M14 16 C 54 34, 86 70, 146 104"/>' +
+    '<path class="v-draw" style="animation-delay:.18s" d="M14 104 C 54 86, 86 50, 146 16"/>' +
+    '<circle class="v-ring" cx="80" cy="60" r="9"/>' +
+    '<circle class="v-pop v-amber" cx="80" cy="60" r="4.5" style="animation-delay:.66s"/>',
+
+    /* growth: four bars, the last one worth noticing */
+    '<line class="v-draw" x1="16" y1="104" x2="146" y2="104"/>' +
+    '<rect class="v-grow" x="26"  y="74"  width="18" height="30"/>' +
+    '<rect class="v-grow" x="56"  y="60"  width="18" height="44" style="animation-delay:.14s"/>' +
+    '<rect class="v-grow" x="86"  y="42"  width="18" height="62" style="animation-delay:.28s"/>' +
+    '<rect class="v-grow v-amber-fill" x="116" y="22" width="18" height="82" style="animation-delay:.42s"/>',
+
+    /* money: a coin, settling */
+    '<circle class="v-coin" cx="80" cy="60" r="34"/>' +
+    '<circle class="v-coin v-amber" cx="80" cy="60" r="12" style="animation-delay:.2s"/>' +
+    '<circle class="v-ring" cx="80" cy="60" r="34" style="animation-delay:.7s"/>',
+
+    /* the long run: a line that wanders and still climbs */
+    '<path class="v-draw" d="M16 96 L 42 72 L 62 86 L 88 50 L 110 64 L 142 24"/>' +
+    '<line class="v-draw" style="animation-delay:.1s" x1="16" y1="104" x2="146" y2="104"/>' +
+    '<circle class="v-pop v-amber" cx="142" cy="24" r="5" style="animation-delay:.74s"/>',
+
+    /* network effects: value is in the connections */
+    '<g class="v-net">' +
+    '<line x1="80" y1="60" x2="30" y2="30"/><line x1="80" y1="60" x2="130" y2="30"/>' +
+    '<line x1="80" y1="60" x2="30" y2="94"/><line x1="80" y1="60" x2="130" y2="94"/>' +
+    '<line x1="30" y1="30" x2="130" y2="30"/><line x1="30" y1="94" x2="130" y2="94"/></g>' +
+    '<circle class="v-pop" cx="30"  cy="30" r="5" style="animation-delay:.5s"/>' +
+    '<circle class="v-pop" cx="130" cy="30" r="5" style="animation-delay:.58s"/>' +
+    '<circle class="v-pop" cx="30"  cy="94" r="5" style="animation-delay:.66s"/>' +
+    '<circle class="v-pop" cx="130" cy="94" r="5" style="animation-delay:.74s"/>' +
+    '<circle class="v-pop v-amber" cx="80" cy="60" r="6.5" style="animation-delay:.82s"/>',
+
+    /* the margin: one more unit, a little less each time */
+    '<line class="v-draw" x1="16" y1="104" x2="146" y2="104"/>' +
+    '<line class="v-draw" style="animation-delay:.08s" x1="16" y1="104" x2="16" y2="18"/>' +
+    '<path class="v-draw" style="animation-delay:.2s" d="M22 96 C 58 96, 92 58, 142 30"/>' +
+    '<circle class="v-pop" cx="52" cy="86" r="4" style="animation-delay:.66s"/>' +
+    '<circle class="v-pop" cx="92" cy="60" r="4" style="animation-delay:.76s"/>' +
+    '<circle class="v-pop v-amber" cx="130" cy="37" r="5" style="animation-delay:.86s"/>'
+  ];
+
+  var pick = art[Math.floor(Math.random() * art.length)];
 
   var el = D.createElement('div');
   el.className = 'intro';
   el.setAttribute('aria-hidden', 'true');
   el.innerHTML =
     '<div class="intro__stage">' +
-      '<svg class="intro__plot" viewBox="0 0 160 120" fill="none" aria-hidden="true">' +
-        '<path class="intro__curve intro__curve--d" d="M14 16 C 54 34, 86 70, 146 104" />' +
-        '<path class="intro__curve intro__curve--s" d="M14 104 C 54 86, 86 50, 146 16" />' +
-        '<circle class="intro__ring" cx="80" cy="60" r="9" />' +
-        '<circle class="intro__dot"  cx="80" cy="60" r="4.5" />' +
-      '</svg>' +
+      '<svg class="intro__plot" viewBox="0 0 160 120" fill="none">' + pick + '</svg>' +
+      '<p class="intro__kicker">Welcome to</p>' +
       '<p class="intro__word">Beautiful Economics</p>' +
       '<span class="intro__rule"></span>' +
     '</div>';
@@ -49,10 +95,8 @@
     }, 420);
   }
 
-  // The failsafe comes first, so nothing below can prevent it.
-  window.setTimeout(close, 1950);
+  window.setTimeout(close, 2300);
 
-  // Any sign of impatience ends it early.
   ['click', 'keydown', 'wheel', 'touchstart'].forEach(function (ev) {
     window.addEventListener(ev, close, { once: true, passive: true });
   });
