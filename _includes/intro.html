@@ -1,5 +1,5 @@
 {%- comment -%}
-  The opening curtain. Homepage only, at most once every four hours.
+  The opening curtain. Homepage only, once per browsing session.
   Visiting the homepage with ?intro on the end always plays it, so the
   site's owner can check it without waiting.
 
@@ -16,10 +16,12 @@
 
   var force = /[?&]intro\b/.test(window.location.search);
   if (!force) {
+    /* Once per browsing session: a reader sees it when they arrive and
+       not again while they click around. Closing the tab and coming
+       back shows it again, which is predictable to reason about. */
     try {
-      var last = window.localStorage.getItem('be-intro');
-      if (last && (Date.now() - Number(last)) < 144e5) return;   /* four hours */
-      window.localStorage.setItem('be-intro', String(Date.now()));
+      if (window.sessionStorage.getItem('be-intro')) return;
+      window.sessionStorage.setItem('be-intro', '1');
     } catch (e) {}
   }
 
