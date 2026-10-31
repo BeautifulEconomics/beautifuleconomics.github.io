@@ -31,3 +31,10 @@
 #   - out-of-copyright works (Smith, Ricardo)  -> yes
 #   - a scanned or downloaded textbook         -> NO
 # ---------------------------------------------------------------
+- title: "Game theory in one sitting"
+  category: "Game theory"
+  file: /assets/library/game-theory-in-one-sitting.pdf
+  pages: 14
+  size: "1.2 MB"
+  note: "Dominant strategies, Nash equilibrium, and why the prisoner's dilemma is not about prisoners."
+  credit: "Written by Beautiful Economics"
