@@ -1126,3 +1126,45 @@ body {
 .chai__eyes { transform-box: fill-box; transform-origin: 50% 50%; }
 
 @media (prefers-reduced-motion: reduce) { .chai { display: none; } }
+
+/* ============================================================
+   Making the section colour actually visible.
+   The accent was only ever a hairline before; here it reaches
+   the page title, the cards and the current navigation item,
+   so each section reads as its own colour at a glance.
+   ============================================================ */
+
+/* The biggest words on the page carry the section's colour. */
+body:not([data-section="home"]) .page-title { color: var(--accent); }
+
+/* A rule beneath the title, in the same colour. */
+body:not([data-section="home"]) .page-head {
+  border-bottom: 1px solid var(--rule-soft);
+  padding-bottom: 1.4rem;
+  position: relative;
+}
+body:not([data-section="home"]) .page-head::after {
+  content: ""; position: absolute; left: 0; bottom: -1px;
+  width: 3.4rem; height: 3px; background: var(--accent);
+}
+
+/* Concept cards: a coloured edge, and a tint when pointed at. */
+.concept-grid a {
+  border-left: 2px solid transparent;
+  transition: background .2s ease, border-color .2s ease;
+}
+.concept-grid a:hover, .concept-grid a:focus-visible {
+  background: var(--accent-wash);
+  border-left-color: var(--accent);
+}
+
+/* The entry underline follows the section instead of always crimson. */
+.entry__title a { background-image: linear-gradient(var(--accent), var(--accent)); }
+
+/* The glyph next to the current navigation item picks up the colour. */
+.nav a[aria-current="page"] { color: var(--accent); }
+.nav a[aria-current="page"] .nav__icon { stroke: var(--accent); opacity: 1; }
+
+/* A thicker stub on band headings, so it reads as a colour, not a hair. */
+.band__heading { padding-bottom: .8rem; }
+.band__heading::after { height: 3px; }
