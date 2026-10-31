@@ -27,8 +27,9 @@ nav: home
 
 {% include today.html %}
 
-<section class="band" id="how">
+<section class="band" id="how" data-band="slate">
   <div class="shell">
+    <p class="band__eyebrow" data-reveal>Start here</p>
     <h2 class="band__heading" data-reveal>How to use this</h2>
     <p class="band__intro" data-reveal data-delay="1">No account, no fee, no order to follow. Three steps and you are reading.</p>
     {% include steps.html %}
@@ -36,8 +37,9 @@ nav: home
 </section>
 
 {% if site.concepts.size > 0 %}
-<section class="band">
+<section class="band" data-band="teal">
   <div class="shell">
+    <p class="band__eyebrow" data-reveal>Concepts</p>
     <h2 class="band__heading" data-reveal>Browse the concepts</h2>
     <ul class="concept-grid">
       {% assign sorted = site.concepts | sort: "title" %}
@@ -57,8 +59,9 @@ nav: home
 
 {% include papers-band.html %}
 
-<section class="band">
+<section class="band band--sunk" data-band="crimson">
   <div class="shell">
+    <p class="band__eyebrow" data-reveal>Writing</p>
     <h2 class="band__heading" data-reveal>Latest writing</h2>
     {% if site.posts.size > 0 %}
     <ul class="entries">
@@ -79,14 +82,15 @@ nav: home
   </div>
 </section>
 
-<section class="band">
+<section class="band" data-band="bronze">
   <div class="shell">
+    <p class="band__eyebrow" data-reveal>Questions</p>
     <h2 class="band__heading" data-reveal>About this site</h2>
     <div data-reveal data-delay="1">{% include faq.html %}</div>
   </div>
 </section>
 
-<section class="band band--sunk">
+<section class="band band--sunk" data-band="slate">
   <div class="shell">
     <div class="column" data-reveal>
       {% include subscribe.html id="subscribe-home" %}

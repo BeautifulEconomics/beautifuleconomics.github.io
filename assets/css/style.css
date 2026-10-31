@@ -1168,3 +1168,68 @@ body:not([data-section="home"]) .page-head::after {
 /* A thicker stub on band headings, so it reads as a colour, not a hair. */
 .band__heading { padding-bottom: .8rem; }
 .band__heading::after { height: 3px; }
+
+/* ============================================================
+   Telling one band from the next.
+   Each band on the home page carries its own colour and a small
+   label above the heading, so the sections read as separate
+   rooms rather than one long scroll of the same cream.
+   ============================================================ */
+[data-band="teal"]    { --accent: #0E5B52; --accent-wash: #0E5B5214; }
+[data-band="indigo"]  { --accent: #33408C; --accent-wash: #33408C14; }
+[data-band="crimson"] { --accent: #8C1A38; --accent-wash: #8C1A3814; }
+[data-band="bronze"]  { --accent: #8A5212; --accent-wash: #8A521214; }
+[data-band="slate"]   { --accent: #35545F; --accent-wash: #35545F14; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) [data-band="teal"]    { --accent: #58B9A9; }
+  :root:not([data-theme="light"]) [data-band="indigo"]  { --accent: #8E9CEE; }
+  :root:not([data-theme="light"]) [data-band="crimson"] { --accent: #E3879F; }
+  :root:not([data-theme="light"]) [data-band="bronze"]  { --accent: #D9A441; }
+  :root:not([data-theme="light"]) [data-band="slate"]   { --accent: #89AEBA; }
+}
+:root[data-theme="dark"] [data-band="teal"]    { --accent: #58B9A9; }
+:root[data-theme="dark"] [data-band="indigo"]  { --accent: #8E9CEE; }
+:root[data-theme="dark"] [data-band="crimson"] { --accent: #E3879F; }
+:root[data-theme="dark"] [data-band="bronze"]  { --accent: #D9A441; }
+:root[data-theme="dark"] [data-band="slate"]   { --accent: #89AEBA; }
+
+/* The small label, in the same manner as "Word of the day". */
+.band__eyebrow {
+  font-family: var(--mono);
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 .85rem;
+}
+
+/* The hairline between bands takes a trace of the band's colour, so the
+   seam is visible without drawing a line across the page. */
+.band[data-band] {
+  position: relative;
+  border-top-color: color-mix(in srgb, var(--accent) 38%, var(--rule));
+}
+
+/* ---- the margins pick up the colour of the band beside them ---- */
+@media (min-width: 88em) {
+  .page-rules {
+    background-image:
+      linear-gradient(var(--rule), var(--rule)),
+      linear-gradient(var(--rule), var(--rule));
+  }
+  /* Tick marks down the two edges, like the axis of a chart. */
+  .page-rules__tick {
+    position: fixed; top: 0; bottom: 0; width: 9px; z-index: 1;
+    pointer-events: none;
+    background-image: repeating-linear-gradient(
+      to bottom, var(--ink-faint) 0 1px, transparent 1px 5rem);
+    opacity: .5;
+  }
+  .page-rules__tick--left  { left:  calc(50% - 37rem); }
+  .page-rules__tick--right { right: calc(50% - 37rem); }
+}
+@media (max-width: 87.99em), (prefers-reduced-transparency: reduce) {
+  .page-rules__tick { display: none; }
+}

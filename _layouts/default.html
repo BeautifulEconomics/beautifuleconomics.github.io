@@ -11,6 +11,8 @@
 <body data-section="{{ page.nav | default: 'page' }}">
   {% if page.nav == 'home' %}{% include intro.html %}{% endif %}
   <div class="page-rules" aria-hidden="true"></div>
+  <div class="page-rules__tick page-rules__tick--left" aria-hidden="true"></div>
+  <div class="page-rules__tick page-rules__tick--right" aria-hidden="true"></div>
   <a class="skip" href="#main">Skip to content</a>
   {% include masthead.html %}
   <main id="main">
