@@ -31,10 +31,10 @@
 #   - out-of-copyright works (Smith, Ricardo)  -> yes
 #   - a scanned or downloaded textbook         -> NO
 # ---------------------------------------------------------------
-- title: "Game theory in one sitting"
-  category: "Game theory"
-  file: /assets/library/game-theory-in-one-sitting.pdf
-  pages: 14
-  size: "1.2 MB"
-  note: "Dominant strategies, Nash equilibrium, and why the prisoner's dilemma is not about prisoners."
+- title: "Consumer equilibrium made simple"
+  category: "Microeconomics"
+  file: /assets/library/consumer_equilibrium_made_simple_beautiful_economics.pdf
+  pages: 3
+  size: "229 KB"
+  note: "How a consumer picks the best affordable combination of two goods, given their income and the prices they face."
   credit: "Written by Beautiful Economics"
