@@ -1,0 +1,58 @@
+{%- comment -%}
+  A small cutting-chai glass that peeks up from the bottom corner every
+  so often, looks at the reader, and goes back down.
+
+  Built entirely by this script and drawn as SVG, so nothing is fetched
+  from anyone else's server and no reader can be left with a broken
+  image. It never takes clicks (pointer-events: none) and never appears
+  for a reader who has asked for less motion.
+{%- endcomment -%}
+<script>
+(function () {
+  var D = document;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var el = D.createElement('div');
+  el.className = 'chai';
+  el.setAttribute('aria-hidden', 'true');
+  el.innerHTML =
+    '<svg viewBox="0 0 64 72" fill="none">' +
+      /* steam */
+      '<g class="chai__steam">' +
+        '<path d="M24 16 C 20 11, 28 9, 24 4"/>' +
+        '<path d="M32 14 C 28 9, 36 7, 32 2"/>' +
+        '<path d="M40 16 C 36 11, 44 9, 40 4"/>' +
+      '</g>' +
+      /* the glass: narrow at the base, flared at the rim */
+      '<path class="chai__glass" d="M18 26 L 22 68 L 42 68 L 46 26 Z"/>' +
+      /* the tea inside */
+      '<path class="chai__tea" d="M19.5 32 L 22.6 65.5 L 41.4 65.5 L 44.5 32 Z"/>' +
+      /* the rim */
+      '<line class="chai__rim" x1="17" y1="26" x2="47" y2="26"/>' +
+      /* two eyes looking out over the tea */
+      '<g class="chai__eyes">' +
+        '<circle cx="27.5" cy="42" r="2.6"/>' +
+        '<circle cx="36.5" cy="42" r="2.6"/>' +
+      '</g>' +
+    '</svg>';
+
+  D.body.appendChild(el);
+
+  var showing = false;
+  function peek() {
+    if (showing) return;
+    showing = true;
+    el.classList.add('is-up');
+    window.setTimeout(function () {
+      el.classList.remove('is-up');
+      showing = false;
+    }, 4200);
+  }
+
+  /* First look a little after the reader has settled, then now and then. */
+  window.setTimeout(function () {
+    peek();
+    window.setInterval(peek, 62000);
+  }, 22000);
+})();
+</script>

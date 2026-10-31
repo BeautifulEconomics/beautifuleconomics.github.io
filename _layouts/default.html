@@ -8,7 +8,7 @@
   <script>document.documentElement.className += ' js';</script>
   {% include head.html %}
 </head>
-<body>
+<body data-section="{{ page.nav | default: 'page' }}">
   {% if page.nav == 'home' %}{% include intro.html %}{% endif %}
   <div class="page-rules" aria-hidden="true"></div>
   <a class="skip" href="#main">Skip to content</a>
@@ -17,6 +17,7 @@
     {{ content }}
   </main>
   {% include footer.html %}
+  {% include chai.html %}
 
   <script>
     (function () {

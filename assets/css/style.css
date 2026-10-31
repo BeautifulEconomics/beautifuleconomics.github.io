@@ -43,6 +43,36 @@
 
 @media (min-width: 48em) { :root { --gutter: 2.5rem; } }
 
+/* ---- one accent per section ------------------------------------
+   Each page wears a single colour so it reads as calm rather than
+   busy. The accent is set on <body data-section="..."> and every
+   coloured detail on the page refers to it, never to a fixed hue.
+   ---------------------------------------------------------------- */
+:root { --accent: #0E5B52; --accent-wash: #0E5B5214; }
+
+body[data-section="concepts"] { --accent: #0E5B52; --accent-wash: #0E5B5214; }
+body[data-section="advanced"] { --accent: #33408C; --accent-wash: #33408C14; }
+body[data-section="writing"]  { --accent: #8C1A38; --accent-wash: #8C1A3814; }
+body[data-section="library"]  { --accent: #8A5212; --accent-wash: #8A521214; }
+body[data-section="about"]    { --accent: #35545F; --accent-wash: #35545F14; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) body[data-section="concepts"],
+  :root:not([data-theme="light"]) body[data-section="home"],
+  :root:not([data-theme="light"]) body[data-section="page"] { --accent: #58B9A9; }
+  :root:not([data-theme="light"]) body[data-section="advanced"] { --accent: #8E9CEE; }
+  :root:not([data-theme="light"]) body[data-section="writing"]  { --accent: #E3879F; }
+  :root:not([data-theme="light"]) body[data-section="library"]  { --accent: #D9A441; }
+  :root:not([data-theme="light"]) body[data-section="about"]    { --accent: #89AEBA; }
+}
+:root[data-theme="dark"] body[data-section="concepts"],
+:root[data-theme="dark"] body[data-section="home"],
+:root[data-theme="dark"] body[data-section="page"] { --accent: #58B9A9; }
+:root[data-theme="dark"] body[data-section="advanced"] { --accent: #8E9CEE; }
+:root[data-theme="dark"] body[data-section="writing"]  { --accent: #E3879F; }
+:root[data-theme="dark"] body[data-section="library"]  { --accent: #D9A441; }
+:root[data-theme="dark"] body[data-section="about"]    { --accent: #89AEBA; }
+
 /* ---------------------------------------------------------------
    Dark mode. Designed, not inverted: the paper becomes a deep
    blue-green slate and both accents are lifted so they still read.
@@ -134,7 +164,7 @@ body {
   text-decoration: none;
   display: inline-flex; align-items: baseline; gap: .5rem;
 }
-.wordmark:hover { color: var(--plot); }
+.wordmark:hover { color: var(--accent); }
 .wordmark__dot {
   width: .4rem; height: .4rem; border-radius: 50%;
   background: var(--mark); display: inline-block; flex: none;
@@ -171,8 +201,8 @@ body {
 .nav a:focus-visible .nav__icon,
 .nav a[aria-current="page"] .nav__icon { opacity: 1; }
 
-.nav a:hover, .nav a:focus-visible { color: var(--ink); border-bottom-color: var(--mark); }
-.nav a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--plot); }
+.nav a:hover, .nav a:focus-visible { color: var(--accent); border-bottom-color: var(--accent); }
+.nav a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--accent); }
 /* On a narrow screen the mark takes its own row so the navigation has the
    full width and can keep its glyphs without crowding. */
 @media (max-width: 34em) {
@@ -355,7 +385,7 @@ body {
 .band__heading::after {
   content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
   background: linear-gradient(to right,
-    var(--high-solid) 0, var(--high-solid) 2.2rem,
+    var(--accent) 0, var(--accent) 2.2rem,
     var(--rule) 2.2rem, var(--rule) 100%);
 }
 
@@ -405,7 +435,7 @@ body {
   transition: background .2s ease;
 }
 .concept-grid a:hover, .concept-grid a:focus-visible { background: var(--paper-lift); }
-.concept-grid a:hover .concept-grid__term { color: var(--plot); }
+.concept-grid a:hover .concept-grid__term { color: var(--accent); }
 .concept-grid__term {
   font-family: var(--display); font-weight: 600; font-size: 1.16rem;
   letter-spacing: -0.014em; display: block; margin-bottom: .4rem;
@@ -428,7 +458,7 @@ body {
   font-variation-settings: "SOFT" 0, "WONK" 1, "opsz" 36;
 }
 .today__term a { color: var(--ink); text-decoration: none; transition: color .18s ease; }
-.today__term a:hover { color: var(--plot); }
+.today__term a:hover { color: var(--accent); }
 .today__gloss { margin: 0; color: var(--ink-soft); font-size: 1.08rem; line-height: 1.55; max-width: 48ch; text-wrap: pretty; }
 
 /* ---------------------------- articles ------------------------ */
@@ -507,7 +537,7 @@ body {
   border: 1px solid var(--rule); border-radius: 1px;
 }
 .signup input[type="email"]::placeholder { color: var(--ink-faint); }
-.signup input[type="email"]:focus-visible { outline: 2px solid var(--plot); outline-offset: 1px; border-color: var(--plot); }
+.signup input[type="email"]:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
 .signup__note { font-size: .9rem; color: var(--ink-faint); margin: 1rem 0 0; }
 .signup--pending {
   font-family: var(--mono); font-size: .82rem; line-height: 1.6; color: var(--mark);
@@ -780,7 +810,7 @@ body {
   border-left: 2px solid var(--high-solid); padding-left: 1rem;
 }
 .faq summary::marker { content: ""; }
-.nav a[aria-current="page"] { border-bottom-color: var(--high-solid); border-bottom-width: 2px; }
+.nav a[aria-current="page"] { border-bottom-color: var(--accent); border-bottom-width: 2px; }
 .page-title { position: relative; }
 
 .subscribe__fine {
@@ -845,7 +875,7 @@ body {
 }
 .skip:focus { left: 1rem; top: 1rem; }
 
-:focus-visible { outline: 2px solid var(--plot); outline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
 ::selection { background: var(--plot-wash); }
 
@@ -957,7 +987,7 @@ body {
   transition: color .18s ease;
 }
 .faq summary::-webkit-details-marker { display: none; }
-.faq summary:hover { color: var(--plot); }
+.faq summary:hover { color: var(--accent); }
 .faq summary::after {
   content: ""; position: absolute; right: .4rem; top: 50%;
   width: .72rem; height: .72rem; margin-top: -.42rem;
@@ -966,7 +996,7 @@ body {
   transform: rotate(45deg); transform-origin: center;
   transition: transform .22s ease, border-color .18s ease;
 }
-.faq details[open] summary::after { transform: rotate(-135deg); border-color: var(--plot); }
+.faq details[open] summary::after { transform: rotate(-135deg); border-color: var(--accent); }
 .faq__answer { margin: 0; padding: 0 2.5rem 1.6rem 0; color: var(--ink-soft); line-height: 1.65; max-width: 62ch; }
 .faq__answer a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--mark); text-underline-offset: 3px; }
 
@@ -1040,3 +1070,59 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .intro { display: none; }
 }
+
+/* ============================================================
+   The chai glass in the corner.
+   Built and animated by _includes/chai.html. It never takes a
+   click, and it is not created at all for a reader who has
+   asked for reduced motion.
+   ============================================================ */
+.chai {
+  position: fixed;
+  right: clamp(.75rem, 3vw, 2rem);
+  bottom: 0;
+  z-index: 40;
+  width: clamp(44px, 7vw, 62px);
+  pointer-events: none;
+  transform: translateY(100%);
+  transition: transform .85s cubic-bezier(.3,.85,.3,1);
+}
+.chai.is-up { transform: translateY(14%); }
+
+.chai svg { display: block; width: 100%; height: auto; overflow: visible; }
+
+.chai__glass {
+  fill: var(--paper-lift);
+  stroke: var(--ink-soft);
+  stroke-width: 2.4;
+  stroke-linejoin: round;
+}
+.chai__tea   { fill: #B5793A; opacity: .9; }
+.chai__rim   { stroke: var(--ink-soft); stroke-width: 2.8; stroke-linecap: round; }
+.chai__eyes circle { fill: #1A1210; }
+
+.chai__steam path {
+  stroke: var(--ink-faint);
+  stroke-width: 2;
+  stroke-linecap: round;
+  opacity: 0;
+}
+.chai.is-up .chai__steam path { animation: chai-steam 2.6s ease-in-out .5s infinite; }
+.chai.is-up .chai__steam path:nth-child(2) { animation-delay: .9s; }
+.chai.is-up .chai__steam path:nth-child(3) { animation-delay: 1.4s; }
+
+/* A couple of blinks while it is up, so it reads as looking at you. */
+.chai.is-up .chai__eyes { animation: chai-blink 4.2s linear forwards; }
+
+@keyframes chai-steam {
+  0%   { opacity: 0;   transform: translateY(3px); }
+  35%  { opacity: .75; }
+  100% { opacity: 0;   transform: translateY(-7px); }
+}
+@keyframes chai-blink {
+  0%, 26%, 31%, 58%, 63%, 100% { transform: scaleY(1); }
+  28.5%, 60.5%                 { transform: scaleY(.1); }
+}
+.chai__eyes { transform-box: fill-box; transform-origin: 50% 50%; }
+
+@media (prefers-reduced-motion: reduce) { .chai { display: none; } }
