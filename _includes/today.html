@@ -55,7 +55,9 @@
 
 <script>
 (function () {
-  var words = {{ words | jsonify }};
+  {%- comment -%} Only the three fields the page uses are sent, so the
+     maintenance note in words.yml costs the reader nothing. {%- endcomment -%}
+  var words = [{% for w in words %}{"term":{{ w.term | jsonify }},"meaning":{{ w.meaning | jsonify }}{% if w.link %},"link":{{ w.link | jsonify }}{% endif %}}{% unless forloop.last %},{% endunless %}{% endfor %}];
   var thoughts = {{ thoughts | jsonify }};
   var concepts = [
     {% for c in site.concepts %}{ t: {{ c.title | jsonify }}, g: {{ c.gloss | jsonify }}, u: {{ c.url | relative_url | jsonify }} }{% unless forloop.last %},{% endunless %}
