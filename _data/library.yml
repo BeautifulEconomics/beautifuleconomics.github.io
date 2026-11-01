@@ -38,3 +38,12 @@
   size: "229 KB"
   note: "How a consumer picks the best affordable combination of two goods, given their income and the prices they face."
   credit: "Written by Beautiful Economics"
+
+- title: "Prisoners Dilemma"
+  category: "Game Theory"
+  file: /assests/library/prisoners_dilemma_payoff_matrix_beautiful_economics.pdf
+  pages: 14
+  size: "1.2 MB"
+  note: "Dominant strategies, Nash equilibrium, and why the prisoner's dilemma is not about prisoners."
+  credit: "Written by Beautiful Economics"
+
