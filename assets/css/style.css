@@ -1072,164 +1072,75 @@ body {
 }
 
 /* ============================================================
-   The chai glass in the corner.
-   Built and animated by _includes/chai.html. It never takes a
-   click, and it is not created at all for a reader who has
-   asked for reduced motion.
+   The small cast that peeks in from the edges.
+   Built and animated by _includes/chai.html. They take turns,
+   never take a click, and are not created at all for a reader
+   who has asked for reduced motion.
    ============================================================ */
-.chai {
+.peek {
   position: fixed;
-  right: clamp(.75rem, 3vw, 2rem);
-  bottom: 0;
-  z-index: 40;
+  z-index: 30;
   width: clamp(44px, 7vw, 62px);
   pointer-events: none;
-  transform: translateY(100%);
   transition: transform .85s cubic-bezier(.3,.85,.3,1);
 }
-.chai.is-up { transform: translateY(14%); }
+.peek svg { display: block; width: 100%; height: auto; overflow: visible; }
 
-.chai svg { display: block; width: 100%; height: auto; overflow: visible; }
+/* where each one waits, and how far it leans in */
+.peek--br { right: clamp(.75rem, 3vw, 2rem); bottom: 0; transform: translateY(100%); }
+.peek--bl { left:  clamp(.75rem, 3vw, 2rem); bottom: 0; transform: translateY(100%); }
+.peek--l  { left: 0; top: 38%; transform: translateX(-100%); }
 
-.chai__glass {
+.peek--br.is-up, .peek--bl.is-up { transform: translateY(14%); }
+.peek--l.is-up                   { transform: translateX(-18%); }
+
+/* shared ink */
+.peek__body {
   fill: var(--paper-lift);
   stroke: var(--ink-soft);
   stroke-width: 2.4;
   stroke-linejoin: round;
 }
-.chai__tea   { fill: #B5793A; opacity: .9; }
-.chai__rim   { stroke: var(--ink-soft); stroke-width: 2.8; stroke-linecap: round; }
-.chai__eyes circle { fill: #1A1210; }
-
-.chai__steam path {
-  stroke: var(--ink-faint);
-  stroke-width: 2;
-  stroke-linecap: round;
-  opacity: 0;
+.peek__fill { fill: #B5793A; stroke: none; }
+.peek__disc {
+  fill: var(--high-solid);
+  stroke: var(--ink-soft);
+  stroke-width: 2.2;
 }
-.chai.is-up .chai__steam path { animation: chai-steam 2.6s ease-in-out .5s infinite; }
-.chai.is-up .chai__steam path:nth-child(2) { animation-delay: .9s; }
-.chai.is-up .chai__steam path:nth-child(3) { animation-delay: 1.4s; }
+.peek--bl .peek__fill { fill: var(--high-solid); }
+.peek__rim {
+  stroke: var(--ink-soft); stroke-width: 2.4; stroke-linecap: round; fill: none;
+}
+.peek__page {
+  stroke: var(--ink-faint); stroke-width: 2; stroke-linecap: round;
+}
+.peek__brow {
+  fill: none; stroke: var(--ink-soft); stroke-width: 2.4; stroke-linecap: round;
+}
+.peek__eyes circle { fill: #1A1210; }
+.peek__eyes {
+  transform-box: fill-box; transform-origin: 50% 50%;
+}
+.peek.is-up .peek__eyes { animation: peek-blink 4.2s linear forwards; }
 
-/* A couple of blinks while it is up, so it reads as looking at you. */
-.chai.is-up .chai__eyes { animation: chai-blink 4.2s linear forwards; }
+/* steam, chai only */
+.peek__steam path {
+  stroke: var(--ink-faint); stroke-width: 2; stroke-linecap: round; opacity: 0;
+}
+.peek.is-up .peek__steam path { animation: peek-steam 2.6s ease-in-out .5s infinite; }
+.peek.is-up .peek__steam path:nth-child(2) { animation-delay: .9s; }
+.peek.is-up .peek__steam path:nth-child(3) { animation-delay: 1.4s; }
 
-@keyframes chai-steam {
+@keyframes peek-steam {
   0%   { opacity: 0;   transform: translateY(3px); }
   35%  { opacity: .75; }
   100% { opacity: 0;   transform: translateY(-7px); }
 }
-@keyframes chai-blink {
+@keyframes peek-blink {
   0%, 26%, 31%, 58%, 63%, 100% { transform: scaleY(1); }
   28.5%, 60.5%                 { transform: scaleY(.1); }
 }
-.chai__eyes { transform-box: fill-box; transform-origin: 50% 50%; }
 
-@media (prefers-reduced-motion: reduce) { .chai { display: none; } }
-
-/* ============================================================
-   Making the section colour actually visible.
-   The accent was only ever a hairline before; here it reaches
-   the page title, the cards and the current navigation item,
-   so each section reads as its own colour at a glance.
-   ============================================================ */
-
-/* The biggest words on the page carry the section's colour. */
-body:not([data-section="home"]) .page-title { color: var(--accent); }
-
-/* A rule beneath the title, in the same colour. */
-body:not([data-section="home"]) .page-head {
-  border-bottom: 1px solid var(--rule-soft);
-  padding-bottom: 1.4rem;
-  position: relative;
-}
-body:not([data-section="home"]) .page-head::after {
-  content: ""; position: absolute; left: 0; bottom: -1px;
-  width: 3.4rem; height: 3px; background: var(--accent);
-}
-
-/* Concept cards: a coloured edge, and a tint when pointed at. */
-.concept-grid a {
-  border-left: 2px solid transparent;
-  transition: background .2s ease, border-color .2s ease;
-}
-.concept-grid a:hover, .concept-grid a:focus-visible {
-  background: var(--accent-wash);
-  border-left-color: var(--accent);
-}
-
-/* The entry underline follows the section instead of always crimson. */
-.entry__title a { background-image: linear-gradient(var(--accent), var(--accent)); }
-
-/* The glyph next to the current navigation item picks up the colour. */
-.nav a[aria-current="page"] { color: var(--accent); }
-.nav a[aria-current="page"] .nav__icon { stroke: var(--accent); opacity: 1; }
-
-/* A thicker stub on band headings, so it reads as a colour, not a hair. */
-.band__heading { padding-bottom: .8rem; }
-.band__heading::after { height: 3px; }
-
-/* ============================================================
-   Telling one band from the next.
-   Each band on the home page carries its own colour and a small
-   label above the heading, so the sections read as separate
-   rooms rather than one long scroll of the same cream.
-   ============================================================ */
-[data-band="teal"]    { --accent: #0E5B52; --accent-wash: #0E5B5214; }
-[data-band="indigo"]  { --accent: #33408C; --accent-wash: #33408C14; }
-[data-band="crimson"] { --accent: #8C1A38; --accent-wash: #8C1A3814; }
-[data-band="bronze"]  { --accent: #8A5212; --accent-wash: #8A521214; }
-[data-band="slate"]   { --accent: #35545F; --accent-wash: #35545F14; }
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) [data-band="teal"]    { --accent: #58B9A9; }
-  :root:not([data-theme="light"]) [data-band="indigo"]  { --accent: #8E9CEE; }
-  :root:not([data-theme="light"]) [data-band="crimson"] { --accent: #E3879F; }
-  :root:not([data-theme="light"]) [data-band="bronze"]  { --accent: #D9A441; }
-  :root:not([data-theme="light"]) [data-band="slate"]   { --accent: #89AEBA; }
-}
-:root[data-theme="dark"] [data-band="teal"]    { --accent: #58B9A9; }
-:root[data-theme="dark"] [data-band="indigo"]  { --accent: #8E9CEE; }
-:root[data-theme="dark"] [data-band="crimson"] { --accent: #E3879F; }
-:root[data-theme="dark"] [data-band="bronze"]  { --accent: #D9A441; }
-:root[data-theme="dark"] [data-band="slate"]   { --accent: #89AEBA; }
-
-/* The small label, in the same manner as "Word of the day". */
-.band__eyebrow {
-  font-family: var(--mono);
-  font-size: .7rem;
-  font-weight: 500;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin: 0 0 .85rem;
-}
-
-/* The hairline between bands takes a trace of the band's colour, so the
-   seam is visible without drawing a line across the page. */
-.band[data-band] {
-  position: relative;
-  border-top-color: color-mix(in srgb, var(--accent) 38%, var(--rule));
-}
-
-/* ---- the margins pick up the colour of the band beside them ---- */
-@media (min-width: 88em) {
-  .page-rules {
-    background-image:
-      linear-gradient(var(--rule), var(--rule)),
-      linear-gradient(var(--rule), var(--rule));
-  }
-  /* Tick marks down the two edges, like the axis of a chart. */
-  .page-rules__tick {
-    position: fixed; top: 0; bottom: 0; width: 9px; z-index: 1;
-    pointer-events: none;
-    background-image: repeating-linear-gradient(
-      to bottom, var(--ink-faint) 0 1px, transparent 1px 5rem);
-    opacity: .5;
-  }
-  .page-rules__tick--left  { left:  calc(50% - 37rem); }
-  .page-rules__tick--right { right: calc(50% - 37rem); }
-}
-@media (max-width: 87.99em), (prefers-reduced-transparency: reduce) {
-  .page-rules__tick { display: none; }
-}
+/* The side character needs room that narrow screens do not have. */
+@media (max-width: 60em) { .peek--l { display: none; } }
+@media (prefers-reduced-motion: reduce) { .peek { display: none; } }

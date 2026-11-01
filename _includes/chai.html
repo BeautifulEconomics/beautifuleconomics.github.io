@@ -1,58 +1,81 @@
 {%- comment -%}
-  A small cutting-chai glass that peeks up from the bottom corner every
-  so often, looks at the reader, and goes back down.
+  The small cast that peeks in from the edges: a cutting-chai glass at the
+  bottom right, a stack of coins at the bottom left, and a book that leans
+  in from the left margin.
 
-  Built entirely by this script and drawn as SVG, so nothing is fetched
-  from anyone else's server and no reader can be left with a broken
-  image. It never takes clicks (pointer-events: none) and never appears
-  for a reader who has asked for less motion.
+  They take turns, so only one is ever on screen. Everything is built by
+  this script and drawn as SVG, so nothing is fetched from anyone else's
+  server and no reader can be left with a broken image. None of them take
+  clicks (pointer-events: none), and none are created at all for a reader
+  who has asked for less motion.
 {%- endcomment -%}
 <script>
 (function () {
   var D = document;
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  var el = D.createElement('div');
-  el.className = 'chai';
-  el.setAttribute('aria-hidden', 'true');
-  el.innerHTML =
-    '<svg viewBox="0 0 64 72" fill="none">' +
-      /* steam */
-      '<g class="chai__steam">' +
+  var cast = [
+    /* ---- the cutting chai, bottom right ---- */
+    { cls: 'peek peek--br', box: '0 0 64 72', svg:
+      '<g class="peek__steam">' +
         '<path d="M24 16 C 20 11, 28 9, 24 4"/>' +
         '<path d="M32 14 C 28 9, 36 7, 32 2"/>' +
         '<path d="M40 16 C 36 11, 44 9, 40 4"/>' +
       '</g>' +
-      /* the glass: narrow at the base, flared at the rim */
-      '<path class="chai__glass" d="M18 26 L 22 68 L 42 68 L 46 26 Z"/>' +
-      /* the tea inside */
-      '<path class="chai__tea" d="M19.5 32 L 22.6 65.5 L 41.4 65.5 L 44.5 32 Z"/>' +
-      /* the rim */
-      '<line class="chai__rim" x1="17" y1="26" x2="47" y2="26"/>' +
-      /* two eyes looking out over the tea */
-      '<g class="chai__eyes">' +
-        '<circle cx="27.5" cy="42" r="2.6"/>' +
-        '<circle cx="36.5" cy="42" r="2.6"/>' +
-      '</g>' +
-    '</svg>';
+      '<path class="peek__body" d="M18 26 L 22 68 L 42 68 L 46 26 Z"/>' +
+      '<path class="peek__fill" d="M19.5 32 L 22.6 65.5 L 41.4 65.5 L 44.5 32 Z"/>' +
+      '<line class="peek__rim" x1="17" y1="26" x2="47" y2="26"/>' +
+      '<g class="peek__eyes"><circle cx="27.5" cy="42" r="2.6"/><circle cx="36.5" cy="42" r="2.6"/></g>' },
 
-  D.body.appendChild(el);
+    /* ---- a stack of coins, bottom left ---- */
+    { cls: 'peek peek--bl', box: '0 0 64 72', svg:
+      /* drawn bottom coin first so each rim sits in front of the one below */
+      '<rect class="peek__fill" x="12" y="54" width="40" height="14"/>' +
+      '<ellipse class="peek__disc" cx="32" cy="54" rx="20" ry="6"/>' +
+      '<rect class="peek__fill" x="12" y="42" width="40" height="14"/>' +
+      '<ellipse class="peek__disc" cx="32" cy="42" rx="20" ry="6"/>' +
+      '<rect class="peek__fill" x="12" y="30" width="40" height="14"/>' +
+      '<ellipse class="peek__disc" cx="32" cy="30" rx="20" ry="6"/>' +
+      '<line class="peek__rim" x1="12" y1="30" x2="12" y2="68"/>' +
+      '<line class="peek__rim" x1="52" y1="30" x2="52" y2="68"/>' +
+      '<g class="peek__eyes"><circle cx="26" cy="37" r="2.4"/><circle cx="38" cy="37" r="2.4"/></g>' },
 
-  var showing = false;
+    /* ---- a book leaning in from the left ---- */
+    { cls: 'peek peek--l', box: '0 0 64 72', svg:
+      '<rect class="peek__body" x="14" y="22" width="36" height="48" rx="2"/>' +
+      '<line class="peek__rim" x1="22" y1="22" x2="22" y2="70"/>' +
+      '<line class="peek__page" x1="30" y1="34" x2="43" y2="34"/>' +
+      '<line class="peek__page" x1="30" y1="42" x2="43" y2="42"/>' +
+      '<line class="peek__page" x1="30" y1="50" x2="38" y2="50"/>' +
+      '<g class="peek__eyes"><circle cx="30" cy="16" r="2.6"/><circle cx="41" cy="16" r="2.6"/></g>' +
+      '<path class="peek__brow" d="M26 10 C 30 6, 45 6, 48 11"/>' }
+  ];
+
+  var nodes = cast.map(function (c) {
+    var el = D.createElement('div');
+    el.className = c.cls;
+    el.setAttribute('aria-hidden', 'true');
+    el.innerHTML = '<svg viewBox="' + c.box + '" fill="none">' + c.svg + '</svg>';
+    D.body.appendChild(el);
+    return el;
+  });
+
+  var turn = 0, busy = false;
   function peek() {
-    if (showing) return;
-    showing = true;
+    if (busy) return;
+    busy = true;
+    var el = nodes[turn % nodes.length];
+    turn++;
     el.classList.add('is-up');
     window.setTimeout(function () {
       el.classList.remove('is-up');
-      showing = false;
+      busy = false;
     }, 4200);
   }
 
-  /* First look a little after the reader has settled, then now and then. */
   window.setTimeout(function () {
     peek();
-    window.setInterval(peek, 62000);
-  }, 22000);
+    window.setInterval(peek, 46000);
+  }, 20000);
 })();
 </script>
