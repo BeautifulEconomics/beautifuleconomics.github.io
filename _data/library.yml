@@ -37,26 +37,26 @@
   note: "How a consumer picks the best affordable combination of two goods, given their income and the prices they face."
   credit: "Written by Beautiful Economics"
 
+- title: "The Slutsky equation"
+  category: "Microeconomics"
+  file: /assets/library/slutsky_equation_made_simple_beautiful_economics.pdf
+  note: "One price change. Two effects. One clear explanation."
+  credit: "Written by Beautiful Economics"
+
 - title: "Prisoners Dilemma"
   category: "Game Theory"
   file: /assets/library/prisoners_dilemma_payoff_matrix_beautiful_economics.pdf
   note: "Dominant strategies, Nash equilibrium, and why the prisoner's dilemma is not about prisoners."
   credit: "Written by Beautiful Economics"
 
--title: "BLUE in Econometrics"
-category: "Econometrics"
+- title: "BLUE in econometrics"
+  category: "Econometrics"
   file: /assets/library/blue_in_econometrics_made_simple_beautiful_economics.pdf
-  note: "BLUE stands for Best Linear Unbiased Estimator and Assumptions and OLS"
+  note: "Best Linear Unbiased Estimator: the assumptions behind OLS, and what each one is doing."
   credit: "Written by Beautiful Economics"
 
--title: "The Slutsky Equation"
-category: "Microeconomics"
-  file: /assets/library/slutsky_equation_made_simple_beautiful_economics.pdf
-  note: "One price change. Two effects. One clear explanation"
-  credit: "Written by Beautiful Economics"
-
-  -title: "Omitted Variable Bias(OVB)"
-category: "Econometrics"
+- title: "Omitted variable bias"
+  category: "Econometrics"
   file: /assets/library/omitted_variable_bias_made_simple_beautiful_economics.pdf
-  note: "The hidden variable that quietly changes your regression result"
+  note: "The hidden variable that quietly changes your regression result."
   credit: "Written by Beautiful Economics"
