@@ -49,3 +49,14 @@ category: "Econometrics"
   note: "BLUE stands for Best Linear Unbiased Estimator and Assumptions and OLS"
   credit: "Written by Beautiful Economics"
 
+-title: "The Slutsky Equation"
+category: "Microeconomics"
+  file: /assets/library/slutsky_equation_made_simple_beautiful_economics.pdf
+  note: "One price change. Two effects. One clear explanation"
+  credit: "Written by Beautiful Economics"
+
+  -title: "Omitted Variable Bias(OVB)"
+category: "Econometrics"
+  file: /assets/library/omitted_variable_bias_made_simple_beautiful_economics.pdf
+  note: "The hidden variable that quietly changes your regression result"
+  credit: "Written by Beautiful Economics"
