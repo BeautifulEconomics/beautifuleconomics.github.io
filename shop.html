@@ -18,11 +18,16 @@ description: Original writing from Beautiful Economics, sold here when it is fin
   </div>
 </section>
 
+{%- comment -%}
+  The list of things for sale. The whole band is hidden while _data/shop.yml
+  is empty, so the page says nothing rather than showing an empty shelf.
+  Add one entry to that file and this section appears on its own.
+{%- endcomment -%}
+{% assign items = site.data.shop %}
+{% if items and items.size > 0 %}
 <section class="band band--sunk" data-band="bronze">
   <div class="shell">
     <h2 class="band__heading">What is being made</h2>
-    {% assign items = site.data.shop %}
-    {% if items and items.size > 0 %}
     <ul class="shelf">
       {% for g in items %}
       {% case g.status %}
@@ -41,12 +46,10 @@ description: Original writing from Beautiful Economics, sold here when it is fin
       </li>
       {% endfor %}
     </ul>
-    {% else %}
-    <p class="empty">Nothing listed yet. Add an entry to <code>_data/shop.yml</code> and it appears here.</p>
-    {% endif %}
-    <p class="shelf__credit">Written by Beautiful Economics, one at a time. The order can change: whatever readers ask about most tends to get finished first.</p>
+    <p class="shelf__credit">Written by Beautiful Economics, one at a time.</p>
   </div>
 </section>
+{% endif %}
 
 <section class="band">
   <div class="shell">
