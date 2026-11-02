@@ -2,6 +2,7 @@
 title: Instrumental variables
 gloss: A way to recover a causal effect when the thing you care about is tangled up with what you cannot see.
 field: Econometrics
+math: true
 ---
 
 ## The problem it solves

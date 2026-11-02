@@ -2,6 +2,7 @@
 title: The Bellman equation
 gloss: A problem stretching over all of time, rewritten as the same small problem faced once, again and again.
 field: Dynamic optimisation
+math: true
 ---
 
 ## The claim

@@ -5,7 +5,7 @@ layout: default
 <article class="article">
   <div class="shell">
     <div class="column">
-      <p class="article__meta">Concept{% if page.field %} — {{ page.field }}{% endif %}</p>
+      <p class="article__meta">{% if page.collection == 'advanced' %}Advanced{% else %}Concept{% endif %}{% if page.field %} — {{ page.field }}{% endif %}</p>
       <h1>{{ page.title }}</h1>
       {% if page.gloss %}<p class="article__standfirst">{{ page.gloss }}</p>{% endif %}
       <div class="prose">{{ content }}</div>
@@ -23,9 +23,10 @@ layout: default
 
 <section class="band">
   <div class="shell">
-    <h2 class="band__heading">More concepts</h2>
+    {% if page.collection == 'advanced' %}{% assign siblings = site.advanced %}{% assign sibling_label = "More advanced topics" %}{% else %}{% assign siblings = site.concepts %}{% assign sibling_label = "More concepts" %}{% endif %}
+    <h2 class="band__heading">{{ sibling_label }}</h2>
     <ul class="concept-grid">
-      {% for c in site.concepts limit: 6 %}
+      {% for c in siblings limit: 6 %}
         {% unless c.url == page.url %}
         <li><a href="{{ c.url | relative_url }}">
           <span class="concept-grid__term">{{ c.title }}</span>

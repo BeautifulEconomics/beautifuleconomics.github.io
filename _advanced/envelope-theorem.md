@@ -2,6 +2,7 @@
 title: The envelope theorem
 gloss: When you are already optimising, small changes to the thing you chose cost you nothing to first order.
 field: Microeconomic theory
+math: true
 ---
 
 ## The claim
