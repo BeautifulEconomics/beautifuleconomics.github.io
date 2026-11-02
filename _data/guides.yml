@@ -1,0 +1,47 @@
+# ---------------------------------------------------------------
+# The Study guides page.
+#
+# These are the longer, paid guides written by Beautiful Economics.
+# Nothing here is for sale yet: this page tells readers what is coming
+# and how far along it is. Only a guide with status "ready" shows a
+# price or a buy link, so an unfinished guide can never take money.
+#
+# COPY THIS SHAPE. Two spaces before every line after the first.
+#
+#   - title: "Consumer theory, start to finish"
+#     topic: "Microeconomics"
+#     status: "writing"
+#     note: "Preferences to demand curves, worked slowly, with the algebra shown."
+#
+# status  must be one of:
+#   planned  - decided on, not started          -> shows "Planned"
+#   writing  - being written now                -> shows "Being written"
+#   editing  - written, being checked           -> shows "Nearly ready"
+#   ready    - finished and on sale             -> shows the price and link
+#
+# For a "ready" guide add two more lines:
+#     price: "₹49"
+#     link: "https://..."        (your shop page for that guide)
+#
+# Keep the list honest. A guide that has sat at "writing" for six months
+# says more to a reader than any promise on this page does.
+# ---------------------------------------------------------------
+- title: "Consumer theory, start to finish"
+  topic: "Microeconomics"
+  status: "writing"
+  note: "Preferences, budget sets, the Slutsky decomposition and where demand curves actually come from. Every step of the algebra shown, not skipped."
+
+- title: "OLS and what it assumes"
+  topic: "Econometrics"
+  status: "writing"
+  note: "The Gauss-Markov assumptions one at a time: what each one does, what breaks when it fails, and how to tell."
+
+- title: "Game theory without the fear"
+  topic: "Game theory"
+  status: "planned"
+  note: "Dominance, Nash, mixed strategies and backward induction, built up from games you can solve on paper."
+
+- title: "The macro models, side by side"
+  topic: "Macroeconomics"
+  status: "planned"
+  note: "Keynesian cross, IS-LM, AD-AS and Solow — what each one is for, and the question each one cannot answer."

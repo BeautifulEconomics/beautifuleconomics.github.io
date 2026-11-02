@@ -55,6 +55,7 @@ body[data-section="advanced"] { --accent: #33408C; --accent-wash: #33408C14; }
 body[data-section="writing"]  { --accent: #8C1A38; --accent-wash: #8C1A3814; }
 body[data-section="library"]  { --accent: #8A5212; --accent-wash: #8A521214; }
 body[data-section="about"]    { --accent: #35545F; --accent-wash: #35545F14; }
+body[data-section="guides"]   { --accent: #6B3A6E; --accent-wash: #6B3A6E14; }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) body[data-section="concepts"],
@@ -64,6 +65,7 @@ body[data-section="about"]    { --accent: #35545F; --accent-wash: #35545F14; }
   :root:not([data-theme="light"]) body[data-section="writing"]  { --accent: #E3879F; }
   :root:not([data-theme="light"]) body[data-section="library"]  { --accent: #D9A441; }
   :root:not([data-theme="light"]) body[data-section="about"]    { --accent: #89AEBA; }
+  :root:not([data-theme="light"]) body[data-section="guides"]   { --accent: #C49AC7; }
 }
 :root[data-theme="dark"] body[data-section="concepts"],
 :root[data-theme="dark"] body[data-section="home"],
@@ -72,6 +74,7 @@ body[data-section="about"]    { --accent: #35545F; --accent-wash: #35545F14; }
 :root[data-theme="dark"] body[data-section="writing"]  { --accent: #E3879F; }
 :root[data-theme="dark"] body[data-section="library"]  { --accent: #D9A441; }
 :root[data-theme="dark"] body[data-section="about"]    { --accent: #89AEBA; }
+:root[data-theme="dark"] body[data-section="guides"]   { --accent: #C49AC7; }
 
 /* ---------------------------------------------------------------
    Dark mode. Designed, not inverted: the paper becomes a deep
@@ -501,6 +504,17 @@ body {
   transition: color .18s ease;
 }
 .prose a:hover { color: var(--mark); }
+
+/* Links outside .prose — page intros, notes, captions — were falling back
+   to the browser's default blue, which stood out badly against everything
+   else. They now read like prose links. */
+.page-intro a, .wip a, .shelf__note a, .shelf__credit a, .subscribe__body a, .subscribe__pending a {
+  color: inherit; text-decoration: underline;
+  text-decoration-color: var(--mark); text-underline-offset: 4px; text-decoration-thickness: 1px;
+  transition: color .18s ease;
+}
+.page-intro a:hover, .wip a:hover, .shelf__note a:hover, .shelf__credit a:hover,
+.subscribe__body a:hover, .subscribe__pending a:hover { color: var(--mark); }
 .prose strong { font-weight: 600; }
 .prose blockquote {
   margin-left: 0; margin-right: 0; padding-left: 1.4rem;
@@ -1144,3 +1158,38 @@ body {
 /* The side character needs room that narrow screens do not have. */
 @media (max-width: 60em) { .peek--l { display: none; } }
 @media (prefers-reduced-motion: reduce) { .peek { display: none; } }
+
+/* ----------------------------------------------------------------
+   Study guides: the work-in-progress note and the status markers.
+   Nothing is for sale until a guide's status is "ready", so these
+   labels are the page's only promise and they stay plain.
+   ---------------------------------------------------------------- */
+.wip {
+  margin: 0 0 1.6rem;
+  padding: 1.1rem 1.3rem;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-wash);
+  color: var(--ink-soft);
+  font-size: 1rem;
+  line-height: 1.62;
+}
+.wip strong { color: var(--ink); }
+
+.status {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: .7rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: .2rem .5rem;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  color: var(--ink-soft);
+}
+.status--writing { border-color: color-mix(in srgb, var(--accent) 55%, var(--rule)); color: var(--accent); }
+.status--editing { border-color: color-mix(in srgb, var(--accent) 55%, var(--rule)); color: var(--accent); }
+.status--ready   { border-color: color-mix(in srgb, var(--plot) 60%, var(--rule)); color: var(--plot); }
+.status__topic { font-family: var(--mono); font-size: .7rem; letter-spacing: .08em;
+                 text-transform: uppercase; color: var(--ink-faint); margin-left: .55rem; }
+
+.button--small { font-size: .82rem; padding: .45rem .9rem; }
