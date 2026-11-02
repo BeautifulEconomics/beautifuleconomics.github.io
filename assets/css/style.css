@@ -55,7 +55,7 @@ body[data-section="advanced"] { --accent: #33408C; --accent-wash: #33408C14; }
 body[data-section="writing"]  { --accent: #8C1A38; --accent-wash: #8C1A3814; }
 body[data-section="library"]  { --accent: #8A5212; --accent-wash: #8A521214; }
 body[data-section="about"]    { --accent: #35545F; --accent-wash: #35545F14; }
-body[data-section="guides"]   { --accent: #6B3A6E; --accent-wash: #6B3A6E14; }
+body[data-section="shop"]   { --accent: #6B3A6E; --accent-wash: #6B3A6E14; }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) body[data-section="concepts"],
@@ -65,7 +65,7 @@ body[data-section="guides"]   { --accent: #6B3A6E; --accent-wash: #6B3A6E14; }
   :root:not([data-theme="light"]) body[data-section="writing"]  { --accent: #E3879F; }
   :root:not([data-theme="light"]) body[data-section="library"]  { --accent: #D9A441; }
   :root:not([data-theme="light"]) body[data-section="about"]    { --accent: #89AEBA; }
-  :root:not([data-theme="light"]) body[data-section="guides"]   { --accent: #C49AC7; }
+  :root:not([data-theme="light"]) body[data-section="shop"]   { --accent: #C49AC7; }
 }
 :root[data-theme="dark"] body[data-section="concepts"],
 :root[data-theme="dark"] body[data-section="home"],
@@ -74,7 +74,7 @@ body[data-section="guides"]   { --accent: #6B3A6E; --accent-wash: #6B3A6E14; }
 :root[data-theme="dark"] body[data-section="writing"]  { --accent: #E3879F; }
 :root[data-theme="dark"] body[data-section="library"]  { --accent: #D9A441; }
 :root[data-theme="dark"] body[data-section="about"]    { --accent: #89AEBA; }
-:root[data-theme="dark"] body[data-section="guides"]   { --accent: #C49AC7; }
+:root[data-theme="dark"] body[data-section="shop"]   { --accent: #C49AC7; }
 
 /* ---------------------------------------------------------------
    Dark mode. Designed, not inverted: the paper becomes a deep
@@ -1160,7 +1160,7 @@ body {
 @media (prefers-reduced-motion: reduce) { .peek { display: none; } }
 
 /* ----------------------------------------------------------------
-   Study guides: the work-in-progress note and the status markers.
+   Shop: the work-in-progress note and the status markers.
    Nothing is for sale until a guide's status is "ready", so these
    labels are the page's only promise and they stay plain.
    ---------------------------------------------------------------- */

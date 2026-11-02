@@ -1,0 +1,57 @@
+---
+layout: default
+title: Shop
+nav: shop
+permalink: /shop/
+description: Original writing from Beautiful Economics, sold here when it is finished — concepts, PDFs, books and handwritten pages. Nothing is for sale yet.
+---
+<section class="band band--first">
+  <div class="shell">
+    <div class="page-head">
+      <h1 class="page-title">{{ site.shop_label | default: "Shop" }}</h1>
+      <p class="page-intro">This is where the work that takes real time will live — whole concepts written out properly, as PDFs, as books, and as pages written by hand. Everything already in the <a href="{{ '/library/' | relative_url }}">Library</a> stays free, always.</p>
+    </div>
+    <div class="column">
+      <p class="wip">🚧 <strong>Something interesting is on the way.</strong> Nothing here is finished and nothing is for sale yet — this page is a window onto what is being made, not a waiting room with a till in it. ✍️📚</p>
+      <p class="page-intro">When something is ready it will be priced so a student can actually buy it, because writing a student cannot afford has failed at the only thing it was for. 🎓</p>
+    </div>
+  </div>
+</section>
+
+<section class="band band--sunk" data-band="bronze">
+  <div class="shell">
+    <h2 class="band__heading">What is being made</h2>
+    {% assign items = site.data.shop %}
+    {% if items and items.size > 0 %}
+    <ul class="shelf">
+      {% for g in items %}
+      {% case g.status %}
+        {% when 'ready'   %}{% assign label = 'Available now'  %}{% assign mark = '✅' %}
+        {% when 'editing' %}{% assign label = 'Nearly ready'   %}{% assign mark = '🔍' %}
+        {% when 'writing' %}{% assign label = 'Being written'  %}{% assign mark = '✍️' %}
+        {% else %}          {% assign label = 'Planned'        %}{% assign mark = '📋' %}
+      {% endcase %}
+      <li data-reveal>
+        <p class="shelf__title">{{ g.title }}</p>
+        <p class="shelf__meta"><span class="status status--{{ g.status | default: 'planned' }}">{{ mark }} {{ label }}</span>{% if g.topic %} <span class="status__topic">{{ g.topic }}</span>{% endif %}</p>
+        {% if g.note %}<p class="shelf__note">{{ g.note }}</p>{% endif %}
+        {% if g.status == 'ready' and g.link %}
+        <p class="shelf__meta"><a class="button button--small" href="{{ g.link }}">Get it{% if g.price %} — {{ g.price }}{% endif %}</a></p>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="empty">Nothing listed yet. Add an entry to <code>_data/shop.yml</code> and it appears here.</p>
+    {% endif %}
+    <p class="shelf__credit">Written by Beautiful Economics, one at a time. The order can change: whatever readers ask about most tends to get finished first.</p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="shell">
+    <div class="column" data-reveal>
+      {% include subscribe.html id="subscribe-shop" heading="Hear when the first one is ready." body="One message when something is finished, and nothing else to your address. No countdowns, no reminders, no pressure." %}
+    </div>
+  </div>
+</section>

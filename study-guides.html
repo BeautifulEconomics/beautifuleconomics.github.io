@@ -1,56 +1,15 @@
 ---
-layout: default
-title: Study guides
-nav: guides
+layout: null
 permalink: /study-guides/
-description: Longer written guides from Beautiful Economics — being written now, priced to be affordable, and announced here when each one is finished.
+sitemap: false
 ---
-<section class="band band--first">
-  <div class="shell">
-    <div class="page-head">
-      <h1 class="page-title">Study guides</h1>
-      <p class="page-intro">The <a href="{{ '/library/' | relative_url }}">Library</a> holds short explainers, free to download. These are the longer ones: whole topics taken from the first idea to the last, written the same way and meant to be worked through rather than skimmed.</p>
-    </div>
-    <div class="column">
-      <p class="wip">🚧 <strong>Work in progress.</strong> Nothing here is finished yet, and nothing is for sale. This page exists so you can see what is being written and how far along it is — not to take your money before the work is done. 📚</p>
-      <p class="page-intro">When a guide is ready it will be priced to be affordable for a student, because a guide a student cannot afford has failed at the only thing it was for. Everything already in the Library stays free. ✍️</p>
-    </div>
-  </div>
-</section>
-
-<section class="band band--sunk" data-band="bronze">
-  <div class="shell">
-    <h2 class="band__heading">What is being written</h2>
-    {% if site.data.guides and site.data.guides.size > 0 %}
-    <ul class="shelf">
-      {% for g in site.data.guides %}
-      {% case g.status %}
-        {% when 'ready'   %}{% assign label = 'Finished'      %}{% assign mark = '✅' %}
-        {% when 'editing' %}{% assign label = 'Nearly ready'  %}{% assign mark = '🔍' %}
-        {% when 'writing' %}{% assign label = 'Being written' %}{% assign mark = '✍️' %}
-        {% else %}          {% assign label = 'Planned'       %}{% assign mark = '📋' %}
-      {% endcase %}
-      <li data-reveal>
-        <p class="shelf__title">{{ g.title }}</p>
-        <p class="shelf__meta"><span class="status status--{{ g.status | default: 'planned' }}">{{ mark }} {{ label }}</span>{% if g.topic %} <span class="status__topic">{{ g.topic }}</span>{% endif %}</p>
-        {% if g.note %}<p class="shelf__note">{{ g.note }}</p>{% endif %}
-        {% if g.status == 'ready' and g.link %}
-        <p class="shelf__meta"><a class="button button--small" href="{{ g.link }}">Get it{% if g.price %} — {{ g.price }}{% endif %}</a></p>
-        {% endif %}
-      </li>
-      {% endfor %}
-    </ul>
-    {% else %}
-    <p class="empty">Nothing listed yet. Add an entry to <code>_data/guides.yml</code> and it appears here.</p>
-    {% endif %}
-    <p class="shelf__credit">Written by Beautiful Economics. The order can change: what gets finished first is usually whatever readers ask about most.</p>
-  </div>
-</section>
-
-<section class="band">
-  <div class="shell">
-    <div class="column" data-reveal>
-      {% include subscribe.html id="subscribe-guides" heading="Hear when the first one is finished." body="One message when a guide is ready, and nothing else to your address. No launch countdowns and no reminders." %}
-    </div>
-  </div>
-</section>
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>Moved</title>
+<link rel="canonical" href="{{ '/shop/' | absolute_url }}">
+<meta http-equiv="refresh" content="0; url={{ '/shop/' | relative_url }}">
+<meta name="robots" content="noindex">
+</head><body>
+<p>This page moved to <a href="{{ '/shop/' | relative_url }}">{{ '/shop/' | absolute_url }}</a>.</p>
+</body></html>
