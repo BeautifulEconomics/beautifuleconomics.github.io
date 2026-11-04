@@ -66,76 +66,75 @@
   file: /assets/library/Beautiful_Economics_Keynesian_Multiplier_Chapter.pdf
   note: "How one person’s spending becomes another person’s income — and why national income can rise by more than the initial spending."
   credit: "Written by Beautiful Economics"
-  
+
 - title: "The Allais Paradox"
   category: "Experiment"
   file: /assets/library/Beautiful_Economics_Allais_Paradox.pdf
-  note: "Why can a sure outcome chnage the way we choose under risk ?."
+  note: "Why can a sure outcome change the way we choose under risk?"
   credit: "Written by Beautiful Economics"
-    
-- title: "The Beauty Contest Game(BCG)"
+
+- title: "The Beauty Contest Game (BCG)"
   category: "Experiment"
   file: /assets/library/Beautiful_Economics_Beauty_Contest_Game.pdf
-  note: "Guess what others will guess - and think one step ahead."
+  note: "Guess what others will guess — and think one step ahead."
   credit: "Written by Beautiful Economics"
-    
+
 - title: "The Dictator Game"
   category: "Experiment"
   file: /assets/library/Beautiful_Economics_Dictator_Game_Refined.pdf
-  note: "One person decide and other gets no say."
+  note: "One person decides and the other gets no say."
   credit: "Written by Beautiful Economics"
-    
-- title: "Endowment Effect Experiment"
+
+- title: "The Endowment Effect"
   category: "Experiment"
   file: /assets/library/Beautiful_Economics_Endowment_Effect_Experiment.pdf
-  note: "Why the same object can be valued differently depending on whether person owns it."
+  note: "Why the same object can be valued differently depending on whether a person owns it."
   credit: "Written by Beautiful Economics"
-      
-- title: "Gift Exchange Effect"
+
+- title: "The Gift Exchange Experiment"
   category: "Experiment"
   file: /assets/library/Beautiful_Economics_Gift_Exchange_Experiment.pdf
-  note: "Can a genrous wage induce workers to provide more effort - even when effort cannot be enforced?."
+  note: "Can a generous wage induce workers to provide more effort — even when effort cannot be enforced?"
   credit: "Written by Beautiful Economics"
-    
-- title: "Hold Laury Risk Task"
+
+- title: "The Holt–Laury Risk Task"
   category: "Experiment"
   file: /assets/library/Beautiful_Economics_Holt_Laury_Risk_Task.pdf
-  note: "A widely used lottery choice procedure for measruing indiviudal attitudes toward risk."
+  note: "A widely used lottery-choice procedure for measuring individual attitudes toward risk."
   credit: "Written by Beautiful Economics"
-    
-- title: "Marshmallow Experiment"
+
+- title: "The Marshmallow Experiment"
   category: "Experiment"
   file: /assets/library/Beautiful_Economics_Marshmallow_Experiment_Editorial.pdf
-  note: "Can a child wait for bigger reward - or will the immediate marshmallow win?."
+  note: "Can a child wait for a bigger reward — or will the immediate marshmallow win?"
   credit: "Written by Beautiful Economics"
-    
-- title: "The Prisoners Dilemma Game(PDG)"
+
+- title: "The Prisoner's Dilemma (PDG)"
   category: "Experiment"
   file: /assets/library/Beautiful_Economics_Prisoners_Dilemma_Fresh.pdf
-  note: "When self interest can leave both players worse off ?."
+  note: "When self-interest can leave both players worse off."
   credit: "Written by Beautiful Economics"
-    
-- title: "Prospect Theory Experiment"
+
+- title: "Prospect Theory"
   category: "Experiment"
   file: /assets/library/Beautiful_Economics_Prospect_Theory_Experiment.pdf
-  note: "Why choices under risk depends on gains, losses, and the way probabilities are percieved."
+  note: "Why choices under risk depend on gains, losses, and the way probabilities are perceived."
   credit: "Written by Beautiful Economics"
-    
+
 - title: "The Public Good Game (PGG)"
   category: "Experiment"
   file: /assets/library/Beautiful_Economics_Public_Good_Game_Refined.pdf
-  note: "Would you put some of your money into shared pot if everyone including people who contribute nothing - could benefit?."
+  note: "Would you put your money into a shared pot if everyone — including people who contribute nothing — could benefit?"
   credit: "Written by Beautiful Economics"
-    
+
 - title: "The Trust Game"
   category: "Experiment"
   file: /assets/library/Beautiful_Economics_Trust_Game_Refined.pdf
-  note: "A samll game about money - A big question about people?."
-  credit: "Written by Beautiful Economics"
-    
-- title: "Ulitimatum Game"
-  category: "Experiment"
-  file: /assets/library/Beautiful_Economics_Ultimatum_Game_Refined.pdf
-  note: "Would you accept a small share of money or reject it so neither of you gets anything?."
+  note: "A small game about money. A big question about people."
   credit: "Written by Beautiful Economics"
 
+- title: "The Ultimatum Game"
+  category: "Experiment"
+  file: /assets/library/Beautiful_Economics_Ultimatum_Game_Refined.pdf
+  note: "Would you accept a small share of money — or reject it so neither of you gets anything?"
+  credit: "Written by Beautiful Economics"
