@@ -22,7 +22,8 @@ description: Free PDFs — notes, summaries and reading guides you can download 
 
       {% if groups.size > 1 %}
       <nav class="shelf-jump" aria-label="Categories">
-        {% for g in groups %}<a href="#{{ g.name | slugify }}">{{ g.name }}</a>{% endfor %}
+        <button class="shelf-jump__btn active" data-filter="all">All</button>
+        {% for g in groups %}<button class="shelf-jump__btn" data-filter="{{ g.name | slugify }}">{{ g.name }}</button>{% endfor %}
       </nav>
       {% endif %}
 
@@ -46,6 +47,35 @@ description: Free PDFs — notes, summaries and reading guides you can download 
     {% endif %}
   </div>
 </section>
+
+<style>
+.shelf-jump{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
+.shelf-jump__btn{background:none;border:1px solid var(--border,#ccc);padding:.35rem 1rem;border-radius:2rem;font-family:inherit;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;color:var(--fg,#333);transition:background .2s,color .2s}
+.shelf-jump__btn:hover{background:var(--accent,#2a7a5a);color:#fff;border-color:var(--accent,#2a7a5a)}
+.shelf-jump__btn.active{background:var(--accent,#2a7a5a);color:#fff;border-color:var(--accent,#2a7a5a)}
+.shelf-group.hidden{display:none}
+</style>
+
+<script>
+(function(){
+  var btns = document.querySelectorAll('.shelf-jump__btn');
+  var groups = document.querySelectorAll('.shelf-group');
+  btns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var f = btn.getAttribute('data-filter');
+      btns.forEach(function(b){b.classList.remove('active')});
+      btn.classList.add('active');
+      groups.forEach(function(g){
+        if(f === 'all' || g.id === f){
+          g.classList.remove('hidden');
+        } else {
+          g.classList.add('hidden');
+        }
+      });
+    });
+  });
+})();
+</script>
 
 <section class="band band--sunk">
   <div class="shell"><div class="column">
