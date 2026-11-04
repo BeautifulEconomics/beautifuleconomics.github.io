@@ -3,33 +3,41 @@ layout: page
 title: About
 nav: about
 permalink: /about/
-standfirst: Beautiful Economics is written by one person, published at one address, and meant to still be here when you come back.
+standfirst: Economics explained with care — by someone who teaches it, studies it, and believes it belongs to everyone.
 ---
 
-I am Arjun Sharma. I work on economics — currently on what happens to the quality of news when outlets compete for a fixed amount of reader attention — and I write here for people who are not economists.
+I am Arjun — Founder of Beautiful Economics.
 
-**Why a website, when there is already a Facebook page?**
+I hold a B.Com and an M.A. in Economics. I am currently a PhD researcher in behavioural and experimental economics at IIT Kanpur, one of India's premier research institutions. Before that, I was an assistant professor of economics at the University of Delhi.
 
-Because a Facebook post is gone in two days. It cannot be searched for, it cannot be linked to reliably, and whether anyone sees it at all is decided by a ranking system I have no view into. That is a bad home for work meant to be useful more than once.
+**What Beautiful Economics is for**
 
-Everything here has its own address. You can find it on Google in 2031, send the link to a student, or keep the PDF on your own laptop. The Facebook page continues, but it points here.
+Economics shapes every decision you make — what you buy, how you save, whom you trust, how societies organise themselves. But most of that knowledge sits behind jargon, paywalls and textbooks written for exams. Beautiful Economics exists to change that.
+
+The objective is simple: take serious economic ideas — the ones that actually explain how people think and behave — and make them available to anyone willing to read carefully. No shortcuts, no oversimplification, but no unnecessary complexity either.
+
+**What I expect from you**
+
+Curiosity. That is it. You do not need a degree. You do not need to have studied economics before. But I will not talk down to you. Every piece here respects your time and your intelligence — it earns your attention or it does not belong on this site.
+
+Read an idea. Question it. Disagree with it. Come back and read another one. That is how we learn together.
 
 **What you will find**
 
-*Concepts* — a growing dictionary. Each entry explains what an idea claims, what it quietly assumes, and where it stops working. Most explanations skip that last part.
+*Concepts* — a growing dictionary. Each entry explains what an idea claims, what it quietly assumes, and where it stops working.
 
 *Advanced* — the machinery underneath: models, proofs and methods, for readers who already have the basics.
 
-*Writing* — longer pieces, where an argument needs room.
+*Writing* — longer essays where an argument needs room to breathe.
 
-*Library* — PDFs you can download and keep, free, without handing over an email address first.
+*Library* — PDFs you can download and keep. Free, no account required.
 
 **What this is not**
 
-It is not a course, it is not exam coaching, and it will not tell you what the market does tomorrow. I would rather explain one idea properly than twenty badly.
+It is not a course, it is not exam coaching, and it will not predict the market. I would rather explain one idea properly than twenty badly.
 
 **Reach me**
 
-{% if site.email != "" %}Corrections are welcome and I would rather be told than left wrong. Write to [{{ site.email }}](mailto:{{ site.email }}).
-{% elsif site.facebook != "" %}Corrections are welcome and I would rather be told than left wrong. Send a message on [Facebook]({{ site.facebook }}){% if site.instagram != "" %} or [Instagram]({{ site.instagram }}){% endif %}, and it gets fixed with the correction noted.
-{% else %}Corrections are welcome and I would rather be told than left wrong.{% endif %}
+{% if site.email != "" %}Corrections are welcome — I would rather be told than left wrong. Write to [{{ site.email }}](mailto:{{ site.email }}).
+{% elsif site.facebook != "" %}Corrections are welcome — I would rather be told than left wrong. Send a message on [Facebook]({{ site.facebook }}){% if site.instagram != "" %} or [Instagram]({{ site.instagram }}){% endif %}.
+{% else %}Corrections are welcome — I would rather be told than left wrong.{% endif %}
