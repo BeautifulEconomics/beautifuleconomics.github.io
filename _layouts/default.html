@@ -54,5 +54,108 @@
       });
     })();
   </script>
+
+  <!-- Reading mode toggle -->
+  <script>
+  (function(){
+    var modes = ['auto','light','dark','sepia'];
+    var root = document.documentElement;
+    var btn = document.getElementById('reading-toggle');
+    if(!btn) return;
+
+    var saved = 'auto';
+    try { saved = localStorage.getItem('be-theme') || 'auto'; } catch(e){}
+    if(modes.indexOf(saved) === -1) saved = 'auto';
+    if(saved !== 'auto') root.setAttribute('data-theme', saved);
+
+    btn.addEventListener('click', function(){
+      var i = modes.indexOf(saved);
+      saved = modes[(i+1) % modes.length];
+      if(saved === 'auto'){
+        root.removeAttribute('data-theme');
+      } else {
+        root.setAttribute('data-theme', saved);
+      }
+      try { localStorage.setItem('be-theme', saved); } catch(e){}
+      btn.setAttribute('title', 'Reading mode: ' + saved);
+    });
+    if(saved !== 'auto') btn.setAttribute('title', 'Reading mode: ' + saved);
+  })();
+  </script>
+
+  <!-- Indian festival calendar -->
+  <script>
+  (function(){
+    // Festival dates: [month(1-indexed), day, duration_days, css_class, greeting]
+    // Lunar festivals listed for 2026-2029; fixed-date ones repeat yearly.
+    var festivals = {
+      // Fixed-date festivals (every year)
+      fixed: [
+        [1, 14, 2, 'makar',        'Happy Makar Sankranti ✦ from Beautiful Economics'],
+        [1, 26, 1, 'republic',     'Happy Republic Day ✦ Jai Hind 🇮🇳'],
+        [8, 15, 1, 'independence', 'Happy Independence Day ✦ Jai Hind 🇮🇳'],
+        [12,25, 2, 'christmas',    'Merry Christmas ✦ from Beautiful Economics']
+      ],
+      // Lunar festivals by year
+      2026: [
+        [3, 17, 2, 'holi',      'Happy Holi ✦ from Beautiful Economics'],
+        [4, 14, 2, 'baisakhi',  'Happy Baisakhi ✦ from Beautiful Economics'],
+        [9,  7, 2, 'ganesh',    'Ganpati Bappa Morya ✦ Happy Ganesh Chaturthi'],
+        [10, 2, 3, 'navratri',  'Happy Navratri ✦ from Beautiful Economics'],
+        [10,11, 1, 'dussehra',  'Happy Dussehra ✦ Victory of Good over Evil'],
+        [10,25, 3, 'diwali',    'Happy Diwali ✦ from Beautiful Economics 🪔'],
+        [3, 31, 2, 'eid',       'Eid Mubarak ✦ from Beautiful Economics']
+      ],
+      2027: [
+        [3,  6, 2, 'holi',      'Happy Holi ✦ from Beautiful Economics'],
+        [4, 14, 2, 'baisakhi',  'Happy Baisakhi ✦ from Beautiful Economics'],
+        [8, 27, 2, 'ganesh',    'Ganpati Bappa Morya ✦ Happy Ganesh Chaturthi'],
+        [9, 21, 3, 'navratri',  'Happy Navratri ✦ from Beautiful Economics'],
+        [9, 30, 1, 'dussehra',  'Happy Dussehra ✦ Victory of Good over Evil'],
+        [10,14, 3, 'diwali',    'Happy Diwali ✦ from Beautiful Economics 🪔'],
+        [3, 20, 2, 'eid',       'Eid Mubarak ✦ from Beautiful Economics']
+      ],
+      2028: [
+        [3, 24, 2, 'holi',      'Happy Holi ✦ from Beautiful Economics'],
+        [4, 13, 2, 'baisakhi',  'Happy Baisakhi ✦ from Beautiful Economics'],
+        [9, 14, 2, 'ganesh',    'Ganpati Bappa Morya ✦ Happy Ganesh Chaturthi'],
+        [10, 8, 3, 'navratri',  'Happy Navratri ✦ from Beautiful Economics'],
+        [10,19, 1, 'dussehra',  'Happy Dussehra ✦ Victory of Good over Evil'],
+        [11, 2, 3, 'diwali',    'Happy Diwali ✦ from Beautiful Economics 🪔'],
+        [3,  9, 2, 'eid',       'Eid Mubarak ✦ from Beautiful Economics']
+      ],
+      2029: [
+        [3, 13, 2, 'holi',      'Happy Holi ✦ from Beautiful Economics'],
+        [4, 14, 2, 'baisakhi',  'Happy Baisakhi ✦ from Beautiful Economics'],
+        [9,  3, 2, 'ganesh',    'Ganpati Bappa Morya ✦ Happy Ganesh Chaturthi'],
+        [9, 27, 3, 'navratri',  'Happy Navratri ✦ from Beautiful Economics'],
+        [10, 8, 1, 'dussehra',  'Happy Dussehra ✦ Victory of Good over Evil'],
+        [10,22, 3, 'diwali',    'Happy Diwali ✦ from Beautiful Economics 🪔'],
+        [2, 26, 2, 'eid',       'Eid Mubarak ✦ from Beautiful Economics']
+      ]
+    };
+
+    var now = new Date();
+    var y = now.getFullYear(), m = now.getMonth()+1, d = now.getDate();
+    var all = (festivals.fixed || []).concat(festivals[y] || []);
+    var root = document.documentElement;
+    var banner = document.getElementById('festival-banner');
+    var text = document.getElementById('festival-text');
+
+    for(var i=0; i<all.length; i++){
+      var f = all[i];
+      var start = new Date(y, f[0]-1, f[1]);
+      var end = new Date(y, f[0]-1, f[1] + f[2]);
+      if(now >= start && now < end){
+        root.classList.add('festival-' + f[3]);
+        if(banner && text){
+          text.textContent = f[4];
+          banner.classList.add('is-active');
+        }
+        break;
+      }
+    }
+  })();
+  </script>
 </body>
 </html>
