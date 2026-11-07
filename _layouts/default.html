@@ -59,27 +59,41 @@
   <script>
   (function(){
     var modes = ['auto','light','dark','sepia'];
+    var labels = {auto:'Auto',light:'Light',dark:'Dark',sepia:'Reading'};
     var root = document.documentElement;
+    var body = document.body;
     var btn = document.getElementById('reading-toggle');
     if(!btn) return;
 
     var saved = 'auto';
     try { saved = localStorage.getItem('be-theme') || 'auto'; } catch(e){}
     if(modes.indexOf(saved) === -1) saved = 'auto';
-    if(saved !== 'auto') root.setAttribute('data-theme', saved);
+
+    function apply(mode){
+      if(mode === 'auto'){
+        root.removeAttribute('data-theme');
+      } else {
+        root.setAttribute('data-theme', mode);
+      }
+      // Reading mode class for distraction-free styles
+      if(mode === 'sepia'){
+        body.classList.add('is-reading');
+      } else {
+        body.classList.remove('is-reading');
+      }
+      btn.setAttribute('title', labels[mode] + ' mode');
+      // Toggle icon glow in reading mode
+      btn.classList.toggle('is-active', mode === 'sepia');
+    }
+
+    apply(saved);
 
     btn.addEventListener('click', function(){
       var i = modes.indexOf(saved);
       saved = modes[(i+1) % modes.length];
-      if(saved === 'auto'){
-        root.removeAttribute('data-theme');
-      } else {
-        root.setAttribute('data-theme', saved);
-      }
+      apply(saved);
       try { localStorage.setItem('be-theme', saved); } catch(e){}
-      btn.setAttribute('title', 'Reading mode: ' + saved);
     });
-    if(saved !== 'auto') btn.setAttribute('title', 'Reading mode: ' + saved);
   })();
   </script>
 
@@ -103,7 +117,7 @@
         [9,  7, 2, 'ganesh',    'Ganpati Bappa Morya ✦ Happy Ganesh Chaturthi'],
         [10, 2, 3, 'navratri',  'Happy Navratri ✦ from Beautiful Economics'],
         [10,11, 1, 'dussehra',  'Happy Dussehra ✦ Victory of Good over Evil'],
-        [10,25, 3, 'diwali',    'Happy Diwali ✦ from Beautiful Economics 🪔'],
+        [10,25, 3, 'diwali',    'Happy Diwali ✦ from Beautiful Economics 🪨'],
         [3, 31, 2, 'eid',       'Eid Mubarak ✦ from Beautiful Economics']
       ],
       2027: [
@@ -112,7 +126,7 @@
         [8, 27, 2, 'ganesh',    'Ganpati Bappa Morya ✦ Happy Ganesh Chaturthi'],
         [9, 21, 3, 'navratri',  'Happy Navratri ✦ from Beautiful Economics'],
         [9, 30, 1, 'dussehra',  'Happy Dussehra ✦ Victory of Good over Evil'],
-        [10,14, 3, 'diwali',    'Happy Diwali ✦ from Beautiful Economics 🪔'],
+        [10,14, 3, 'diwali',    'Happy Diwali ✦ from Beautiful Economics 🪨'],
         [3, 20, 2, 'eid',       'Eid Mubarak ✦ from Beautiful Economics']
       ],
       2028: [
@@ -121,7 +135,7 @@
         [9, 14, 2, 'ganesh',    'Ganpati Bappa Morya ✦ Happy Ganesh Chaturthi'],
         [10, 8, 3, 'navratri',  'Happy Navratri ✦ from Beautiful Economics'],
         [10,19, 1, 'dussehra',  'Happy Dussehra ✦ Victory of Good over Evil'],
-        [11, 2, 3, 'diwali',    'Happy Diwali ✦ from Beautiful Economics 🪔'],
+        [11, 2, 3, 'diwali',    'Happy Diwali ✦ from Beautiful Economics 🪨'],
         [3,  9, 2, 'eid',       'Eid Mubarak ✦ from Beautiful Economics']
       ],
       2029: [
@@ -130,7 +144,7 @@
         [9,  3, 2, 'ganesh',    'Ganpati Bappa Morya ✦ Happy Ganesh Chaturthi'],
         [9, 27, 3, 'navratri',  'Happy Navratri ✦ from Beautiful Economics'],
         [10, 8, 1, 'dussehra',  'Happy Dussehra ✦ Victory of Good over Evil'],
-        [10,22, 3, 'diwali',    'Happy Diwali ✦ from Beautiful Economics 🪔'],
+        [10,22, 3, 'diwali',    'Happy Diwali ✦ from Beautiful Economics 🪨'],
         [2, 26, 2, 'eid',       'Eid Mubarak ✦ from Beautiful Economics']
       ]
     };
