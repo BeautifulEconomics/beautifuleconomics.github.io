@@ -1198,23 +1198,23 @@ body {
    Sepia reading mode
    --------------------------------------------------------------- */
 :root[data-theme="sepia"] {
-  --paper:      #F4ECD8;
-  --paper-lift: #FAF4E4;
-  --paper-sunk: #EBE2CC;
-  --rule:       #D4C9AD;
-  --rule-soft:  #DFD6BF;
-  --ink:        #3B2E1A;
-  --ink-soft:   #6B5B45;
-  --ink-faint:  #8A7B65;
+  --paper:      #E8D5B5;
+  --paper-lift: #F0DFC4;
+  --paper-sunk: #DECCA8;
+  --rule:       #C4AD88;
+  --rule-soft:  #D1BB99;
+  --ink:        #2E2011;
+  --ink-soft:   #5C4A32;
+  --ink-faint:  #7A6850;
   --plot:       #6B4226;
-  --mark:       #8C1A38;
+  --mark:       #7A1530;
   --plot-wash:  #6B42261f;
   --high:       #FFD84D80;
-  --grid:       rgba(107, 91, 69, .2);
-  --high-solid: #D4A017;
-  --deep:       #2C2114;
-  --deep-ink:   #F2EFE7;
-  --deep-soft:  #A09080;
+  --grid:       rgba(107, 91, 69, .18);
+  --high-solid: #C49012;
+  --deep:       #2A1C10;
+  --deep-ink:   #F0E8D8;
+  --deep-soft:  #9A8670;
 }
 :root[data-theme="sepia"] body[data-section="concepts"] { --accent: #5A7A3A; }
 :root[data-theme="sepia"] body[data-section="advanced"] { --accent: #4A5A8C; }
@@ -1235,10 +1235,35 @@ body {
   margin-left: .5rem;
 }
 .reading-toggle:hover { color: var(--accent); border-color: var(--accent); }
+.reading-toggle.is-active {
+  background: var(--high-solid); color: var(--deep, #2C2114);
+  border-color: var(--high-solid);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--high-solid) 50%, transparent);
+}
 .reading-toggle svg { width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.reading-toggle.is-active svg { fill: currentColor; }
 @media (max-width: 34em) {
   .reading-toggle { width: 1.6rem; height: 1.6rem; }
   .reading-toggle svg { width: .8rem; height: .8rem; }
+}
+
+/* ---------------------------------------------------------------
+   Reading mode — distraction-free: hides chrome, widens measure,
+   softens everything except the text itself.
+   --------------------------------------------------------------- */
+.is-reading .page-rules { display: none; }
+.is-reading .cover__actions { display: none; }
+.is-reading .band--daily .daily { display: none; }
+.is-reading .peek { display: none !important; }
+.is-reading .footer__grid { grid-template-columns: 1fr; gap: 1.4rem; }
+.is-reading .footer__trust,
+.is-reading .footer__follow-col { display: none; }
+.is-reading .nav { opacity: .45; transition: opacity .3s; }
+.is-reading .nav:hover { opacity: 1; }
+.is-reading .masthead { border-bottom-color: var(--rule-soft); }
+.is-reading .prose { font-size: 1.22rem; line-height: 1.8; }
+@media (min-width: 46em) {
+  .is-reading .prose { font-size: 1.28rem; }
 }
 
 /* ---------------------------------------------------------------
