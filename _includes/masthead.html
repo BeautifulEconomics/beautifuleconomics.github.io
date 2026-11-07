@@ -1,3 +1,6 @@
+<div class="festival-banner" id="festival-banner" aria-live="polite">
+  <span class="festival-banner__text" id="festival-text"></span>
+</div>
 <header class="masthead{% if page.nav == 'home' %} masthead--home{% endif %}">
   <div class="shell masthead__inner">
     {%- comment -%}
@@ -16,5 +19,8 @@
       <a href="{{ '/shop/' | relative_url }}"{% if page.nav == 'shop' %} aria-current="page"{% endif %}>{% include icons.html name='shop' %}<span>{{ site.shop_label | default: "Shop" }}</span></a>
       <a href="{{ '/about/' | relative_url }}"{% if page.nav == 'about' %} aria-current="page"{% endif %}>{% include icons.html name='about' %}<span>About</span></a>
     </nav>
+    <button class="reading-toggle" id="reading-toggle" type="button" aria-label="Change reading mode" title="Reading mode">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
   </div>
 </header>
