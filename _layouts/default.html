@@ -70,19 +70,11 @@
     if(modes.indexOf(saved) === -1) saved = 'auto';
 
     function apply(mode){
-      if(mode === 'auto'){
-        root.removeAttribute('data-theme');
-      } else {
-        root.setAttribute('data-theme', mode);
-      }
-      // Reading mode class for distraction-free styles
-      if(mode === 'sepia'){
-        body.classList.add('is-reading');
-      } else {
-        body.classList.remove('is-reading');
-      }
+      if(mode === 'auto'){ root.removeAttribute('data-theme'); }
+      else { root.setAttribute('data-theme', mode); }
+      if(mode === 'sepia'){ body.classList.add('is-reading'); }
+      else { body.classList.remove('is-reading'); }
       btn.setAttribute('title', labels[mode] + ' mode');
-      // Toggle icon glow in reading mode
       btn.classList.toggle('is-active', mode === 'sepia');
     }
 
@@ -112,40 +104,40 @@
       ],
       // Lunar festivals by year
       2026: [
-        [3, 17, 2, 'holi',      'Happy Holi ✦ from Beautiful Economics'],
+        [3,  4, 2, 'holi',      'Happy Holi ✦ from Beautiful Economics'],
         [4, 14, 2, 'baisakhi',  'Happy Baisakhi ✦ from Beautiful Economics'],
-        [9,  7, 2, 'ganesh',    'Ganpati Bappa Morya ✦ Happy Ganesh Chaturthi'],
-        [10, 2, 3, 'navratri',  'Happy Navratri ✦ from Beautiful Economics'],
-        [10,11, 1, 'dussehra',  'Happy Dussehra ✦ Victory of Good over Evil'],
-        [10,25, 3, 'diwali',    'Happy Diwali ✦ from Beautiful Economics 🪨'],
-        [3, 31, 2, 'eid',       'Eid Mubarak ✦ from Beautiful Economics']
+        [9, 14, 2, 'ganesh',    'Ganpati Bappa Morya ✦ Happy Ganesh Chaturthi'],
+        [10,11, 3, 'navratri',  'Happy Navratri ✦ from Beautiful Economics'],
+        [10,20, 1, 'dussehra',  'Happy Dussehra ✦ Victory of Good over Evil'],
+        [11, 8, 3, 'diwali',    'Happy Diwali ✦ from Beautiful Economics 🪔'],
+        [3, 19, 2, 'eid',       'Eid Mubarak ✦ from Beautiful Economics']
       ],
       2027: [
-        [3,  6, 2, 'holi',      'Happy Holi ✦ from Beautiful Economics'],
-        [4, 14, 2, 'baisakhi',  'Happy Baisakhi ✦ from Beautiful Economics'],
-        [8, 27, 2, 'ganesh',    'Ganpati Bappa Morya ✦ Happy Ganesh Chaturthi'],
-        [9, 21, 3, 'navratri',  'Happy Navratri ✦ from Beautiful Economics'],
-        [9, 30, 1, 'dussehra',  'Happy Dussehra ✦ Victory of Good over Evil'],
-        [10,14, 3, 'diwali',    'Happy Diwali ✦ from Beautiful Economics 🪨'],
-        [3, 20, 2, 'eid',       'Eid Mubarak ✦ from Beautiful Economics']
-      ],
-      2028: [
-        [3, 24, 2, 'holi',      'Happy Holi ✦ from Beautiful Economics'],
-        [4, 13, 2, 'baisakhi',  'Happy Baisakhi ✦ from Beautiful Economics'],
-        [9, 14, 2, 'ganesh',    'Ganpati Bappa Morya ✦ Happy Ganesh Chaturthi'],
-        [10, 8, 3, 'navratri',  'Happy Navratri ✦ from Beautiful Economics'],
-        [10,19, 1, 'dussehra',  'Happy Dussehra ✦ Victory of Good over Evil'],
-        [11, 2, 3, 'diwali',    'Happy Diwali ✦ from Beautiful Economics 🪨'],
-        [3,  9, 2, 'eid',       'Eid Mubarak ✦ from Beautiful Economics']
-      ],
-      2029: [
-        [3, 13, 2, 'holi',      'Happy Holi ✦ from Beautiful Economics'],
+        [3, 22, 2, 'holi',      'Happy Holi ✦ from Beautiful Economics'],
         [4, 14, 2, 'baisakhi',  'Happy Baisakhi ✦ from Beautiful Economics'],
         [9,  3, 2, 'ganesh',    'Ganpati Bappa Morya ✦ Happy Ganesh Chaturthi'],
-        [9, 27, 3, 'navratri',  'Happy Navratri ✦ from Beautiful Economics'],
-        [10, 8, 1, 'dussehra',  'Happy Dussehra ✦ Victory of Good over Evil'],
-        [10,22, 3, 'diwali',    'Happy Diwali ✦ from Beautiful Economics 🪨'],
-        [2, 26, 2, 'eid',       'Eid Mubarak ✦ from Beautiful Economics']
+        [9, 30, 3, 'navratri',  'Happy Navratri ✦ from Beautiful Economics'],
+        [10, 9, 1, 'dussehra',  'Happy Dussehra ✦ Victory of Good over Evil'],
+        [10,28, 3, 'diwali',    'Happy Diwali ✦ from Beautiful Economics 🪔'],
+        [3, 10, 2, 'eid',       'Eid Mubarak ✦ from Beautiful Economics']
+      ],
+      2028: [
+        [3, 11, 2, 'holi',      'Happy Holi ✦ from Beautiful Economics'],
+        [4, 13, 2, 'baisakhi',  'Happy Baisakhi ✦ from Beautiful Economics'],
+        [8, 23, 2, 'ganesh',    'Ganpati Bappa Morya ✦ Happy Ganesh Chaturthi'],
+        [9, 19, 3, 'navratri',  'Happy Navratri ✦ from Beautiful Economics'],
+        [9, 27, 1, 'dussehra',  'Happy Dussehra ✦ Victory of Good over Evil'],
+        [10,17, 3, 'diwali',    'Happy Diwali ✦ from Beautiful Economics 🪔'],
+        [2, 27, 2, 'eid',       'Eid Mubarak ✦ from Beautiful Economics']
+      ],
+      2029: [
+        [2, 28, 2, 'holi',      'Happy Holi ✦ from Beautiful Economics'],
+        [4, 14, 2, 'baisakhi',  'Happy Baisakhi ✦ from Beautiful Economics'],
+        [9, 11, 2, 'ganesh',    'Ganpati Bappa Morya ✦ Happy Ganesh Chaturthi'],
+        [10, 8, 3, 'navratri',  'Happy Navratri ✦ from Beautiful Economics'],
+        [10,16, 1, 'dussehra',  'Happy Dussehra ✦ Victory of Good over Evil'],
+        [11, 5, 3, 'diwali',    'Happy Diwali ✦ from Beautiful Economics 🪔'],
+        [2, 16, 2, 'eid',       'Eid Mubarak ✦ from Beautiful Economics']
       ]
     };
 
