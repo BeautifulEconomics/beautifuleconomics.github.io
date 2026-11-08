@@ -238,6 +238,40 @@ body {
 }
 .cover__rule--thin { max-width: 3rem; opacity: .4; margin-top: .3rem; }
 
+.cover__title-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(.5rem, 2vw, 1.5rem);
+}
+
+.cover__deco {
+  font-size: clamp(2rem, 6vw, 4rem);
+  line-height: 1;
+  opacity: 0;
+  transition: opacity .4s ease;
+}
+.festival-active .cover__deco { opacity: 1; }
+
+/* Animated pulse for festival decorations */
+@keyframes deco-glow {
+  0%, 100% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.2); filter: brightness(1.3); }
+}
+.festival-active .cover__deco {
+  animation: deco-glow 2s ease-in-out infinite;
+}
+.cover__deco--right { animation-delay: 1s !important; }
+
+/* Festival greeting override — bigger, bolder on festival days */
+.festival-active .cover__greeting {
+  font-size: clamp(1.15rem, 3vw, 1.6rem);
+  font-weight: 600;
+  font-style: normal;
+  color: var(--accent, var(--ink));
+  letter-spacing: .02em;
+}
+
 .cover__title {
   font-family: var(--display);
   font-weight: 600;
@@ -1311,3 +1345,40 @@ body {
 
 :root.festival-baisakhi .wordmark__dot { background: #F39C12; }
 :root.festival-baisakhi .festival-banner { background: linear-gradient(90deg, #F39C12, #E67E22); }
+
+:root.festival-newyear .wordmark__dot { background: #FFD700; box-shadow: 0 0 6px #FFD700aa; }
+:root.festival-newyear .festival-banner { background: linear-gradient(90deg, #1A1A2E, #FFD700, #1A1A2E); }
+
+:root.festival-easter .wordmark__dot { background: #A8D8EA; }
+:root.festival-easter .festival-banner { background: linear-gradient(90deg, #FAD0C4, #A8D8EA, #C3F0CA); }
+:root.festival-easter .festival-banner { color: #14191B; }
+
+:root.festival-halloween .wordmark__dot { background: #FF6600; }
+:root.festival-halloween .festival-banner { background: linear-gradient(90deg, #1A1A2E, #FF6600, #1A1A2E); }
+
+:root.festival-shivratri .wordmark__dot { background: #5B2C6F; }
+:root.festival-shivratri .festival-banner { background: linear-gradient(90deg, #1A1A2E, #5B2C6F, #1A1A2E); color: #E8E0F0; }
+
+:root.festival-buddha .wordmark__dot { background: #F0C05A; }
+:root.festival-buddha .festival-banner { background: linear-gradient(90deg, #B8860B, #F0C05A, #B8860B); }
+
+:root.festival-gurupurab .wordmark__dot { background: #FF8C00; }
+:root.festival-gurupurab .festival-banner { background: linear-gradient(90deg, #FF8C00, #FFD700, #FF8C00); color: #14191B; }
+
+/* Diwali-specific diya glow for decorations */
+:root.festival-diwali .cover__deco {
+  text-shadow: 0 0 12px #FFD700, 0 0 24px #FF8C00;
+}
+:root.festival-diwali .cover__greeting {
+  color: #C8860E;
+}
+@keyframes diya-flicker {
+  0%, 100% { transform: scale(1); filter: brightness(1) drop-shadow(0 0 8px #FFD700); }
+  25% { transform: scale(1.15); filter: brightness(1.2) drop-shadow(0 0 12px #FF8C00); }
+  50% { transform: scale(1.05); filter: brightness(1.35) drop-shadow(0 0 16px #FFD700); }
+  75% { transform: scale(1.2); filter: brightness(1.1) drop-shadow(0 0 10px #FF8C00); }
+}
+:root.festival-diwali .cover__deco {
+  animation: diya-flicker 2.5s ease-in-out infinite;
+}
+:root.festival-diwali .cover__deco--right { animation-delay: 1.2s; }
