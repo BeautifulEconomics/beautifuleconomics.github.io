@@ -1,0 +1,17 @@
+---
+layout: null
+---
+[
+  {% assign all_docs = site.concepts | concat: site.advanced | concat: site.posts %}
+  {% for doc in all_docs %}
+  {
+    "title": {{ doc.title | jsonify }},
+    "url": {{ doc.url | relative_url | jsonify }},
+    "gloss": {{ doc.gloss | default: doc.standfirst | default: "" | jsonify }},
+    "field": {{ doc.field | default: "" | jsonify }},
+    "collection": {{ doc.collection | default: "posts" | jsonify }},
+    "date": {{ doc.date | date: "%Y-%m-%d" | jsonify }},
+    "content": {{ doc.content | strip_html | truncatewords: 200 | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+]
