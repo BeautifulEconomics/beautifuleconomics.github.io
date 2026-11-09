@@ -1,0 +1,78 @@
+---
+title: Search
+nav: search
+---
+<section class="band">
+  <div class="shell">
+    <div class="column">
+      <h1 class="band__heading">Search</h1>
+      <div class="search-box">
+        <input type="search" id="search-input" class="search-box__input" placeholder="Search concepts, writing, advanced topics..." autocomplete="off" autofocus>
+        <svg class="search-box__icon" viewBox="0 0 24 24" width="20" height="20"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><line x1="16.5" y1="16.5" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <div id="search-results" class="search-results"></div>
+      <p id="search-empty" class="search-empty" hidden>No results found. Try a different term.</p>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js"></script>
+<script>
+(function () {
+  var input = document.getElementById('search-input');
+  var resultsEl = document.getElementById('search-results');
+  var emptyEl = document.getElementById('search-empty');
+  var idx, docs;
+
+  fetch('{{ "/search.json" | relative_url }}')
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      docs = data;
+      idx = lunr(function () {
+        this.ref('url');
+        this.field('title', { boost: 10 });
+        this.field('gloss', { boost: 5 });
+        this.field('field', { boost: 3 });
+        this.field('content');
+        data.forEach(function (doc) { this.add(doc); }, this);
+      });
+      var params = new URLSearchParams(window.location.search);
+      var q = params.get('q');
+      if (q) { input.value = q; doSearch(q); }
+    });
+
+  var timer;
+  input.addEventListener('input', function () {
+    clearTimeout(timer);
+    var q = this.value.trim();
+    timer = setTimeout(function () { doSearch(q); }, 200);
+  });
+
+  function doSearch(query) {
+    resultsEl.innerHTML = '';
+    emptyEl.hidden = true;
+    if (!query || !idx) return;
+
+    var results = idx.search(query + '~1');
+    if (!results.length) results = idx.search(query + '*');
+    if (!results.length) { emptyEl.hidden = false; return; }
+
+    var html = '<ul class="entries">';
+    results.slice(0, 12).forEach(function (r) {
+      var doc = docs.find(function (d) { return d.url === r.ref; });
+      if (!doc) return;
+      var label = doc.collection === 'concepts' ? 'Concept'
+                : doc.collection === 'advanced' ? 'Advanced'
+                : 'Writing';
+      var sub = doc.gloss || '';
+      html += '<li class="entry">'
+            + '<span class="entry__date">' + label + '</span>'
+            + '<div><h3 class="entry__title"><a href="' + doc.url + '">' + doc.title + '</a></h3>'
+            + (sub ? '<p class="entry__summary">' + sub + '</p>' : '')
+            + '</div></li>';
+    });
+    html += '</ul>';
+    resultsEl.innerHTML = html;
+  }
+})();
+                     </script>search.html
