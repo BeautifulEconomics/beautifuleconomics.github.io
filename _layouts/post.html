@@ -1,14 +1,18 @@
----
+x---
 layout: default
 ---
+{% assign words = content | strip_html | number_of_words %}
+{% assign mins = words | divided_by: 200 %}
+{% if mins < 1 %}{% assign mins = 1 %}{% endif %}
 <div class="reading">
 <article class="article">
   <div class="shell">
     <div class="column">
-      <p class="article__meta">{{ page.date | date: "%-d %B %Y" }}{% if page.reading %} — {{ page.reading }}{% endif %}</p>
+      <p class="article__meta">{{ page.date | date: "%-d %B %Y" }} — {{ mins }} min read</p>
       <h1>{{ page.title }}</h1>
       {% if page.standfirst %}<p class="article__standfirst">{{ page.standfirst }}</p>{% endif %}
       <div class="prose">{{ content }}</div>
+      {% include share.html %}
     </div>
   </div>
 </article>
@@ -37,6 +41,25 @@ layout: default
         {% endunless %}
       {% endfor %}
     </ul>
+
+    {% comment %} Related concepts {% endcomment %}
+    {% assign related_concepts = "" | split: "" %}
+    {% for c in site.concepts %}
+      {% if page.content contains c.title %}
+        {% assign related_concepts = related_concepts | push: c %}
+      {% endif %}
+    {% endfor %}
+    {% if related_concepts.size > 0 %}
+    <h2 class="band__heading" style="margin-top:3rem">Concepts mentioned</h2>
+    <ul class="concept-grid">
+      {% for c in related_concepts limit: 4 %}
+      <li><a href="{{ c.url | relative_url }}">
+        <span class="concept-grid__term">{{ c.title }}</span>
+        <span class="concept-grid__gloss">{{ c.gloss }}</span>
+      </a></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
   </div>
 </section>
 </div>
