@@ -1,4 +1,4 @@
-x---
+---
 layout: default
 ---
 {% assign words = content | strip_html | number_of_words %}
@@ -28,57 +28,17 @@ layout: default
 <section class="band">
   <div class="shell">
     {% if page.collection == 'advanced' %}{% assign siblings = site.advanced %}{% assign sibling_label = "More advanced topics" %}{% else %}{% assign siblings = site.concepts %}{% assign sibling_label = "More concepts" %}{% endif %}
-
-    {%- comment -%}
-      Related by field first, then fill with others. Never show the current page.
-    {%- endcomment -%}
-    {% assign related = "" | split: "" %}
-    {% if page.field %}
-      {% for c in siblings %}
-        {% if c.url != page.url and c.field == page.field %}
-          {% assign related = related | push: c %}
-        {% endif %}
-      {% endfor %}
-    {% endif %}
-    {% for c in siblings %}
-      {% if c.url != page.url and related.size < 6 %}
-        {% assign already = false %}
-        {% for r in related %}{% if r.url == c.url %}{% assign already = true %}{% endif %}{% endfor %}
-        {% unless already %}{% assign related = related | push: c %}{% endunless %}
-      {% endif %}
-    {% endfor %}
-
     <h2 class="band__heading">{{ sibling_label }}</h2>
     <ul class="concept-grid">
-      {% for c in related limit: 6 %}
-      <li><a href="{{ c.url | relative_url }}">
-        <span class="concept-grid__term">{{ c.title }}</span>
-        <span class="concept-grid__gloss">{{ c.gloss }}</span>
-      </a></li>
+      {% for c in siblings limit: 6 %}
+        {% unless c.url == page.url %}
+        <li><a href="{{ c.url | relative_url }}">
+          <span class="concept-grid__term">{{ c.title }}</span>
+          <span class="concept-grid__gloss">{{ c.gloss }}</span>
+        </a></li>
+        {% endunless %}
       {% endfor %}
     </ul>
-
-    {% comment %} Cross-link to writing posts if any share the same field {% endcomment %}
-    {% assign related_posts = "" | split: "" %}
-    {% for p in site.posts %}
-      {% if p.field == page.field or p.tags contains page.title %}
-        {% assign related_posts = related_posts | push: p %}
-      {% endif %}
-    {% endfor %}
-    {% if related_posts.size > 0 %}
-    <h2 class="band__heading" style="margin-top:3rem">Related writing</h2>
-    <ul class="entries">
-      {% for item in related_posts limit: 3 %}
-      <li class="entry">
-        <span class="entry__date">{{ item.date | date: "%d.%m.%Y" }}</span>
-        <div>
-          <h3 class="entry__title"><a href="{{ item.url | relative_url }}">{{ item.title }}</a></h3>
-          {% if item.standfirst %}<p class="entry__summary">{{ item.standfirst }}</p>{% endif %}
-        </div>
-      </li>
-      {% endfor %}
-    </ul>
-    {% endif %}
   </div>
 </section>
 </div>
